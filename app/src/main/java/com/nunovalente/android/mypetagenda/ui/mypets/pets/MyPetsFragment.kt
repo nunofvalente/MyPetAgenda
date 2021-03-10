@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentMypetsBinding
 import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 import com.nunovalente.android.mypetagenda.ui.mypets.MyPetsAdapter
+import com.nunovalente.android.mypetagenda.ui.mypets.PetClickListener
 import javax.inject.Inject
 
 class MyPetsFragment : BaseFragment() {
@@ -41,6 +43,13 @@ class MyPetsFragment : BaseFragment() {
             }
         })
 
+        viewModel.navigateToDetails.observe(viewLifecycleOwner, { pet ->
+            if(pet != null) {
+                findNavController().navigate(R.id.action_navigation_mypets_to_petDetailFragment)
+                viewModel.doneNavigating()
+            }
+        })
+
         setRecyclerAdapter()
 
         viewModel.petList.observe(viewLifecycleOwner, { petList ->
@@ -55,8 +64,11 @@ class MyPetsFragment : BaseFragment() {
     }
 
     private fun setRecyclerAdapter() {
-        val adapter = MyPetsAdapter()
-        binding.recyclerMyPets.adapter = adapter
+        binding.recyclerMyPets.apply {
+            this.adapter = MyPetsAdapter(PetClickListener { pet ->
+                viewModel.navigateToPetDetail(pet)
+            })
+        }
     }
 
     private fun showData() {

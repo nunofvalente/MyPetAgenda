@@ -18,6 +18,7 @@
     <string name="add_pet">Add Pet</string>
     <string name="pet_image">Pet image</string>
     <string name="your_pets_are_waiting_to_be_added">Your pets are waiting to be added!</string>
+    <string name="take_photos_with_your_pets">Take photos with your pets and keep a reminder forever!</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

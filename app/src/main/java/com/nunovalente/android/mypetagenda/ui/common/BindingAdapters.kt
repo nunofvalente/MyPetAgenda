@@ -1,12 +1,26 @@
-package com.nunovalente.android.mypetagenda.ui.common.util
+package com.nunovalente.android.mypetagenda.ui.common
 
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.Spinner
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.models.Pet
 import com.nunovalente.android.mypetagenda.ui.mypets.MyPetsAdapter
 
+
+@BindingAdapter("loadImage")
+fun loadImage(imageView: ImageView, url: String?) {
+    url?.let { url ->
+        Glide.with(imageView.context).load(url)
+            .placeholder(R.drawable.default_image_pet)
+            .error(R.drawable.default_image_pet)
+            .circleCrop()
+            .into(imageView)
+    }
+}
 
 @BindingAdapter("submitPetList")
 fun loadItems(recyclerView: RecyclerView, petsList: List<Pet>?) {

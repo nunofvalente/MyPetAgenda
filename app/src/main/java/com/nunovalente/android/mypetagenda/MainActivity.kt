@@ -41,11 +41,11 @@ class MainActivity : BaseActivity() {
 
     private fun showBottomNav() {
         binding.navView.visibility = View.VISIBLE
-        binding.toolbarMain.visibility = View.VISIBLE
+        binding.appBarMain.visibility = View.VISIBLE
     }
 
     private fun hideBottomNav() {
         binding.navView.visibility = View.GONE
-        binding.toolbarMain.visibility = View.GONE
+        binding.appBarMain.visibility = View.GONE
     }
 }

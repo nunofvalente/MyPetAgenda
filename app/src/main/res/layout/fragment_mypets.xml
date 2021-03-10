@@ -50,14 +50,13 @@
             android:id="@+id/fab_myPets"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/margin_16"
-            android:layout_marginRight="@dimen/margin_16"
             android:layout_marginBottom="@dimen/margin_16"
             android:contentDescription="@string/add_new_pet"
             android:onClick="@{() -> viewModel.navigateToAddPet()}"
             android:src="@drawable/ic_add_fab"
-            tools:ignore="RtlHardcoded" />
+            />
 
     </FrameLayout>
 </layout>

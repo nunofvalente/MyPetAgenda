@@ -9,7 +9,7 @@ import com.nunovalente.android.mypetagenda.databinding.AdapterMyPetsBinding
 import com.nunovalente.android.mypetagenda.models.Pet
 
 
-class MyPetsAdapter() : ListAdapter<Pet, MyPetsAdapter.MyPetsViewHolder>(MyPetsDiffCallback()) {
+class MyPetsAdapter(private val clickListener: PetClickListener) : ListAdapter<Pet, MyPetsAdapter.MyPetsViewHolder>(MyPetsDiffCallback()) {
 
     class MyPetsViewHolder private constructor(private val binding: AdapterMyPetsBinding): RecyclerView.ViewHolder(binding.root) {
 
@@ -36,6 +36,9 @@ class MyPetsAdapter() : ListAdapter<Pet, MyPetsAdapter.MyPetsViewHolder>(MyPetsD
         val pet = getItem(position)
 
         holder.bind(pet)
+        holder.itemView.setOnClickListener {
+            clickListener.onClick(pet)
+        }
     }
 }
 
@@ -47,4 +50,8 @@ class MyPetsDiffCallback: DiffUtil.ItemCallback<Pet>() {
     override fun areContentsTheSame(oldItem: Pet, newItem: Pet): Boolean {
         return oldItem == newItem
     }
+}
+
+class PetClickListener(private val clickListener: (pet: Pet) -> Unit) {
+    fun onClick(pet: Pet) = clickListener(pet)
 }
