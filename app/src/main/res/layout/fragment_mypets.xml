@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.nunovalente.android.mypetagenda.ui.mypets.pets.MyPetsViewModel" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?actionBarSize"
+        android:layout_marginTop="?actionBarSize"
+        tools:context=".fragments.MyPetsFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_myPets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_16"
+            android:layout_gravity="center"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            app:submitPetList="@{viewModel.petList}" />
+
+        <TextView
+            android:id="@+id/txt_mypets_noData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/your_pets_are_waiting_to_be_added"
+            android:textSize="@dimen/text_size_18"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/progress_my_pets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{viewModel.isDataLoading ? View.GONE : View.VISIBLE}" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_myPets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
+            android:layout_marginBottom="@dimen/margin_16"
+            android:contentDescription="@string/add_new_pet"
+            android:onClick="@{() -> viewModel.navigateToAddPet()}"
+            android:src="@drawable/ic_add_fab"
+            tools:ignore="RtlHardcoded" />
+
+    </FrameLayout>
+</layout>

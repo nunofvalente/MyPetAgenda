@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="pet"
+            type="com.nunovalente.android.mypetagenda.models.Pet" />
+
+    </data>
+
+<LinearLayout
+    android:layout_margin="@dimen/margin_8"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/pet_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/default_image_pet"
+        android:contentDescription="@string/pet_image" />
+
+    <TextView
+        android:id="@+id/pet_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Balto"
+        android:textSize="@dimen/text_size_18"
+        android:padding="@dimen/margin_8"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:text="@{pet.name}"/>
+
+</LinearLayout>
+</layout>

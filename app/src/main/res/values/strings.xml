@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">My Pet Agenda</string>
+    <string name="title_home">Home</string>
+    <string name="title_gallery">Gallery</string>
+    <string name="title_my_pets">My Pets</string>
+    <string name="title_activity">Activity</string>
+    <string name="add_new_pet">Add new pet</string>
+
+    <string name="upload_picture">Upload Picture</string>
+    <string name="name">Name</string>
+    <string name="breed_if_applicable">Breed (If applicable)</string>
+    <string name="save">Save</string>
+    <string name="type">Type</string>
+    <string name="weight">Weight</string>
+    <string name="birthday">Birthday</string>
+    <string name="kg">Kg</string>
+    <string name="_22_04_2013">22/04/2013</string>
+    <string name="add_pet">Add Pet</string>
+    <string name="pet_image">Pet image</string>
+    <string name="your_pets_are_waiting_to_be_added">Your pets are waiting to be added!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

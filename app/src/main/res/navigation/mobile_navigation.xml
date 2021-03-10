@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.nunovalente.android.mypetagenda.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_gallery"
+        android:name="com.nunovalente.android.mypetagenda.ui.gallery.GalleryFragment"
+        android:label="@string/title_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/navigation_mypets"
+        android:name="com.nunovalente.android.mypetagenda.ui.mypets.pets.MyPetsFragment"
+        android:label="@string/title_my_pets"
+        tools:layout="@layout/fragment_mypets" >
+        <action
+            android:id="@+id/action_navigation_mypets_to_addPetFragment"
+            app:destination="@id/navigation_addPetFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_activity"
+        android:name="com.nunovalente.android.mypetagenda.ui.activity.ActivityFragment"
+        android:label="@string/title_activity"
+        tools:layout="@layout/fragment_activity" />
+    <fragment
+        android:id="@+id/navigation_addPetFragment"
+        android:name="com.nunovalente.android.mypetagenda.ui.mypets.addpet.AddPetFragment"
+        android:label="AddPetFragment"
+        tools:layout="@layout/fragment_add_pet">
+        <action
+            android:id="@+id/action_navigation_addPetFragment_to_navigation_mypets"
+            app:destination="@id/navigation_mypets"
+            app:popUpTo="@id/navigation_mypets"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
