@@ -30,14 +30,15 @@
             app:spanCount="2"
             app:submitPetList="@{viewModel.petList}" />
 
-        <TextView
-            android:id="@+id/txt_mypets_noData"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/your_pets_are_waiting_to_be_added"
-            android:textSize="@dimen/text_size_18"
-            android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/image_add_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add_me"
+            android:layout_margin="@dimen/margin_32"
+            android:visibility="gone"
+            android:gravity="center_horizontal"
+            android:contentDescription="@string/add_me_image" />
 
         <ProgressBar
             android:id="@+id/progress_my_pets"

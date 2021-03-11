@@ -13,8 +13,8 @@ import com.nunovalente.android.mypetagenda.ui.mypets.MyPetsAdapter
 
 @BindingAdapter("loadImage")
 fun loadImage(imageView: ImageView, url: String?) {
-    url?.let { url ->
-        Glide.with(imageView.context).load(url)
+    url?.let {
+        Glide.with(imageView.context).load(it)
             .placeholder(R.drawable.default_image_pet)
             .error(R.drawable.default_image_pet)
             .circleCrop()

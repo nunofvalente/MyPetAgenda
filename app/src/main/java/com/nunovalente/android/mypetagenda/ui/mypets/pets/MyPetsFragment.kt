@@ -15,6 +15,7 @@ import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 import com.nunovalente.android.mypetagenda.ui.mypets.MyPetsAdapter
 import com.nunovalente.android.mypetagenda.ui.mypets.PetClickListener
+import java.util.*
 import javax.inject.Inject
 
 class MyPetsFragment : BaseFragment() {
@@ -34,7 +35,6 @@ class MyPetsFragment : BaseFragment() {
         viewModel = ViewModelProvider(this, factory).get(MyPetsViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
 
         viewModel.navigate.observe(viewLifecycleOwner, { navigate ->
             if (navigate) {
@@ -73,11 +73,11 @@ class MyPetsFragment : BaseFragment() {
 
     private fun showData() {
         binding.recyclerMyPets.visibility = View.VISIBLE
-        binding.txtMypetsNoData.visibility = View.GONE
+        binding.imageAddMe.visibility = View.GONE
     }
 
     private fun showNoData() {
         binding.recyclerMyPets.visibility = View.GONE
-        binding.txtMypetsNoData.visibility = View.VISIBLE
+        binding.imageAddMe.visibility = View.VISIBLE
     }
 }

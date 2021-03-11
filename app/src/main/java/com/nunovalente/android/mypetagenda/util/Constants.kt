@@ -1,4 +1,4 @@
-package com.nunovalente.android.mypetagenda
+package com.nunovalente.android.mypetagenda.util
 
 object Constants {
 

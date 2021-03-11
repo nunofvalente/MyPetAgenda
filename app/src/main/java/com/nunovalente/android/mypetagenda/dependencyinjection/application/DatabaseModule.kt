@@ -1,7 +1,7 @@
 package com.nunovalente.android.mypetagenda.dependencyinjection.application
 
 import androidx.room.Room
-import com.nunovalente.android.mypetagenda.Constants
+import com.nunovalente.android.mypetagenda.util.Constants
 import com.nunovalente.android.mypetagenda.application.MyApplication
 import com.nunovalente.android.mypetagenda.data.Repository
 import com.nunovalente.android.mypetagenda.data.local.PetDao
