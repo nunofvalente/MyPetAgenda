@@ -1,8 +1,11 @@
 package com.nunovalente.android.mypetagenda.models
 
+import android.os.Parcelable
 import com.nunovalente.android.mypetagenda.data.entities.DatabasePet
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
+@Parcelize
 data class Pet(
     var id: String = UUID.randomUUID().toString(),
     var name: String = "",
@@ -11,7 +14,7 @@ data class Pet(
     var breed: String = "",
     var weight: String = "",
     var imagePath: String = ""
-) {
+) : Parcelable {
     constructor(name: String, birthday: String, type: String, breed: String, weight: String, imagePath: String) : this(UUID.randomUUID().toString(), name, birthday, type, breed, weight, imagePath)
 }
 

@@ -6,16 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentMypetsBinding
 import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 import com.nunovalente.android.mypetagenda.ui.mypets.MyPetsAdapter
 import com.nunovalente.android.mypetagenda.ui.mypets.PetClickListener
-import java.util.*
 import javax.inject.Inject
 
 class MyPetsFragment : BaseFragment() {
@@ -32,6 +31,7 @@ class MyPetsFragment : BaseFragment() {
     ): View? {
         injector.inject(this)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_mypets, container, false)
+
         viewModel = ViewModelProvider(this, factory).get(MyPetsViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -45,7 +45,9 @@ class MyPetsFragment : BaseFragment() {
 
         viewModel.navigateToDetails.observe(viewLifecycleOwner, { pet ->
             if(pet != null) {
-                findNavController().navigate(R.id.action_navigation_mypets_to_petDetailFragment)
+                val extras = FragmentNavigatorExtras(binding.recyclerMyPets to "pet_image_transition")
+                val directions = MyPetsFragmentDirections.actionNavigationMypetsToPetDetailFragment(pet)
+                findNavController().navigate(directions)
                 viewModel.doneNavigating()
             }
         })

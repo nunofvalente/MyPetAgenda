@@ -5,4 +5,6 @@ import com.nunovalente.android.mypetagenda.data.Repository
 import javax.inject.Inject
 
 class PetDetailViewModel @Inject constructor(private val repository: Repository): ViewModel() {
+
+
 }

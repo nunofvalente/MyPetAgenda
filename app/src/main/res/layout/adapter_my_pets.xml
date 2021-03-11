@@ -17,8 +17,8 @@
 
     <ImageView
         android:id="@+id/pet_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/circle_image_size"
+        android:layout_height="@dimen/circle_image_size"
         app:loadImage="@{pet.imagePath}"
         android:layout_gravity="center"
         android:src="@drawable/default_image_pet"

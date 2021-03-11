@@ -6,6 +6,7 @@ import com.nunovalente.android.mypetagenda.ui.activity.ActivityViewModel
 import com.nunovalente.android.mypetagenda.ui.gallery.GalleryViewModel
 import com.nunovalente.android.mypetagenda.ui.home.HomeViewModel
 import com.nunovalente.android.mypetagenda.ui.mypets.AddPetViewModel
+import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.PetDetailViewModel
 import com.nunovalente.android.mypetagenda.ui.mypets.pets.MyPetsViewModel
 import dagger.Binds
 import dagger.Module
@@ -38,4 +39,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddPetViewModel::class)
     abstract fun addPetViewModel(addPetViewModel: AddPetViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PetDetailViewModel::class)
+    abstract fun petDetailViewModel(petViewModel: PetDetailViewModel): ViewModel
 }

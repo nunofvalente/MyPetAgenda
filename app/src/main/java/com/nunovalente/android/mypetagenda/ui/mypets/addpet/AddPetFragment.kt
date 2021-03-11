@@ -33,7 +33,7 @@ class AddPetFragment : BaseFragment() {
     }
 
     @Inject lateinit var factory: ViewModelFactory
-    @Inject lateinit var calendar: CalendarImpl
+    @Inject lateinit var calendarImpl: CalendarImpl
 
     private val permissionList = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
 
@@ -86,7 +86,7 @@ class AddPetFragment : BaseFragment() {
         }
 
         binding.editPetBirthday.setOnClickListener {
-            calendar.chooseDate(binding.editPetBirthday)
+            calendarImpl.chooseDate(requireContext(), binding.editPetBirthday)
         }
     }
 

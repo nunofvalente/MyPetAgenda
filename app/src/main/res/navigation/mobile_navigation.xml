@@ -27,7 +27,7 @@
             app:destination="@id/navigation_addPetFragment" />
         <action
             android:id="@+id/action_navigation_mypets_to_petDetailFragment"
-            app:destination="@id/navigation_petDetailFragment" />
+            app:destination="@id/navigation_petDetailFragment"/>
     </fragment>
 
     <fragment
@@ -51,14 +51,15 @@
         android:name="com.nunovalente.android.mypetagenda.ui.mypets.petdetail.PetDetailFragment"
         android:label="PetDetailFragment"
         tools:layout="@layout/fragment_pet_detail">
-        <argument
-            android:name="petId"
-            app:argType="integer"
-            android:defaultValue="-1" />
         <action
             android:id="@+id/action_navigation_petDetailFragment_to_navigation_mypets"
             app:destination="@id/navigation_mypets"
             app:popUpTo="@id/navigation_mypets"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="pet"
+            app:argType="com.nunovalente.android.mypetagenda.models.Pet"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>
