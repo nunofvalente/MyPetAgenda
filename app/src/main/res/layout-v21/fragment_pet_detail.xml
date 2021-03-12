@@ -39,7 +39,7 @@
                     android:layout_height="@dimen/circle_image_size"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/margin_16"
-                    android:transitionName="@string/pet_image_transition"
+                    android:transitionName="@{pet.id}"
                     app:loadImage="@{pet.imagePath}"
                     tools:src="@drawable/default_image_pet"
                     android:contentDescription="@string/pet_image" />

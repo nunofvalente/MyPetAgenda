@@ -40,6 +40,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/margin_16"
                     app:loadImage="@{pet.imagePath}"
+                    android:transitionName="@string/pet_image_transition"
                     tools:src="@drawable/default_image_pet"
                     android:contentDescription="@string/pet_image" />
 

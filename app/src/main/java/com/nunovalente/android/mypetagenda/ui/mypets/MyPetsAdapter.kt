@@ -1,10 +1,14 @@
 package com.nunovalente.android.mypetagenda.ui.mypets
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.AdapterMyPetsBinding
 import com.nunovalente.android.mypetagenda.models.Pet
 
@@ -34,10 +38,12 @@ class MyPetsAdapter(private val clickListener: PetClickListener) : ListAdapter<P
 
     override fun onBindViewHolder(holder: MyPetsViewHolder, position: Int) {
         val pet = getItem(position)
+        val imageView: ImageView = holder.itemView.findViewById(R.id.pet_image_adapter)
 
         holder.bind(pet)
         holder.itemView.setOnClickListener {
-            clickListener.onClick(pet)
+            ViewCompat.setTransitionName(imageView, pet.name)
+            clickListener.onClick(imageView, pet)
         }
     }
 }
@@ -52,6 +58,6 @@ class MyPetsDiffCallback: DiffUtil.ItemCallback<Pet>() {
     }
 }
 
-class PetClickListener(private val clickListener: (pet: Pet) -> Unit) {
-    fun onClick(pet: Pet) = clickListener(pet)
+class PetClickListener(private val clickListener: (transitionView: ImageView, pet: Pet) -> Unit) {
+    fun onClick(transitionView: ImageView, pet: Pet) = clickListener(transitionView, pet)
 }

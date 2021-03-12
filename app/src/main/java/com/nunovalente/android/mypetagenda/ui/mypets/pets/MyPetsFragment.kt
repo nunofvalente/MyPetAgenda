@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.navigation.fragment.findNavController
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentMypetsBinding
@@ -29,46 +29,50 @@ class MyPetsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        injector.inject(this)
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_mypets, container, false)
+        return if (::binding.isInitialized) {
+            binding.root
+        } else {
+            injector.inject(this)
+            binding = DataBindingUtil.inflate(inflater, R.layout.fragment_mypets, container, false)
 
-        viewModel = ViewModelProvider(this, factory).get(MyPetsViewModel::class.java)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+            viewModel = ViewModelProvider(this, factory).get(MyPetsViewModel::class.java)
+            binding.viewModel = viewModel
+            binding.lifecycleOwner = this
 
-        viewModel.navigate.observe(viewLifecycleOwner, { navigate ->
-            if (navigate) {
-                findNavController().navigate(R.id.action_navigation_mypets_to_addPetFragment)
-                viewModel.doneNavigating()
-            }
-        })
+            viewModel.navigate.observe(viewLifecycleOwner, { navigate ->
+                if (navigate) {
+                    findNavController().navigate(R.id.action_navigation_mypets_to_addPetFragment)
+                    viewModel.doneNavigating()
+                }
+            })
 
-        viewModel.navigateToDetails.observe(viewLifecycleOwner, { pet ->
-            if(pet != null) {
-                val extras = FragmentNavigatorExtras(binding.recyclerMyPets to "pet_image_transition")
-                val directions = MyPetsFragmentDirections.actionNavigationMypetsToPetDetailFragment(pet)
-                findNavController().navigate(directions)
-                viewModel.doneNavigating()
-            }
-        })
+            setRecyclerAdapter()
 
-        setRecyclerAdapter()
+            viewModel.petList.observe(viewLifecycleOwner, { petList ->
+                if (petList!!.isEmpty()) {
+                    showNoData()
+                } else {
+                    showData()
+                }
+            })
 
-        viewModel.petList.observe(viewLifecycleOwner, { petList ->
-            if (petList!!.isEmpty()) {
-                showNoData()
-            } else {
-                showData()
-            }
-        })
+            return binding.root
+        }
+    }
 
-        return binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+
+        view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
     private fun setRecyclerAdapter() {
         binding.recyclerMyPets.apply {
-            this.adapter = MyPetsAdapter(PetClickListener { pet ->
-                viewModel.navigateToPetDetail(pet)
+            this.adapter = MyPetsAdapter(PetClickListener {transitionView, pet ->
+                val extras = FragmentNavigatorExtras(transitionView to pet.id)
+                val directions = MyPetsFragmentDirections.actionNavigationMypetsToPetDetailFragment(pet)
+                findNavController().navigate(directions, extras)
             })
         }
     }
