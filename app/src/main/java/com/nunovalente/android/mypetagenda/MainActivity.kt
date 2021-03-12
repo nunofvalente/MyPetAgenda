@@ -48,4 +48,9 @@ class MainActivity : BaseActivity() {
         binding.navView.visibility = View.GONE
         binding.appBarMain.visibility = View.GONE
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
+    }
 }

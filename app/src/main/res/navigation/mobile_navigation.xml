@@ -54,6 +54,7 @@
         <action
             android:id="@+id/action_navigation_petDetailFragment_to_navigation_mypets"
             app:destination="@id/navigation_mypets"
+            app:enterAnim="@android:anim/fade_in"
             app:popUpTo="@id/navigation_mypets"
             app:popUpToInclusive="true" />
         <argument

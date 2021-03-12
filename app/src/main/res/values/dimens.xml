@@ -17,5 +17,6 @@
 
     <!-- Image Sizes -->
     <dimen name="circle_image_size">100dp</dimen>
+    <dimen name="appBar_petProfile_height">150dp</dimen>
 
 </resources>

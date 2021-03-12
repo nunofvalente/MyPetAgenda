@@ -1,84 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="pet"
             type="com.nunovalente.android.mypetagenda.models.Pet" />
-
-        <variable
-            name="imageUrlPet"
-            type="String" />
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center|bottom"
+        android:gravity="center"
         android:orientation="vertical">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_details"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center|bottom"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="@dimen/appBar_petProfile_height"
+            android:background="@color/app_primary_light"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/app_bar_details"
+            <ImageView
+                android:id="@+id/pet_profile_image"
+                android:layout_width="@dimen/circle_image_size"
+                android:layout_height="@dimen/circle_image_size"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_16"
+                android:contentDescription="@string/pet_image"
+                app:loadImage="@{pet.imagePath}"
+                tools:src="@drawable/default_image_pet" />
+
+            <TextView
+                android:id="@+id/pet_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="@dimen/margin_8"
+                android:gravity="center"
+                android:text="@{pet.name}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                tools:text="Balto" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager_pet_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/pet_detail_tab"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="?actionBarSize"
+                android:layout_gravity="top"
                 android:background="@color/app_primary_light"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                app:tabIndicatorColor="@color/app_secondary"
+                app:tabSelectedTextColor="@color/white"
+                app:tabTextColor="@color/white">
 
-                <ImageView
-                    android:id="@+id/pet_profile_image"
-                    android:layout_width="@dimen/circle_image_size"
-                    android:layout_height="@dimen/circle_image_size"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/margin_16"
-                    app:loadImage="@{pet.imagePath}"
-                    android:transitionName="@string/pet_image_transition"
-                    tools:src="@drawable/default_image_pet"
-                    android:contentDescription="@string/pet_image" />
-
-                <TextView
-                    android:id="@+id/pet_profile_name"
+                <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom"
-                    android:layout_marginTop="@dimen/margin_8"
-                    android:gravity="center"
-                    android:text="@{pet.name}"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_20"
-                    android:textStyle="bold"
-                    tools:text="Balto" />
+                    android:text="@string/reminders" />
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/pet_detail_tab"
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    android:layout_gravity="bottom"
-                    app:tabIndicatorColor="@android:color/white"
-                    app:tabSelectedTextColor="@android:color/white"
-                    android:background="@color/app_primary"
-                    app:tabTextColor="@color/white"/>
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/notes" />
 
-            </com.google.android.material.appbar.AppBarLayout>
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile" />
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/pager_pet_profile"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp" />
+            </com.google.android.material.tabs.TabLayout>
+        </androidx.viewpager.widget.ViewPager>
 
-        </LinearLayout>
-
-
-
-
-    </FrameLayout>
+    </LinearLayout>
 </layout>
