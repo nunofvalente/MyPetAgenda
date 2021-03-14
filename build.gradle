@@ -43,4 +43,5 @@ ext {
     room_version = "2.2.6"
     glide_version = "4.12.0"
     timber_version = "4.7.1"
+    fab_library_version = "1.6.4"
 }

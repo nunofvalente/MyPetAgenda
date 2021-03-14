@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
+import android.view.WindowInsetsController
 import android.view.WindowManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -37,13 +38,13 @@ class MainActivity : BaseActivity() {
                 R.id.navigation_home -> showBottomNav()
                 R.id.navigation_gallery -> showBottomNav()
                 R.id.navigation_mypets -> showBottomNav()
-                R.id.navigation_petDetailFragment -> hideStatusBar()
+            //    R.id.navigation_petDetailFragment -> hideStatusBar()
                 else -> hideBottomNav()
             }
         }
     }
 
-    private fun hideStatusBar() {
+   /* private fun hideStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
@@ -53,14 +54,15 @@ class MainActivity : BaseActivity() {
             )
         }
         hideBottomNav()
-    }
+    }*/
 
     private fun showBottomNav() {
         binding.navView.visibility = View.VISIBLE
         binding.appBarMain.visibility = View.VISIBLE
-        showStatusBar()
+     //   showStatusBar()
     }
 
+    @Suppress("DEPRECATION")
     private fun showStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.show(WindowInsets.Type.statusBars())
@@ -76,6 +78,6 @@ class MainActivity : BaseActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 }

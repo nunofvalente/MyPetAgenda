@@ -5,8 +5,9 @@ import com.nunovalente.android.mypetagenda.util.Constants
 import com.nunovalente.android.mypetagenda.application.MyApplication
 import com.nunovalente.android.mypetagenda.data.Repository
 import com.nunovalente.android.mypetagenda.data.local.PetDao
-import com.nunovalente.android.mypetagenda.data.local.PetDatabase
+import com.nunovalente.android.mypetagenda.data.local.Database
 import com.nunovalente.android.mypetagenda.data.local.PetLocalDataSource
+import com.nunovalente.android.mypetagenda.data.local.ReminderDao
 import dagger.Module
 import dagger.Provides
 
@@ -15,21 +16,22 @@ class DatabaseModule {
 
     @AppScope
     @Provides
-    fun petDatabase(application: MyApplication): PetDatabase = Room.databaseBuilder(
+    fun database(application: MyApplication): Database = Room.databaseBuilder(
         application.applicationContext,
-        PetDatabase::class.java,
-        Constants.PET_DATABASE_NAME
+        Database::class.java,
+        Constants.DATABASE_NAME
     ).build()
 
-    @AppScope
-    @Provides
-    fun petDao(database: PetDatabase): PetDao = database.petDao()
 
-    @AppScope
+    @Provides
+    fun petDao(database: Database): PetDao = database.petDao()
+
+    @Provides
+    fun reminderDao(database: Database): ReminderDao = database.reminderDao()
+
     @Provides
     fun petLocalDataSource(dao: PetDao) = PetLocalDataSource(dao)
 
-    @AppScope
     @Provides
     fun repository(petLocalDataSource: PetLocalDataSource) = Repository(petLocalDataSource)
 }

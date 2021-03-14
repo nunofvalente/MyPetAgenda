@@ -1,4 +1,4 @@
-package com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs
+package com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

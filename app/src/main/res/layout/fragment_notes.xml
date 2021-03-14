@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.mypets.petdetail.tabs.NotesFragment">
+    tools:context=".ui.mypets.petdetail.tabs.notes.NotesFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Notes" />
+        android:text="@string/notes" />
 
 </FrameLayout>

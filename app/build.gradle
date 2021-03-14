@@ -86,4 +86,7 @@ dependencies {
 
     //Timber
     implementation "com.jakewharton.timber:timber:$timber_version"
+
+    //Floating Action Button Menu Library
+    implementation "com.github.clans:fab:$fab_library_version"
 }
