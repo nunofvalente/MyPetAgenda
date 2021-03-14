@@ -1,36 +1,29 @@
 package com.nunovalente.android.mypetagenda.ui.mypets.petdetail
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavArgs
-import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.transition.ChangeBounds
-import androidx.transition.TransitionInflater
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.transition.MaterialContainerTransform
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentPetDetailBinding
 import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
-import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.NotesFragment
-import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.ProfileFragment
-import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.RemindersFragment
+import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.adapters.PetViewPagerAdapter
 import javax.inject.Inject
+
 
 class PetDetailFragment : BaseFragment() {
 
     @Inject lateinit var factory: ViewModelFactory
+    @Inject lateinit var petViewPagerAdapter: PetViewPagerAdapter
 
     private lateinit var viewModel: PetDetailViewModel
     private lateinit var binding: FragmentPetDetailBinding
@@ -46,7 +39,6 @@ class PetDetailFragment : BaseFragment() {
 
         viewModel = ViewModelProvider(this, factory).get(PetDetailViewModel::class.java)
 
-
         return binding.root
     }
 
@@ -54,7 +46,7 @@ class PetDetailFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         if (Build.VERSION.SDK_INT >= 21) {
             sharedElementEnterTransition = MaterialContainerTransform().apply {
-                duration = 300
+                duration = 600
             }
         }
 
@@ -62,32 +54,21 @@ class PetDetailFragment : BaseFragment() {
         binding.pet = pet
         binding.executePendingBindings()
 
+        setViewPager()
+    }
+
+    private fun setViewPager() {
+        binding.pagerPetProfile.adapter = petViewPagerAdapter
         binding.petDetailTab.setupWithViewPager(binding.pagerPetProfile)
-        binding.pagerPetProfile.adapter = PetViewPagerAdapter(parentFragmentManager)
+
+        val root = binding.petDetailTab.getChildAt(0)
+        if (root is LinearLayout) {
+            root.showDividers = LinearLayout.SHOW_DIVIDER_MIDDLE
+            val drawable = GradientDrawable()
+            drawable.setColor(ContextCompat.getColor(requireActivity(), R.color.app_primary_dark))
+            drawable.setSize(5, 1)
+            root.dividerPadding = 30
+            root.dividerDrawable = drawable
+        }
     }
 }
-
-    class PetViewPagerAdapter(fm: FragmentManager) :
-        FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-
-        //Number of views in the Pager
-        override fun getCount(): Int {
-            return 3
-        }
-
-        override fun getItem(position: Int): Fragment {
-            return when (position) {
-                0 -> RemindersFragment.newInstance()
-                1 -> NotesFragment.newInstance()
-                else -> ProfileFragment.newInstance()
-            }
-        }
-
-        override fun getPageTitle(position: Int): CharSequence? {
-            return when(position) {
-                0 -> "Reminders"
-                1 -> "Notes"
-                else -> "Profile"
-            }
-        }
-    }

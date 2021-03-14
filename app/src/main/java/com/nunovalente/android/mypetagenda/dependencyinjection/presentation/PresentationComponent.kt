@@ -8,7 +8,7 @@ import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.PetDetailFragment
 import com.nunovalente.android.mypetagenda.ui.mypets.pets.MyPetsFragment
 import dagger.Subcomponent
 
-@Subcomponent(modules = [ViewModelModule::class])
+@Subcomponent(modules = [ViewModelModule::class, PresentationModule::class])
 interface PresentationComponent {
     fun inject(fragment: HomeFragment)
     fun inject(fragment: ActivityFragment)

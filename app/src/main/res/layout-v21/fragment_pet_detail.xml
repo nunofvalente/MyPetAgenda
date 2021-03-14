@@ -54,19 +54,19 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager_pet_profile"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:elevation="@dimen/view_pager_elevation">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/pet_detail_tab"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
+                android:layout_height="wrap_content"
                 android:layout_gravity="top"
                 android:background="@color/app_primary_light"
-                app:tabIndicatorColor="@color/app_secondary"
+                app:tabIndicatorColor="@color/app_primary_dark"
+                app:tabIndicatorHeight="@dimen/tab_layout_indicator_height"
                 app:tabSelectedTextColor="@color/white"
-                app:tabTextColor="@color/white">
-            </com.google.android.material.tabs.TabLayout>
+                app:tabTextColor="@color/white"/>
         </androidx.viewpager.widget.ViewPager>
-
     </LinearLayout>
 </layout>

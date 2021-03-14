@@ -60,13 +60,6 @@ class MyPetsFragment : BaseFragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        postponeEnterTransition()
-
-        view.doOnPreDraw { startPostponedEnterTransition() }
-    }
-
     private fun setRecyclerAdapter() {
         binding.recyclerMyPets.apply {
             this.adapter = MyPetsAdapter(PetClickListener {transitionView, pet ->

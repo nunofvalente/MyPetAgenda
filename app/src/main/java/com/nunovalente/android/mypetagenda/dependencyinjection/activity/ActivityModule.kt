@@ -16,7 +16,7 @@ class ActivityModule(private val activity: AppCompatActivity) {
     fun fragmentManager(activity: AppCompatActivity) = activity.supportFragmentManager
 
     @Provides
-    fun calendar() = Calendar.getInstance()
+    fun calendar(): Calendar = Calendar.getInstance()
 
     @Provides
     fun calendarImpl(calendar: Calendar) = CalendarImpl(calendar)

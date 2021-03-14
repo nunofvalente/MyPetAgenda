@@ -1,7 +1,10 @@
 package com.nunovalente.android.mypetagenda
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -34,14 +37,36 @@ class MainActivity : BaseActivity() {
                 R.id.navigation_home -> showBottomNav()
                 R.id.navigation_gallery -> showBottomNav()
                 R.id.navigation_mypets -> showBottomNav()
+                R.id.navigation_petDetailFragment -> hideStatusBar()
                 else -> hideBottomNav()
             }
         }
     }
 
+    private fun hideStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        hideBottomNav()
+    }
+
     private fun showBottomNav() {
         binding.navView.visibility = View.VISIBLE
         binding.appBarMain.visibility = View.VISIBLE
+        showStatusBar()
+    }
+
+    private fun showStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.show(WindowInsets.Type.statusBars())
+        } else {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
     }
 
     private fun hideBottomNav() {
@@ -51,6 +76,6 @@ class MainActivity : BaseActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

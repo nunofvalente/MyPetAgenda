@@ -29,7 +29,7 @@
                 android:layout_width="@dimen/circle_image_size"
                 android:layout_height="@dimen/circle_image_size"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
                 android:contentDescription="@string/pet_image"
                 app:loadImage="@{pet.imagePath}"
                 tools:src="@drawable/default_image_pet" />
@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|bottom"
                 android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_8"
                 android:gravity="center"
                 android:text="@{pet.name}"
                 android:textColor="@color/white"
@@ -57,30 +58,13 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/pet_detail_tab"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
+                android:layout_height="wrap_content"
                 android:layout_gravity="top"
                 android:background="@color/app_primary_light"
-                app:tabIndicatorColor="@color/app_secondary"
+                app:tabIndicatorColor="@color/app_primary_dark"
+                app:tabIndicatorHeight="@dimen/tab_layout_indicator_height"
                 app:tabSelectedTextColor="@color/white"
-                app:tabTextColor="@color/white">
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/reminders" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/notes" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/profile" />
-
-            </com.google.android.material.tabs.TabLayout>
+                app:tabTextColor="@color/white"/>
         </androidx.viewpager.widget.ViewPager>
-
     </LinearLayout>
 </layout>
