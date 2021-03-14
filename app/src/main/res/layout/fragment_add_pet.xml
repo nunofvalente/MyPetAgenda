@@ -9,10 +9,6 @@
             type="com.nunovalente.android.mypetagenda.ui.mypets.AddPetViewModel" />
 
         <variable
-            name="imageUrlPet"
-            type="String" />
-
-        <variable
             name="breed"
             type="String" />
     </data>

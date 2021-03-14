@@ -3,6 +3,7 @@ package com.nunovalente.android.mypetagenda.util
 import android.app.DatePickerDialog
 import android.content.Context
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
@@ -35,5 +36,35 @@ class CalendarImpl @Inject constructor(private val calendar: Calendar) {
         val sdf = SimpleDateFormat(DATE_FORMAT, Locale.UK)
         val date = sdf.format(calendar.time)
         editText.setText(date)
+    }
+
+    fun chooseDateReminder(context: Context, editText: EditText) {
+        val date = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabelReminder(editText)
+        }
+
+        DatePickerDialog(
+            context,
+            date,
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        ).show()
+    }
+
+    private fun updateLabelReminder(editText: EditText) {
+        val sdf = SimpleDateFormat(DATE_FORMAT, Locale.UK)
+        val currentDate = sdf.format(System.currentTimeMillis())
+        val chosenDate = sdf.format(calendar.time)
+
+       if(chosenDate < currentDate) {
+           editText.setText("")
+           Toast.makeText(editText.context, "Please enter a valid date!", Toast.LENGTH_SHORT).show()
+       }else {
+           editText.setText(chosenDate)
+       }
     }
 }

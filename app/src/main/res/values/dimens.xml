@@ -22,5 +22,6 @@
     <!-- Tab Layout -->
     <dimen name="view_pager_elevation">4dp</dimen>
     <dimen name="tab_layout_indicator_height">3dp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
 
 </resources>
