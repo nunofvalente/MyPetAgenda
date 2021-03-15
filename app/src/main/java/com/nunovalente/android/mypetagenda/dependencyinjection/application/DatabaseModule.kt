@@ -3,6 +3,8 @@ package com.nunovalente.android.mypetagenda.dependencyinjection.application
 import androidx.room.Room
 import com.nunovalente.android.mypetagenda.util.Constants
 import com.nunovalente.android.mypetagenda.application.MyApplication
+import com.nunovalente.android.mypetagenda.data.DefaultNoteRepository
+import com.nunovalente.android.mypetagenda.data.NoteRepository
 import com.nunovalente.android.mypetagenda.data.PetRepository
 import com.nunovalente.android.mypetagenda.data.Repository
 import com.nunovalente.android.mypetagenda.data.local.*
@@ -42,4 +44,7 @@ class DatabaseModule {
 
     @Provides
     fun repository(petLocalDataSource: PetLocalDataSource): PetRepository = Repository(petLocalDataSource)
+
+    @Provides
+    fun noteRepository(noteLocalDataSource: NoteLocalDataSource): NoteRepository = DefaultNoteRepository(noteLocalDataSource)
 }

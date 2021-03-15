@@ -41,4 +41,8 @@
     <string name="recurring">Recurring</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_note">Add Note</string>
+    <string name="please_insert_your_note">Please insert your note...</string>
+    <string name="please_add_a_note">Please add a note!</string>
 </resources>

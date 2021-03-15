@@ -34,5 +34,7 @@ class GalleryFragment : BaseFragment() {
         galleryViewModel = ViewModelProvider(this, factory).get(GalleryViewModel::class.java)
 
         return binding.root
+
+        //TODO Make FAB disappear when changing fragments
     }
 }

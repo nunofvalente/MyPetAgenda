@@ -20,13 +20,19 @@ import com.nunovalente.android.mypetagenda.databinding.FragmentPetDetailBinding
 import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.adapters.PetViewPagerAdapter
+import com.nunovalente.android.mypetagenda.util.NoteDialogImpl
 import javax.inject.Inject
 
 
 class PetDetailFragment : BaseFragment() {
 
+    companion object {
+        private val TAG: String = PetDetailFragment::class.java.simpleName
+    }
+
     @Inject lateinit var factory: ViewModelFactory
     @Inject lateinit var petViewPagerAdapter: PetViewPagerAdapter
+    @Inject lateinit var dialog: NoteDialogImpl
 
     private lateinit var viewModel: PetDetailViewModel
     private lateinit var binding: FragmentPetDetailBinding
@@ -84,7 +90,10 @@ class PetDetailFragment : BaseFragment() {
             findNavController().navigate(directions, extras)
         }
 
-
+        binding.fabPetNotes.setOnClickListener {
+            dialog.isCancelable = false
+            dialog.show(parentFragmentManager, TAG)
+        }
     }
 
     private fun setViewPager() {
