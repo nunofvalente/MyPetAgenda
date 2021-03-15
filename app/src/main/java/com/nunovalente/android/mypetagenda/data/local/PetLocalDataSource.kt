@@ -2,6 +2,7 @@ package com.nunovalente.android.mypetagenda.data.local
 
 import com.nunovalente.android.mypetagenda.data.Result
 import com.nunovalente.android.mypetagenda.data.entities.DatabasePet
+import com.nunovalente.android.mypetagenda.data.local.dao.PetDao
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -9,15 +10,15 @@ import kotlinx.coroutines.withContext
 import java.lang.RuntimeException
 import javax.inject.Inject
 
-class PetLocalDataSource @Inject constructor(private val dao: PetDao, private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) {
+class PetLocalDataSource @Inject constructor(private val dao: PetDao): PetDataSource {
 
-    suspend fun insertPet(databasePet: DatabasePet) {
+    override suspend fun insertPet(databasePet: DatabasePet) {
         withContext(Dispatchers.IO) {
             dao.insertPet(databasePet)
         }
     }
 
-     suspend fun getPet(id: String): Result<DatabasePet> = withContext(ioDispatcher) {
+     override suspend fun getPet(id: String): Result<DatabasePet> = withContext(Dispatchers.IO) {
         try {
             val pet = dao.getPet(id)
             if (pet != null) {
@@ -30,7 +31,7 @@ class PetLocalDataSource @Inject constructor(private val dao: PetDao, private va
         }
     }
 
-    fun getAllPets() : Flow<List<DatabasePet>?> {
+    override fun getAllPets() : Flow<List<DatabasePet>?> {
         try {
             return dao.getAllPets()
         } catch (e: Exception) {
@@ -38,7 +39,7 @@ class PetLocalDataSource @Inject constructor(private val dao: PetDao, private va
         }
     }
 
-    suspend fun deletePet(pet: DatabasePet) = withContext(ioDispatcher) {
+    override suspend fun deletePet(pet: DatabasePet) = withContext(Dispatchers.IO) {
         try {
             dao.deletePet(pet)
         } catch (e: Exception) {

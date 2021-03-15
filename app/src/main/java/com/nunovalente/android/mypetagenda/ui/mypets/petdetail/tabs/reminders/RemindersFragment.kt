@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentRemindersBinding
+import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 
-class RemindersFragment : Fragment() {
+class RemindersFragment : BaseFragment() {
 
 
     private lateinit var binding: FragmentRemindersBinding

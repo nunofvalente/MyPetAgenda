@@ -1,6 +1,7 @@
 package com.nunovalente.android.mypetagenda.ui.mypets.pets
 
 import androidx.lifecycle.*
+import com.nunovalente.android.mypetagenda.data.PetRepository
 import com.nunovalente.android.mypetagenda.data.Repository
 import com.nunovalente.android.mypetagenda.models.Pet
 import kotlinx.coroutines.launch
@@ -8,7 +9,7 @@ import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
 
-class MyPetsViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class MyPetsViewModel @Inject constructor(private val repository: PetRepository) : ViewModel() {
 
     lateinit var petList: LiveData<List<Pet>?>
 
@@ -30,7 +31,10 @@ class MyPetsViewModel @Inject constructor(private val repository: Repository) : 
 
     init {
         _navigate.value = false
+        loadPets()
+    }
 
+    fun loadPets() {
         viewModelScope.launch {
             _isDataLoading.value = true
             try {

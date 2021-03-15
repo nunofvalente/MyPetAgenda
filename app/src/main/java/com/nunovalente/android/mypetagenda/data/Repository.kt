@@ -6,6 +6,7 @@ import androidx.lifecycle.map
 import com.nunovalente.android.mypetagenda.data.entities.DatabasePet
 import com.nunovalente.android.mypetagenda.data.entities.asDomainModel
 import com.nunovalente.android.mypetagenda.data.entities.toDomainModel
+import com.nunovalente.android.mypetagenda.data.local.PetDataSource
 import com.nunovalente.android.mypetagenda.data.local.PetLocalDataSource
 import com.nunovalente.android.mypetagenda.models.Pet
 import com.nunovalente.android.mypetagenda.models.toDatabasePet
@@ -14,16 +15,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class Repository @Inject constructor(
-    private val localDataSource: PetLocalDataSource,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) {
+class Repository @Inject constructor(private val localDataSource: PetDataSource): PetRepository {
 
-    suspend fun insertPet(pet: Pet) = withContext(ioDispatcher) {
+    override suspend fun insertPet(pet: Pet) = withContext(Dispatchers.IO) {
         localDataSource.insertPet(pet.toDatabasePet())
     }
 
-    suspend fun getPet(id: String): Result<Pet> {
+    override suspend fun getPet(id: String): Result<Pet> {
         val result = localDataSource.getPet(id)
         return if (result is Result.Success) {
             val databasePet = result.data
@@ -34,9 +32,13 @@ class Repository @Inject constructor(
         }
     }
 
-    fun getAllPets(): LiveData<List<Pet>?> {
+    override fun getAllPets(): LiveData<List<Pet>?> {
         return localDataSource.getAllPets().asLiveData().map {
             it?.asDomainModel()
         }
+    }
+
+    override suspend fun deletePet(pet: DatabasePet) {
+        localDataSource.deletePet(pet)
     }
 }

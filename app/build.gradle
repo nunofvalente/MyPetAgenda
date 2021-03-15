@@ -64,10 +64,17 @@ dependencies {
 
     //Unit Test
     testImplementation "junit:junit:$jUnit_version"
+    testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
+    testImplementation "org.robolectric:robolectric:$roboletric_version"
+    testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     //IntegrationTesting
     androidTestImplementation "androidx.test.ext:junit:$androidx_test_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+    androidTestImplementation 'androidx.test:rules:1.4.0-alpha04'
 
     // DI
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
@@ -89,4 +96,5 @@ dependencies {
 
     //Floating Action Button Menu Library
     implementation "com.github.clans:fab:$fab_library_version"
+
 }
