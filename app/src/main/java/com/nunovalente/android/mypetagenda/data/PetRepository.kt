@@ -9,5 +9,6 @@ interface PetRepository {
     suspend fun insertPet(pet: Pet)
     suspend fun getPet(id: String): Result<Pet>
     fun getAllPets(): LiveData<List<Pet>?>
-    suspend fun deletePet(pet: DatabasePet)
+    suspend fun deletePet(pet: Pet)
+    suspend fun updatePet(pet: Pet)
 }

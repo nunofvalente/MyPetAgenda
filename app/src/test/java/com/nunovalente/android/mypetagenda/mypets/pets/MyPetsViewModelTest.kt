@@ -20,9 +20,11 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @ExperimentalCoroutinesApi
+@Config(manifest=Config.NONE)
 class MyPetsViewModelTest {
 
     @ExperimentalCoroutinesApi
@@ -65,5 +67,19 @@ class MyPetsViewModelTest {
 
         assertThat(pets?.size, `is`(3))
         assertThat(pets, `is`(petRepository.getAllPets().value))
+    }
+
+    @Test
+    fun checkIfNavigateFalse_checkIfNavigateTrue() {
+        val navigate = petViewModel.navigate.getOrAwaitValue()
+        assertThat(navigate, `is`(false))
+
+        petViewModel.navigateToAddPet()
+        val navigateTrue = petViewModel.navigate.getOrAwaitValue()
+        assertThat(navigateTrue, `is`(true))
+
+        petViewModel.doneNavigating()
+        val navigateFalse = petViewModel.navigate.getOrAwaitValue()
+        assertThat(navigateFalse, `is`(false))
     }
 }

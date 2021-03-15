@@ -1,7 +1,5 @@
 package com.nunovalente.android.mypetagenda.ui.mypets.petdetail
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -15,11 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.transition.Hold
 import com.google.android.material.transition.MaterialContainerTransform
-import com.google.android.material.transition.MaterialElevationScale
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentPetDetailBinding
 import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
@@ -35,8 +30,6 @@ class PetDetailFragment : BaseFragment() {
 
     private lateinit var viewModel: PetDetailViewModel
     private lateinit var binding: FragmentPetDetailBinding
-
-    private val fabList = mutableListOf<FloatingActionButton>()
 
     private val args: PetDetailFragmentArgs by navArgs()
 
@@ -65,15 +58,11 @@ class PetDetailFragment : BaseFragment() {
             sharedElementEnterTransition = MaterialContainerTransform().apply {
                 duration = 600
             }
-        }
-
-        if (Build.VERSION.SDK_INT >= 21) {
             binding.menu.transitionName =
                 resources.getString(R.string.fab_transition_to_view)
         }
 
         setListeners()
-
         setViewPager()
     }
 
@@ -94,6 +83,8 @@ class PetDetailFragment : BaseFragment() {
             val directions = PetDetailFragmentDirections.actionNavigationPetDetailFragmentToAddReminderFragment()
             findNavController().navigate(directions, extras)
         }
+
+
     }
 
     private fun setViewPager() {

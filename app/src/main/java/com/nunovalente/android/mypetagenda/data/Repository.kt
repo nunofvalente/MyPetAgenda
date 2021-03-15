@@ -38,7 +38,11 @@ class Repository @Inject constructor(private val localDataSource: PetDataSource)
         }
     }
 
-    override suspend fun deletePet(pet: DatabasePet) {
-        localDataSource.deletePet(pet)
+    override suspend fun deletePet(pet: Pet) {
+        localDataSource.deletePet(pet.toDatabasePet())
+    }
+
+    override suspend fun updatePet(pet: Pet) {
+        TODO("Not yet implemented")
     }
 }

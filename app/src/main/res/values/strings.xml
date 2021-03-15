@@ -39,4 +39,6 @@
     <string name="day_s">Day(s)</string>
     <string name="title">Title</string>
     <string name="recurring">Recurring</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -47,5 +47,13 @@ class PetLocalDataSource @Inject constructor(private val dao: PetDao): PetDataSo
         }
     }
 
+    override suspend fun updatePet(pet: DatabasePet) = withContext(Dispatchers.IO) {
+        try {
+            dao.updatePet(pet)
+        } catch (e: Exception) {
+            throw RuntimeException("Error updating pet!")
+        }
+    }
+
 
 }

@@ -38,5 +38,8 @@ class DatabaseModule {
     fun petLocalDataSource(dao: PetDao): PetDataSource = PetLocalDataSource(dao)
 
     @Provides
+    fun noteLocalDataSource(dao: NoteDao): NoteDataSource = NoteLocalDataSource(dao)
+
+    @Provides
     fun repository(petLocalDataSource: PetLocalDataSource): PetRepository = Repository(petLocalDataSource)
 }
