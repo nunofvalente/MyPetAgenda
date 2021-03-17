@@ -45,4 +45,11 @@
     <string name="add_note">Add Note</string>
     <string name="please_insert_your_note">Please insert your note...</string>
     <string name="please_add_a_note">Please add a note!</string>
+    <string name="are_you_sure_you_want_to_delete_note">Are you sure you would like to delete this note?</string>
+    <string name="delete">Delete</string>
+    <string name="update_note">Update Note</string>
+    <string name="note">Note</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="pet_id">PetId</string>
 </resources>

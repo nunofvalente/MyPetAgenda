@@ -28,7 +28,7 @@ class MyPetsFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return if (::binding.isInitialized) {
             binding.root
         } else {
@@ -63,7 +63,7 @@ class MyPetsFragment : BaseFragment() {
     private fun setRecyclerAdapter() {
         binding.recyclerMyPets.apply {
             this.adapter = MyPetsAdapter(PetClickListener {transitionView, pet ->
-                val extras = FragmentNavigatorExtras(transitionView to pet.id)
+                val extras = FragmentNavigatorExtras(transitionView to pet.name)
                 val directions = MyPetsFragmentDirections.actionNavigationMypetsToPetDetailFragment(pet)
                 findNavController().navigate(directions, extras)
             })

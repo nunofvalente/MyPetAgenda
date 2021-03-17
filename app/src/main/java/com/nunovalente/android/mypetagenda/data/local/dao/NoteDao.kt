@@ -1,7 +1,6 @@
 package com.nunovalente.android.mypetagenda.data.local.dao
 
 import androidx.room.*
-import com.nunovalente.android.mypetagenda.data.Result
 import com.nunovalente.android.mypetagenda.data.entities.DatabaseNote
 import kotlinx.coroutines.flow.Flow
 
@@ -13,7 +12,7 @@ interface NoteDao {
      *
      * @param note Note to insert in the table
      */
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(note: DatabaseNote?)
 
     /**
@@ -21,7 +20,8 @@ interface NoteDao {
      *
      * @param note the Note we want to update
      */
-    @Update
+   // @Query("UPDATE note_table SET text=:noteText WHERE noteId = :id")
+    @Update(entity = DatabaseNote::class)
     suspend fun updateNote(note: DatabaseNote?)
 
     /**
@@ -46,6 +46,6 @@ interface NoteDao {
      *
      * @return List of all the Notes related to the user account
      */
-    @Query("SELECT * FROM note_table")
-    fun getAllNotes(): Flow<List<DatabaseNote>?>
+    @Query("SELECT * FROM note_table WHERE petId = :petId")
+    fun getAllNotes(petId: Int): Flow<List<DatabaseNote>?>
 }

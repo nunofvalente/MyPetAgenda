@@ -19,7 +19,7 @@ class NoteLocalDataSource @Inject constructor(private val dao: NoteDao): NoteDat
 
     override suspend fun updateNote(note: DatabaseNote) {
         try {
-            return dao.updateNote(note)
+            dao.updateNote(note)
         } catch (e: Exception) {
             throw RuntimeException("Error updating note!")
         }
@@ -33,9 +33,9 @@ class NoteLocalDataSource @Inject constructor(private val dao: NoteDao): NoteDat
         }
     }
 
-    override fun getAllNotes(): Flow<List<DatabaseNote>?> {
+    override fun getAllNotes(petId: Int): Flow<List<DatabaseNote>?> {
         try {
-            return dao.getAllNotes()
+            return dao.getAllNotes(petId)
         } catch (e: Exception) {
             throw RuntimeException("Error loading pets!")
         }

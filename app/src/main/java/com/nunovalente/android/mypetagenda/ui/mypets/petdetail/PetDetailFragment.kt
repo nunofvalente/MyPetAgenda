@@ -17,10 +17,12 @@ import com.google.android.material.transition.Hold
 import com.google.android.material.transition.MaterialContainerTransform
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentPetDetailBinding
+import com.nunovalente.android.mypetagenda.models.Pet
 import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.adapters.PetViewPagerAdapter
-import com.nunovalente.android.mypetagenda.util.NoteDialogImpl
+import com.nunovalente.android.mypetagenda.util.Constants
+import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.notes.NoteDialogImpl
 import javax.inject.Inject
 
 
@@ -36,6 +38,7 @@ class PetDetailFragment : BaseFragment() {
 
     private lateinit var viewModel: PetDetailViewModel
     private lateinit var binding: FragmentPetDetailBinding
+    private lateinit var pet: Pet
 
     private val args: PetDetailFragmentArgs by navArgs()
 
@@ -46,7 +49,7 @@ class PetDetailFragment : BaseFragment() {
         injector.inject(this)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pet_detail, container, false)
 
-        viewModel = ViewModelProvider(this, factory).get(PetDetailViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), factory).get(PetDetailViewModel::class.java)
 
         return binding.root
     }
@@ -54,13 +57,14 @@ class PetDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val pet = args.pet
+        pet = args.pet!!
         binding.pet = pet
+        viewModel.setPetValue(pet)
         binding.executePendingBindings()
 
         if (Build.VERSION.SDK_INT >= 21) {
             binding.frameViewPager.elevation = resources.getDimension(R.dimen.view_pager_elevation)
-            binding.petProfileImage.transitionName = pet?.id
+            binding.petProfileImage.transitionName = pet?.name
             sharedElementEnterTransition = MaterialContainerTransform().apply {
                 duration = 600
             }
@@ -92,6 +96,9 @@ class PetDetailFragment : BaseFragment() {
 
         binding.fabPetNotes.setOnClickListener {
             dialog.isCancelable = false
+            val args= Bundle()
+            args.putInt(Constants.PET_ID, pet.id)
+            dialog.arguments = args
             dialog.show(parentFragmentManager, TAG)
         }
     }

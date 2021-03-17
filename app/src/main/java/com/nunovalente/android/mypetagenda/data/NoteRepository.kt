@@ -7,6 +7,6 @@ interface NoteRepository {
     suspend fun addNote(note: Note)
     suspend fun updateNote(note: Note)
     suspend fun deleteNote(note: Note)
-    fun getAllNotes(): LiveData<List<Note>>
+    fun getAllNotes(petId: Int): LiveData<List<Note>>
     suspend fun getNoteById(id: Int): Result<Note>
 }

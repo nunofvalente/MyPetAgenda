@@ -8,9 +8,9 @@ import com.nunovalente.android.mypetagenda.models.Pet
 @Entity(tableName = "pet_table")
 data class DatabasePet(
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: String,
+    val id: Int,
 
     @ColumnInfo(name = "name")
     val name: String,

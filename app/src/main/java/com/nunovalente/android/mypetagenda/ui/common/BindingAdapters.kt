@@ -7,8 +7,10 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nunovalente.android.mypetagenda.R
+import com.nunovalente.android.mypetagenda.models.Note
 import com.nunovalente.android.mypetagenda.models.Pet
 import com.nunovalente.android.mypetagenda.ui.mypets.MyPetsAdapter
+import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.notes.MyNotesAdapter
 
 
 @BindingAdapter("loadImage")
@@ -26,6 +28,13 @@ fun loadImage(imageView: ImageView, url: String?) {
 fun loadItems(recyclerView: RecyclerView, petsList: List<Pet>?) {
     petsList?.let { pets ->
         (recyclerView.adapter as MyPetsAdapter).submitList(pets)
+    }
+}
+
+@BindingAdapter("submitNoteList")
+fun loadNotes(recyclerView: RecyclerView, noteList: List<Note>?) {
+    noteList?.let { notes ->
+        (recyclerView.adapter as MyNotesAdapter).setValue(notes)
     }
 }
 

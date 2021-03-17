@@ -12,24 +12,26 @@ import com.nunovalente.android.mypetagenda.models.toDatabasePet
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
-class DefaultNoteRepository @Inject constructor(private val noteDataSource: NoteDataSource): NoteRepository {
+class DefaultNoteRepository @Inject constructor(private val noteDataSource: NoteDataSource) :
+    NoteRepository {
 
     override suspend fun addNote(note: Note) = withContext(Dispatchers.IO) {
-            noteDataSource.addNote(note.toDatabaseModel())
+        noteDataSource.addNote(note.toDatabaseModel())
     }
 
     override suspend fun updateNote(note: Note) {
-        TODO("Not yet implemented")
+        noteDataSource.updateNote(note.toDatabaseModel())
     }
 
     override suspend fun deleteNote(note: Note) {
         noteDataSource.deleteNote(note.toDatabaseModel())
     }
 
-    override fun getAllNotes(): LiveData<List<Note>> {
-        return noteDataSource.getAllNotes().asLiveData().map {
+    override fun getAllNotes(petId: Int): LiveData<List<Note>> {
+        return noteDataSource.getAllNotes(petId).asLiveData().map {
             it!!.asDomainModel()
         }
     }

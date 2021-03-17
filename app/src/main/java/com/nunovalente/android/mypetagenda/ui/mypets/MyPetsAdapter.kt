@@ -42,7 +42,7 @@ class MyPetsAdapter(private val clickListener: PetClickListener) : ListAdapter<P
 
         holder.bind(pet)
         holder.itemView.setOnClickListener {
-            ViewCompat.setTransitionName(imageView, pet.name)
+            ViewCompat.setTransitionName(imageView, "image_${pet.name}")
             clickListener.onClick(imageView, pet)
         }
     }

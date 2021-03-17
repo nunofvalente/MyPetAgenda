@@ -8,16 +8,22 @@ import com.nunovalente.android.mypetagenda.models.Pet
 
 @Entity(tableName = "note_table")
 data class DatabaseNote(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "noteId")
+    var noteId: Int,
+
+    @ColumnInfo(name = "petId")
+    var petId: Int,
+
     @ColumnInfo(name = "text")
     var text: String
-) {
-    @PrimaryKey(autoGenerate = true)
-    var noteId: Int = 0
-}
+)
 
 fun List<DatabaseNote>.asDomainModel(): List<Note> {
     return map {
         Note(
+            noteId = it.noteId,
+            petId = it.petId,
             text = it.text
         )
     }
@@ -25,6 +31,8 @@ fun List<DatabaseNote>.asDomainModel(): List<Note> {
 
 fun DatabaseNote.toDomainModel(): Note {
     return Note(
+        this.noteId,
+        this.petId,
         this.text
     )
 }

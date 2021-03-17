@@ -7,7 +7,7 @@ import java.util.*
 
 @Parcelize
 data class Pet(
-    var id: String = UUID.randomUUID().toString(),
+    var id: Int = 0,
     var name: String = "",
     var birthday: String = "",
     var type: String = "",
@@ -15,7 +15,7 @@ data class Pet(
     var weight: String = "",
     var imagePath: String = ""
 ) : Parcelable {
-    constructor(name: String, birthday: String, type: String, breed: String, weight: String, imagePath: String) : this(UUID.randomUUID().toString(), name, birthday, type, breed, weight, imagePath)
+    constructor(name: String, birthday: String, type: String, breed: String, weight: String, imagePath: String) : this(0, name, birthday, type, breed, weight, imagePath)
 }
 
 fun Pet.toDatabasePet(): DatabasePet {
