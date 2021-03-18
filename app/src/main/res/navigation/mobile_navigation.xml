@@ -15,7 +15,11 @@
         android:id="@+id/navigation_gallery"
         android:name="com.nunovalente.android.mypetagenda.ui.gallery.GalleryFragment"
         android:label="@string/title_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_navigation_gallery_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_mypets"
@@ -71,4 +75,9 @@
         android:name="com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders.AddReminderFragment"
         android:label="AddReminderFragment"
         tools:layout="@layout/fragment_add_reminder"/>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.nunovalente.android.mypetagenda.ui.gallery.CameraFragment"
+        android:label="CameraFragment"
+        tools:layout="@layout/fragment_camera"/>
 </navigation>

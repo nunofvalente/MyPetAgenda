@@ -44,11 +44,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(PetDetailViewModel::class)
-    abstract fun petDetailViewModel(petViewModel: PetDetailViewModel): ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(AddReminderViewModel::class)
     abstract fun addReminderViewModel(addReminderViewModel: AddReminderViewModel): ViewModel
 

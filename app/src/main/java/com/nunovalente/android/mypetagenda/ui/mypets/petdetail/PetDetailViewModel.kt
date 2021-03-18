@@ -9,7 +9,7 @@ import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
 
-class PetDetailViewModel @Inject constructor(private val repository: NoteRepository): ViewModel() {
+class PetDetailViewModel: ViewModel() {
     private var pet = MutableLiveData<Pet>()
 
     fun setPetValue(petRetrieved: Pet) {

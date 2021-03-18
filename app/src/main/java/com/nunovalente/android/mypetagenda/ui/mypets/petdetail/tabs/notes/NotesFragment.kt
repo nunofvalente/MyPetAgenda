@@ -70,7 +70,7 @@ class NotesFragment : BaseFragment() {
                         .setMessage(context.getString(R.string.are_you_sure_you_want_to_delete_note))
                         .setPositiveButton(context.getString(R.string.yes)) { dialogInterface: DialogInterface, _: Int ->
                             coroutineScope.launch {
-                              //  viewModel.deleteNote(note)
+                                viewModel.deleteNote(note)
                             }
                             dialogInterface.dismiss()
                         }
@@ -81,7 +81,6 @@ class NotesFragment : BaseFragment() {
                     dialog.show()
                     true
                 })
-
         }
         return false
     }

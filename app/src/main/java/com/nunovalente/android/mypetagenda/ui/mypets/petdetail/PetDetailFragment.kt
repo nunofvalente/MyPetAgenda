@@ -32,7 +32,6 @@ class PetDetailFragment : BaseFragment() {
         private val TAG: String = PetDetailFragment::class.java.simpleName
     }
 
-    @Inject lateinit var factory: ViewModelFactory
     @Inject lateinit var petViewPagerAdapter: PetViewPagerAdapter
     @Inject lateinit var dialog: NoteDialogImpl
 
@@ -49,7 +48,7 @@ class PetDetailFragment : BaseFragment() {
         injector.inject(this)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pet_detail, container, false)
 
-        viewModel = ViewModelProvider(requireActivity(), factory).get(PetDetailViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(PetDetailViewModel::class.java)
 
         return binding.root
     }
@@ -64,7 +63,7 @@ class PetDetailFragment : BaseFragment() {
 
         if (Build.VERSION.SDK_INT >= 21) {
             binding.frameViewPager.elevation = resources.getDimension(R.dimen.view_pager_elevation)
-            binding.petProfileImage.transitionName = pet?.name
+            binding.petProfileImage.transitionName = pet.name
             sharedElementEnterTransition = MaterialContainerTransform().apply {
                 duration = 600
             }

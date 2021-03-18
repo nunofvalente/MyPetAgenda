@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.nunovalente.android.mypetagenda"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -97,5 +97,10 @@ dependencies {
 
     //Floating Action Button Menu Library
     implementation "com.github.clans:fab:$fab_library_version"
+
+    //CameraX
+    implementation "androidx.camera:camera-camera2:$camerax_version"
+    implementation "androidx.camera:camera-lifecycle:$camerax_version"
+    implementation "androidx.camera:camera-view:$cameraView_version"
 
 }
