@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager
 import com.nunovalente.android.mypetagenda.data.NoteRepository
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.adapters.PetViewPagerAdapter
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.notes.NoteDialogImpl
+import com.nunovalente.android.mypetagenda.util.CameraUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -17,4 +18,7 @@ class PresentationModule {
 
     @Provides
     fun dialog(repository: NoteRepository, activity: AppCompatActivity, inflater: LayoutInflater) = NoteDialogImpl(repository,activity, inflater)
+
+    @Provides
+    fun cameraUseCase(activity: AppCompatActivity) = CameraUseCase(activity)
 }

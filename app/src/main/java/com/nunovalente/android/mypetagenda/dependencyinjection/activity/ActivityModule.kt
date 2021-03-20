@@ -24,7 +24,4 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun calendarImpl(calendar: Calendar) = CalendarImpl(calendar)
-
-    @Provides
-    fun cameraUseCase(activity: AppCompatActivity) = CameraUseCase(activity)
 }

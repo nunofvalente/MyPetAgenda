@@ -1,8 +1,11 @@
 package com.nunovalente.android.mypetagenda.util
 
-import android.Manifest
+import android.content.Intent
+import android.media.MediaScannerConnection
 import android.net.Uri
-import android.view.View
+import android.os.Build
+import android.util.Size
+import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
@@ -11,15 +14,13 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.core.net.toFile
 import androidx.lifecycle.LifecycleOwner
 import com.nunovalente.android.mypetagenda.R
-import com.nunovalente.android.mypetagenda.ui.gallery.CameraFragment
 import timber.log.Timber
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class CameraUseCase @Inject constructor(private val activity: AppCompatActivity) {
@@ -41,7 +42,8 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
             outputDirectory,
             SimpleDateFormat(
                 FILENAME_FORMAT, Locale.UK
-            ).format(System.currentTimeMillis()) + ".jpg")
+            ).format(System.currentTimeMillis()) + ".jpg"
+        )
 
         // Create output options object which contains file + metadata
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
@@ -49,13 +51,33 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
         // Set up image capture listener, which is triggered after photo has
         // been taken
         imageCapture.takePicture(
-            outputOptions, ContextCompat.getMainExecutor(activity), object : ImageCapture.OnImageSavedCallback {
+            outputOptions,
+            ContextCompat.getMainExecutor(activity),
+            object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exc: ImageCaptureException) {
                     Timber.e("Photo capture failed: ${exc.message}")
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = Uri.fromFile(photoFile)
+
+                    //Implicit broadcasts will be ignored for devices running API level >= 24
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                        activity.sendBroadcast(
+                            Intent(android.hardware.Camera.ACTION_NEW_PICTURE, savedUri)
+                        )
+                    }
+
+                    val mimeType = MimeTypeMap.getSingleton()
+                        .getMimeTypeFromExtension(savedUri.toFile().extension)
+                    MediaScannerConnection.scanFile(
+                        activity,
+                        arrayOf(savedUri.toFile().absolutePath),
+                        arrayOf(mimeType)
+                    ) { _, uri ->
+                        Timber.d("Image capture scanned into media store: $uri")
+                    }
+
                     val msg = "Photo capture succeeded: $savedUri"
                     Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
                     Timber.d(msg)
@@ -77,7 +99,7 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
                     it.setSurfaceProvider(surfaceProvider)
                 }
 
-            imageCapture = ImageCapture.Builder()
+            imageCapture = ImageCapture.Builder().setTargetResolution(Size(600, 800))
                 .build()
 
             // Select back camera as a default
@@ -91,7 +113,7 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
                 cameraProvider.bindToLifecycle(
                     lifecycleOwner, cameraSelector, preview, imageCapture)
 
-            } catch(exc: Exception) {
+            } catch (exc: Exception) {
                 Timber.e("Use case binding failed")
             }
         }, ContextCompat.getMainExecutor(activity))

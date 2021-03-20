@@ -24,7 +24,8 @@ class DatabaseModule {
         application.applicationContext,
         Database::class.java,
         Constants.DATABASE_NAME
-    ).build()
+    ).fallbackToDestructiveMigration()
+        .build()
 
 
     @Provides

@@ -20,16 +20,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentCameraBinding
+import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 import com.nunovalente.android.mypetagenda.util.CameraUseCase
 import timber.log.Timber
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
-class CameraFragment : Fragment() {
+class CameraFragment : BaseFragment() {
 
     @Inject
     lateinit var cameraUserCase: CameraUseCase
@@ -45,21 +47,28 @@ class CameraFragment : Fragment() {
 
     private lateinit var binding: FragmentCameraBinding
 
-    private lateinit var cameraExecutor: ExecutorService
+  //  private lateinit var cameraExecutor: ExecutorService
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        injector.inject(this)
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_camera, container, false)
 
         if (allPermissionsGranted()) {
             cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this)
         } else {
-            ActivityCompat.requestPermissions(requireActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
+            )
         }
+
+       // cameraExecutor = Executors.newSingleThreadExecutor()
 
         binding.cameraCaptureButton.setOnClickListener {
             cameraUserCase.takePhoto()
@@ -83,14 +92,18 @@ class CameraFragment : Fragment() {
             if (allPermissionsGranted()) {
                 cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this)
             } else {
-                Toast.makeText(requireContext(), "Permissions not granted by the user.", Toast.LENGTH_SHORT).show()
-               findNavController().navigateUp()
+                Toast.makeText(
+                    requireContext(),
+                    "Permissions not granted by the user.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                findNavController().navigateUp()
             }
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        cameraExecutor.shutdown()
+     //   cameraExecutor.shutdown()
     }
 }

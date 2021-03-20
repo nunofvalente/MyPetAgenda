@@ -1,6 +1,7 @@
 package com.nunovalente.android.mypetagenda.dependencyinjection.presentation
 
 import com.nunovalente.android.mypetagenda.ui.activity.ActivityFragment
+import com.nunovalente.android.mypetagenda.ui.gallery.CameraFragment
 import com.nunovalente.android.mypetagenda.ui.gallery.GalleryFragment
 import com.nunovalente.android.mypetagenda.ui.home.HomeFragment
 import com.nunovalente.android.mypetagenda.ui.mypets.addpet.AddPetFragment
@@ -22,6 +23,6 @@ interface PresentationComponent {
     fun inject(fragment: AddReminderFragment)
     fun inject(fragment: NotesFragment)
 
-
+    fun inject(fragment: CameraFragment)
     fun inject(dialog: NoteDialogImpl)
 }
