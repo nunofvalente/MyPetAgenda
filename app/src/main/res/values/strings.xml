@@ -52,4 +52,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="pet_id">PetId</string>
+    <string name="close_camera">Close Camera</string>
+    <string name="flash_on_off">Flash on/off</string>
+    <string name="change_camera_button">Change Camera button</string>
 </resources>

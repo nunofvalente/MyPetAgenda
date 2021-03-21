@@ -1,29 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <androidx.camera.view.PreviewView
-        android:id="@+id/viewFinder"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-        <Button
-            android:id="@+id/camera_capture_button"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginBottom="50dp"
-            android:scaleType="fitCenter"
-           android:background="@drawable/button_take_photo"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+        <ImageView
+            android:id="@+id/image_camera_close"
+            android:layout_width="@dimen/camera_icon_size"
+            android:layout_height="@dimen/camera_icon_size"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_24"
+            android:elevation="@dimen/elevation_2"
+            android:src="@drawable/ic_close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/close_camera"/>
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/viewFinder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="@dimen/margin_54"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:elevation="2dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/camera_flash"
+                android:layout_width="@dimen/camera_icon_size"
+                android:layout_height="@dimen/camera_icon_size"
+                android:src="@drawable/ic__flash_off"
+                android:layout_marginEnd="@dimen/margin_54"
+                android:layout_marginTop="@dimen/margin_16"
+                android:contentDescription="@string/flash_on_off"/>
+
+
+            <Button
+                android:id="@+id/camera_capture_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_take_photo"
+                android:elevation="@dimen/elevation_2"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <ImageView
+                android:id="@+id/camera_image_swap_camera"
+                android:layout_width="@dimen/camera_icon_size"
+                android:layout_height="@dimen/camera_icon_size"
+                android:src="@drawable/ic_flip_camera"
+                android:layout_marginStart="@dimen/margin_54"
+                android:layout_marginTop="@dimen/margin_16"
+                android:contentDescription="@string/change_camera_button"/>
+
+        </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+    </layout>

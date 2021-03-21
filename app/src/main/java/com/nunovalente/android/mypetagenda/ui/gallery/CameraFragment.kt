@@ -1,18 +1,17 @@
 package com.nunovalente.android.mypetagenda.ui.gallery
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -47,8 +46,7 @@ class CameraFragment : BaseFragment() {
 
     private lateinit var binding: FragmentCameraBinding
 
-  //  private lateinit var cameraExecutor: ExecutorService
-
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,7 +57,7 @@ class CameraFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_camera, container, false)
 
         if (allPermissionsGranted()) {
-            cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this)
+            cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this, binding.viewFinder)
         } else {
             ActivityCompat.requestPermissions(
                 requireActivity(),
@@ -68,10 +66,12 @@ class CameraFragment : BaseFragment() {
             )
         }
 
-       // cameraExecutor = Executors.newSingleThreadExecutor()
-
         binding.cameraCaptureButton.setOnClickListener {
             cameraUserCase.takePhoto()
+        }
+
+        binding.imageCameraClose.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         return binding.root
@@ -90,7 +90,7 @@ class CameraFragment : BaseFragment() {
     ) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
-                cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this)
+                cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this, binding.viewFinder)
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -104,6 +104,6 @@ class CameraFragment : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-     //   cameraExecutor.shutdown()
+        cameraUserCase.shutdownExecutor()
     }
 }

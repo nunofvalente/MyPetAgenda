@@ -4,16 +4,11 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
-import android.view.WindowInsetsController
 import android.view.WindowManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nunovalente.android.mypetagenda.databinding.ActivityMainBinding
 import com.nunovalente.android.mypetagenda.ui.common.activity.BaseActivity
 
@@ -32,34 +27,31 @@ class MainActivity : BaseActivity() {
 
         navView.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener {_, destination, _ ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
                 R.id.navigation_activity -> showBottomNav()
                 R.id.navigation_home -> showBottomNav()
                 R.id.navigation_gallery -> showBottomNav()
                 R.id.navigation_mypets -> showBottomNav()
-            //    R.id.navigation_petDetailFragment -> hideStatusBar()
+                R.id.navigation_camera -> hideStatusBar()
                 else -> hideBottomNav()
             }
         }
     }
 
-   /* private fun hideStatusBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        hideBottomNav()
-    }*/
+    private fun hideStatusBar() {
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        binding.navView.visibility = View.GONE
+        binding.appBarMain.visibility = View.GONE
+    }
 
     private fun showBottomNav() {
         binding.navView.visibility = View.VISIBLE
         binding.appBarMain.visibility = View.VISIBLE
-     //   showStatusBar()
+
+        val decorView: View = window.decorView // Hide the status bar.
+        val uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        decorView.systemUiVisibility = uiOptions
     }
 
     @Suppress("DEPRECATION")

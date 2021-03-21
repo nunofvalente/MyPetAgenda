@@ -1,19 +1,23 @@
 package com.nunovalente.android.mypetagenda.util
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.util.Size
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
+import android.view.View
 import android.webkit.MimeTypeMap
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.rotationMatrix
 import androidx.core.net.toFile
 import androidx.lifecycle.LifecycleOwner
 import com.nunovalente.android.mypetagenda.R
@@ -21,6 +25,10 @@ import timber.log.Timber
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Executor
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class CameraUseCase @Inject constructor(private val activity: AppCompatActivity) {
@@ -29,9 +37,14 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
     }
 
-    private var imageCapture: ImageCapture? = null
+    private lateinit var camera: Camera
+    private lateinit var cameraControl: CameraControl
 
+    private var imageCapture: ImageCapture? = null
     private var outputDirectory: File = getOutputDirectory()
+    private var flashMode: Int = ImageCapture.FLASH_MODE_OFF
+
+    private val cameraExecutor: ExecutorService = Executors.newSingleThreadExecutor()
 
     fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
@@ -85,7 +98,7 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
             })
     }
 
-    fun startCamera(surfaceProvider: Preview.SurfaceProvider, lifecycleOwner: LifecycleOwner) {
+    fun startCamera(surfaceProvider: Preview.SurfaceProvider, lifecycleOwner: LifecycleOwner, viewFinder: PreviewView) {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(activity)
 
         cameraProviderFuture.addListener({
@@ -99,7 +112,10 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
                     it.setSurfaceProvider(surfaceProvider)
                 }
 
-            imageCapture = ImageCapture.Builder().setTargetResolution(Size(600, 800))
+            imageCapture = ImageCapture.Builder()
+                .setTargetResolution(Size(600, 800))
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
+                .setFlashMode(flashMode)
                 .build()
 
             // Select back camera as a default
@@ -110,8 +126,13 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
                 cameraProvider.unbindAll()
 
                 // Bind use cases to camera
-                cameraProvider.bindToLifecycle(
-                    lifecycleOwner, cameraSelector, preview, imageCapture)
+                camera = cameraProvider.bindToLifecycle(
+                    lifecycleOwner, cameraSelector, preview, imageCapture
+                )
+
+                cameraControl = camera.cameraControl
+
+                setupZoomAndTapToFocus(viewFinder)
 
             } catch (exc: Exception) {
                 Timber.e("Use case binding failed")
@@ -125,5 +146,45 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
         }
         return if (mediaDir != null && mediaDir.exists())
             mediaDir else activity.filesDir
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setupZoomAndTapToFocus(viewFinder: PreviewView) {
+        val listener = object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+            override fun onScale(detector: ScaleGestureDetector): Boolean {
+                val currentZoomRatio: Float = camera.cameraInfo.zoomState.value?.zoomRatio ?: 1F
+                val delta = detector.scaleFactor
+                cameraControl.setZoomRatio(currentZoomRatio * delta)
+                return true
+            }
+        }
+
+        val scaleGestureDetector = ScaleGestureDetector(viewFinder.context, listener)
+
+        viewFinder.setOnTouchListener { _, event ->
+            scaleGestureDetector.onTouchEvent(event)
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                val factory = viewFinder.meteringPointFactory
+                val point = factory.createPoint(event.x, event.y)
+                val action = FocusMeteringAction.Builder(point, FocusMeteringAction.FLAG_AF)
+                    .setAutoCancelDuration(5, TimeUnit.SECONDS)
+                    .build()
+                cameraControl.startFocusAndMetering(action)
+            }
+            true
+        }
+    }
+
+
+    private fun bindCameraUses() {
+        imageCapture = ImageCapture.Builder()
+            .setTargetResolution(Size(600, 800))
+            .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
+            .setFlashMode(flashMode)
+            .build()
+    }
+
+    fun shutdownExecutor() {
+        cameraExecutor.shutdown()
     }
 }
