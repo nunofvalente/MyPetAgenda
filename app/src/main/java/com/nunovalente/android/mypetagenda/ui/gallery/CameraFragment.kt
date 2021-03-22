@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -51,7 +52,7 @@ class CameraFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         injector.inject(this)
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_camera, container, false)
@@ -72,6 +73,20 @@ class CameraFragment : BaseFragment() {
 
         binding.imageCameraClose.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        binding.cameraFlash.setOnClickListener {
+            cameraUserCase.toggleFlashOnOff(it as ImageView)
+        }
+
+        binding.cameraImageSwapCamera.setOnClickListener {
+            cameraUserCase.flipCamera(it as ImageView)
+            cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this, binding.viewFinder)
+            if(cameraUserCase.hasFlash()) {
+                binding.cameraFlash.visibility = View.VISIBLE
+            } else {
+                binding.cameraFlash.visibility = View.GONE
+            }
         }
 
         return binding.root
