@@ -1,5 +1,6 @@
 package com.nunovalente.android.mypetagenda.ui.common
 
+import android.graphics.Bitmap
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.Spinner
@@ -9,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.models.Note
 import com.nunovalente.android.mypetagenda.models.Pet
+import com.nunovalente.android.mypetagenda.ui.gallery.GalleryAdapter
 import com.nunovalente.android.mypetagenda.ui.mypets.MyPetsAdapter
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.notes.MyNotesAdapter
 
@@ -35,6 +37,13 @@ fun loadItems(recyclerView: RecyclerView, petsList: List<Pet>?) {
 fun loadNotes(recyclerView: RecyclerView, noteList: List<Note>?) {
     noteList?.let { notes ->
         (recyclerView.adapter as MyNotesAdapter).setValue(notes)
+    }
+}
+
+@BindingAdapter("submitGalleryList")
+fun loadImages(recyclerView: RecyclerView, imageList: List<Bitmap>?) {
+    imageList?.let { images ->
+        (recyclerView.adapter as GalleryAdapter).setValue(images)
     }
 }
 

@@ -63,6 +63,10 @@ class AddPetFragment : BaseFragment() {
             }
         }
 
+        binding.addPetBackArrow.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         //Observes when to navigate
         viewModel.navigate.observe(viewLifecycleOwner, { navigate ->
             if (navigate) {

@@ -39,12 +39,9 @@ class MyPetsFragment : BaseFragment() {
             binding.viewModel = viewModel
             binding.lifecycleOwner = this
 
-            viewModel.navigate.observe(viewLifecycleOwner, { navigate ->
-                if (navigate) {
-                    findNavController().navigate(R.id.action_navigation_mypets_to_addPetFragment)
-                    viewModel.doneNavigating()
-                }
-            })
+            binding.fabMyPets.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_mypets_to_addPetFragment)
+            }
 
             setRecyclerAdapter()
 
@@ -58,6 +55,12 @@ class MyPetsFragment : BaseFragment() {
 
             return binding.root
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
     private fun setRecyclerAdapter() {

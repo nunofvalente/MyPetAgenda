@@ -39,18 +39,18 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
 
     private lateinit var camera: Camera
     private lateinit var cameraControl: CameraControl
-
+    private lateinit var cameraSelector: CameraSelector
     private var imageCapture: ImageCapture? = null
+
     private var outputDirectory: File = getOutputDirectory()
     private var flashMode: Int = ImageCapture.FLASH_MODE_OFF
-    private lateinit var cameraSelector: CameraSelector
-    private var hasFrontCamera: Boolean = false
-    private var hasFlash: Boolean = false
-
-
     private var lensFacing = CameraSelector.DEFAULT_BACK_CAMERA
+
+    private var hasFrontCamera: Boolean = false
+
     private val cameraExecutor: ExecutorService = Executors.newSingleThreadExecutor()
 
+    @Suppress("DEPRECATION")
     fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
@@ -106,7 +106,8 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
     fun startCamera(
         surfaceProvider: Preview.SurfaceProvider,
         lifecycleOwner: LifecycleOwner,
-        viewFinder: PreviewView
+        viewFinder: PreviewView,
+        imageView: ImageView
     ) {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(activity)
 
@@ -123,7 +124,6 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
                 }
 
             imageCapture = ImageCapture.Builder()
-                .setTargetResolution(Size(600, 800))
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
                 .setFlashMode(flashMode)
                 .build()
@@ -143,7 +143,13 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
                     imageCapture
                 )
 
-                hasFlash = camera.cameraInfo.hasFlashUnit()
+                val hasFlash = camera.cameraInfo.hasFlashUnit()
+
+                if (hasFlash) {
+                    imageView.visibility = View.VISIBLE
+                } else {
+                    imageView.visibility = View.GONE
+                }
 
                 cameraControl = camera.cameraControl
 
@@ -155,7 +161,7 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
         }, ContextCompat.getMainExecutor(activity))
     }
 
-    private fun getOutputDirectory(): File {
+    fun getOutputDirectory(): File {
         val mediaDir = activity.externalMediaDirs.firstOrNull()?.let {
             File(it, activity.resources.getString(R.string.app_name)).apply { mkdirs() }
         }
@@ -191,36 +197,29 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
     }
 
     fun toggleFlashOnOff(imageView: ImageView) {
-        imageView.visibility = View.VISIBLE
-
-        if (hasFlash) {
-            when (flashMode) {
-                ImageCapture.FLASH_MODE_OFF -> {
-                    flashMode = ImageCapture.FLASH_MODE_ON
-                    imageCapture?.flashMode = flashMode
-                    imageView.setImageResource(R.drawable.ic_flash_on)
-                }
-                ImageCapture.FLASH_MODE_ON -> {
-                    flashMode = ImageCapture.FLASH_MODE_OFF
-                    imageCapture?.flashMode = flashMode
-                    imageView.setImageResource(R.drawable.ic__flash_off)
-                }
+        when (flashMode) {
+            ImageCapture.FLASH_MODE_OFF -> {
+                flashMode = ImageCapture.FLASH_MODE_ON
+                imageCapture?.flashMode = flashMode
+                imageView.setImageResource(R.drawable.ic_flash_on)
             }
-        } else {
-            imageView.visibility = View.GONE
+            ImageCapture.FLASH_MODE_ON -> {
+                flashMode = ImageCapture.FLASH_MODE_OFF
+                imageCapture?.flashMode = flashMode
+                imageView.setImageResource(R.drawable.ic__flash_off)
+            }
         }
     }
+
 
     fun flipCamera(imageView: ImageView) {
         if (hasFrontCamera) {
             when (lensFacing) {
                 CameraSelector.DEFAULT_BACK_CAMERA -> {
-                    lensFacing =  CameraSelector.DEFAULT_FRONT_CAMERA
-                    hasFlash = false
+                    lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA
                 }
                 CameraSelector.DEFAULT_FRONT_CAMERA -> {
-                    lensFacing =  CameraSelector.DEFAULT_BACK_CAMERA
-                    hasFlash = true
+                    lensFacing = CameraSelector.DEFAULT_BACK_CAMERA
                 }
             }
         } else {
@@ -230,9 +229,5 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
 
     fun shutdownExecutor() {
         cameraExecutor.shutdown()
-    }
-
-    fun hasFlash(): Boolean {
-        return hasFlash
     }
 }

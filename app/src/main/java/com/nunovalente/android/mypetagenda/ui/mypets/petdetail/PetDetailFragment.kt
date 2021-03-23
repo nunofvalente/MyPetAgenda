@@ -32,8 +32,10 @@ class PetDetailFragment : BaseFragment() {
         private val TAG: String = PetDetailFragment::class.java.simpleName
     }
 
-    @Inject lateinit var petViewPagerAdapter: PetViewPagerAdapter
-    @Inject lateinit var dialog: NoteDialogImpl
+    @Inject
+    lateinit var petViewPagerAdapter: PetViewPagerAdapter
+    @Inject
+    lateinit var dialog: NoteDialogImpl
 
     private lateinit var viewModel: PetDetailViewModel
     private lateinit var binding: FragmentPetDetailBinding
@@ -61,15 +63,15 @@ class PetDetailFragment : BaseFragment() {
         viewModel.setPetValue(pet)
         binding.executePendingBindings()
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            binding.frameViewPager.elevation = resources.getDimension(R.dimen.view_pager_elevation)
-            binding.petProfileImage.transitionName = pet.name
-            sharedElementEnterTransition = MaterialContainerTransform().apply {
-                duration = 600
-            }
-            binding.menu.transitionName =
-                resources.getString(R.string.fab_transition_to_view)
+
+        binding.frameViewPager.elevation = resources.getDimension(R.dimen.view_pager_elevation)
+        binding.petProfileImage.transitionName = pet.name
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            duration = 600
         }
+        binding.menu.transitionName =
+            resources.getString(R.string.fab_transition_to_view)
+
 
         setListeners()
         setViewPager()
@@ -89,13 +91,14 @@ class PetDetailFragment : BaseFragment() {
                 binding.menu to resources.getString(R.string.view_transitioned)
             )
 
-            val directions = PetDetailFragmentDirections.actionNavigationPetDetailFragmentToAddReminderFragment()
+            val directions =
+                PetDetailFragmentDirections.actionNavigationPetDetailFragmentToAddReminderFragment()
             findNavController().navigate(directions, extras)
         }
 
         binding.fabPetNotes.setOnClickListener {
             dialog.isCancelable = false
-            val args= Bundle()
+            val args = Bundle()
             args.putInt(Constants.PET_ID, pet.id)
             dialog.arguments = args
             dialog.show(parentFragmentManager, TAG)

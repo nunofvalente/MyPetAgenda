@@ -58,7 +58,7 @@ class CameraFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_camera, container, false)
 
         if (allPermissionsGranted()) {
-            cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this, binding.viewFinder)
+            cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this, binding.viewFinder, binding.cameraFlash)
         } else {
             ActivityCompat.requestPermissions(
                 requireActivity(),
@@ -81,12 +81,7 @@ class CameraFragment : BaseFragment() {
 
         binding.cameraImageSwapCamera.setOnClickListener {
             cameraUserCase.flipCamera(it as ImageView)
-            cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this, binding.viewFinder)
-            if(cameraUserCase.hasFlash()) {
-                binding.cameraFlash.visibility = View.VISIBLE
-            } else {
-                binding.cameraFlash.visibility = View.GONE
-            }
+            cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this, binding.viewFinder, binding.cameraFlash)
         }
 
         return binding.root
@@ -105,7 +100,7 @@ class CameraFragment : BaseFragment() {
     ) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
-                cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this, binding.viewFinder)
+                cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this, binding.viewFinder, binding.cameraFlash)
             } else {
                 Toast.makeText(
                     requireContext(),

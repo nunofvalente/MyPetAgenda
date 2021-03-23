@@ -33,7 +33,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_8"
                 android:contentDescription="@string/pet_image"
-
                 app:loadImage="@{pet.imagePath}"
                 tools:src="@drawable/default_image_pet" />
 

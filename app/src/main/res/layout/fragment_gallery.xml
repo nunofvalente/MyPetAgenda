@@ -19,22 +19,26 @@
         tools:context=".fragments.MyPetsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_myPets"
+            android:id="@+id/recycler_images"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/margin_16"
             android:layout_gravity="center"
+            app:submitGalleryList="@{viewModel.images}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2" />
+            app:spanCount="3" />
 
-        <TextView
-            android:id="@+id/txt_gallery_noData"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/take_photos_with_your_pets"
-            android:textSize="@dimen/text_size_18"
-            android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/gallery_image_photo_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/photo_me"
+            android:gravity="center_horizontal"
+            android:layout_margin="@dimen/margin_32"
+            android:visibility="gone"
+            android:contentDescription="@string/take_photos_of_your_pets"
+            />
+
 
         <ProgressBar
             android:id="@+id/progress_my_pets"

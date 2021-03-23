@@ -18,7 +18,6 @@
     <string name="pet_image_transition">Pet image transition</string>
     <string name="pet_image">Pet image</string>
     <string name="your_pets_are_waiting_to_be_added">Your pets are waiting to be added!</string>
-    <string name="take_photos_with_your_pets">Take photos with your pets and keep a reminder forever!</string>
     <string name="add_me_image">Add me image</string>
     <string name="reminders">Reminders</string>
     <string name="profile">Profile</string>
@@ -55,4 +54,11 @@
     <string name="close_camera">Close Camera</string>
     <string name="flash_on_off">Flash on/off</string>
     <string name="change_camera_button">Change Camera button</string>
+    <string name="picture">Picture</string>
+    <string name="navigate_to_previous_screen">Navigate to previous screen</string>
+    <string name="take_photos_of_your_pets">Take photos of your pets.</string>
+    <string name="navigate_back">Navigate Back</string>
+    <string name="delete_photo">Delete Photo</string>
+    <string name="image_container">Image Container</string>
+    <string name="preview">Preview</string>
 </resources>

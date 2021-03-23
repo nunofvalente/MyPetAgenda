@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_navigation_gallery_to_cameraFragment"
             app:destination="@id/navigation_camera" />
+        <action
+            android:id="@+id/action_navigation_gallery_to_photoViewFragment"
+            app:destination="@id/navigation_photo_preview" />
     </fragment>
 
     <fragment
@@ -80,4 +83,13 @@
         android:name="com.nunovalente.android.mypetagenda.ui.gallery.CameraFragment"
         android:label="CameraFragment"
         tools:layout="@layout/fragment_camera"/>
+    <fragment
+        android:id="@+id/navigation_photo_preview"
+        android:name="com.nunovalente.android.mypetagenda.ui.gallery.PhotoViewFragment"
+        android:label="PhotoViewFragment"
+        tools:layout="@layout/fragment_photo_view">
+        <argument
+            android:name="image"
+            app:argType="android.graphics.Bitmap" />
+    </fragment>
 </navigation>

@@ -17,20 +17,7 @@ class MyPetsViewModel @Inject constructor(private val repository: PetRepository)
     val isDataLoading: LiveData<Boolean>
         get() = _isDataLoading.map { it != null }
 
-    private val _navigate = MutableLiveData<Boolean>()
-    val navigate: LiveData<Boolean>
-        get() = _navigate
-
-    fun navigateToAddPet() {
-        _navigate.value = true
-    }
-
-    fun doneNavigating() {
-        _navigate.value = false
-    }
-
     init {
-        _navigate.value = false
         loadPets()
     }
 

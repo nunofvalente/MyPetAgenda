@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.nunovalente.android.mypetagenda.ui.mypets.AddPetViewModel" />
@@ -47,6 +48,13 @@
                         android:id="@+id/toolbar_pets"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/add_pet_back_arrow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/navigate_to_previous_screen"
+                            android:src="@drawable/ic_arrow_back" />
 
                         <TextView
                             android:id="@+id/toolbar_pets_title"
@@ -159,9 +167,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
-                        android:text="@={viewModel.pet.name}"
                         android:hint="@string/name"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:text="@={viewModel.pet.name}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -178,9 +186,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
-                        android:text="@={viewModel.pet.breed}"
                         android:hint="@string/breed_if_applicable"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:text="@={viewModel.pet.breed}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -191,9 +199,9 @@
                     android:layout_marginStart="@dimen/margin_80"
                     android:layout_marginTop="@dimen/margin_32"
                     android:layout_marginEnd="@dimen/margin_80"
+                    android:onClick="@{() -> viewModel.savePetToDb()}"
                     android:text="@string/save"
                     android:textColor="@color/white"
-                    android:onClick="@{() -> viewModel.savePetToDb()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_layout_pet_breed" />

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -13,6 +15,7 @@ import com.nunovalente.android.mypetagenda.databinding.ActivityMainBinding
 import com.nunovalente.android.mypetagenda.ui.common.activity.BaseActivity
 
 class MainActivity : BaseActivity() {
+    private lateinit var navController: NavController
 
     private lateinit var binding: ActivityMainBinding
 
@@ -23,7 +26,7 @@ class MainActivity : BaseActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
+        navController = navHostFragment.navController
 
         navView.setupWithNavController(navController)
 
@@ -39,13 +42,17 @@ class MainActivity : BaseActivity() {
         }
     }
 
+
+    @Suppress("DEPRECATION")
     private fun hideStatusBar() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         binding.navView.visibility = View.GONE
         binding.appBarMain.visibility = View.GONE
     }
 
+    @Suppress("DEPRECATION")
     private fun showBottomNav() {
+        binding.toolbarTitle.text = getString(R.string.app_name)
         binding.navView.visibility = View.VISIBLE
         binding.appBarMain.visibility = View.VISIBLE
 
@@ -66,10 +73,5 @@ class MainActivity : BaseActivity() {
     private fun hideBottomNav() {
         binding.navView.visibility = View.GONE
         binding.appBarMain.visibility = View.GONE
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 }
