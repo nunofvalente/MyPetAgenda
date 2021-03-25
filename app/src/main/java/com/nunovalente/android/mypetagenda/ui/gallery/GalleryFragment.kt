@@ -66,7 +66,7 @@ class GalleryFragment : BaseFragment() {
 
     private fun setRecyclerAdapter() {
         binding.recyclerImages.apply {
-            this.adapter = GalleryAdapter(GalleryClickListener { transitionView, image ->
+            this.adapter = GalleryAdapter(this@GalleryFragment, GalleryClickListener { transitionView, image ->
                 val extras =
                     FragmentNavigatorExtras(transitionView to getString(R.string.image_container))
                 val directions =
