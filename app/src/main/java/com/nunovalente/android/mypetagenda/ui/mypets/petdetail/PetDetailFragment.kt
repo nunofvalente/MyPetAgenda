@@ -71,10 +71,6 @@ class PetDetailFragment : BaseFragment() {
         }
         binding.menu.transitionName =
             resources.getString(R.string.fab_transition_to_view)
-
-
-        setListeners()
-        setViewPager()
     }
 
     private fun setListeners() {
@@ -92,7 +88,7 @@ class PetDetailFragment : BaseFragment() {
             )
 
             val directions =
-                PetDetailFragmentDirections.actionNavigationPetDetailFragmentToAddReminderFragment()
+                PetDetailFragmentDirections.actionNavigationPetDetailFragmentToAddReminderFragment(pet)
             findNavController().navigate(directions, extras)
         }
 
@@ -118,5 +114,12 @@ class PetDetailFragment : BaseFragment() {
             root.dividerPadding = 30
             root.dividerDrawable = drawable
         }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setListeners()
+        setViewPager()
     }
 }

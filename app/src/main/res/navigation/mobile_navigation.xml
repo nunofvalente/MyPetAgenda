@@ -71,13 +71,21 @@
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_navigation_petDetailFragment_to_addReminderFragment"
-            app:destination="@id/navigation_reminderFragment" />
+            app:destination="@id/navigation_addReminderFragment" />
     </fragment>
     <fragment
-        android:id="@+id/navigation_reminderFragment"
+        android:id="@+id/navigation_addReminderFragment"
         android:name="com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders.AddReminderFragment"
         android:label="AddReminderFragment"
-        tools:layout="@layout/fragment_add_reminder"/>
+        tools:layout="@layout/fragment_add_reminder">
+        <action
+            android:id="@+id/action_navigation_addReminderFragment_to_navigation_petDetailFragment"
+            app:destination="@id/navigation_petDetailFragment"
+            app:popUpTo="@id/navigation_petDetailFragment" />
+        <argument
+            android:name="pet"
+            app:argType="com.nunovalente.android.mypetagenda.models.Pet" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_camera"
         android:name="com.nunovalente.android.mypetagenda.ui.gallery.CameraFragment"

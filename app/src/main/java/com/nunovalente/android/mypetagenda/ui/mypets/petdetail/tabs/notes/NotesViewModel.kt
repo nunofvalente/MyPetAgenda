@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class NotesViewModel @Inject constructor(private val repository: NoteRepository): ViewModel() {
 
-    lateinit var noteList: LiveData<List<Note>>
+    var noteList: LiveData<List<Note>>? = null
 
     private val _isDataLoading = MutableLiveData<Boolean>()
     val isDataLoading: LiveData<Boolean>

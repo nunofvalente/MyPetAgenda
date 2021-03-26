@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.nunovalente.android.mypetagenda.ui.gallery.PhotoViewViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.gallery.PhotoViewFragment"
+    android:background="@color/black">
+
+    <ImageView
+        android:id="@+id/photo_preview_back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_16"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/navigate_back"/>
+
+    <ImageView
+        android:id="@+id/image_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_54"
+        android:layout_marginBottom="@dimen/margin_54"
+        android:contentDescription="@string/image_container"
+        android:transitionName="@string/image_container"
+        app:layout_constraintBottom_toTopOf="@+id/linear_photo_preview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photo_preview_back_arrow"
+        tools:src="@drawable/default_image" />
+
+    <LinearLayout
+        android:id="@+id/linear_photo_preview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_54"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/image_delete"
+            android:layout_width="@dimen/camera_icon_size"
+            android:layout_height="@dimen/camera_icon_size"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="@string/delete_photo"/>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

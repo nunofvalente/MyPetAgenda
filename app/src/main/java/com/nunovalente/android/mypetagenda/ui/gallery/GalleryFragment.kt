@@ -57,12 +57,9 @@ class GalleryFragment : BaseFragment() {
 
             //TODO Rotate portrait pictures in recycler view
 
-
             return binding.root
         }
     }
-
-
 
     private fun setRecyclerAdapter() {
         binding.recyclerImages.apply {

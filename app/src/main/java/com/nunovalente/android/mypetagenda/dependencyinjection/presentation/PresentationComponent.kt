@@ -10,6 +10,7 @@ import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.notes.NotesF
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders.AddReminderFragment
 import com.nunovalente.android.mypetagenda.ui.mypets.pets.MyPetsFragment
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.notes.NoteDialogImpl
+import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.profile.ProfileFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [ViewModelModule::class, PresentationModule::class])
@@ -22,6 +23,7 @@ interface PresentationComponent {
     fun inject(fragment: PetDetailFragment)
     fun inject(fragment: AddReminderFragment)
     fun inject(fragment: NotesFragment)
+    fun inject(fragment: ProfileFragment)
 
     fun inject(fragment: CameraFragment)
     fun inject(dialog: NoteDialogImpl)

@@ -26,7 +26,6 @@ class MyPetsAdapter(private val clickListener: PetClickListener) : ListAdapter<P
             fun from(parent: ViewGroup): MyPetsViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = AdapterMyPetsBinding.inflate(layoutInflater, parent, false)
-
                 return MyPetsViewHolder(binding)
             }
         }

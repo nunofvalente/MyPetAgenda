@@ -1,14 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.mypets.petdetail.tabs.profile.ProfileFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <import type="com.nunovalente.android.mypetagenda.util.StringUtil"/>
+
+        <variable
+            name="pet"
+            type="com.nunovalente.android.mypetagenda.models.Pet" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/profile" />
+        tools:context=".ui.mypets.petdetail.tabs.profile.ProfileFragment">
 
-</FrameLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_pet_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/linear_pet_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_16"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_pet_details"
+                    style="@style/Profile_Text_View"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pet_details"
+                    android:layout_marginBottom="@dimen/margin_16"/>
+
+                <TableLayout
+                    android:id="@+id/table_pet_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:stretchColumns="2">
+
+                    <TableRow
+                        android:id="@+id/first_row"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_8">
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="1"
+                            android:text="@string/name" />
+
+                        <TextView
+                            android:id="@+id/text_pet_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/Profile_Text_Info"
+                            android:layout_column="2"
+                            tools:text="Balto"
+                            android:text="@{pet.name}"
+                            android:layout_gravity="end"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/second_row"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_8">
+
+                        <TextView
+                            android:id="@+id/type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="1"
+                            android:text="@string/type" />
+
+                        <TextView
+                            android:id="@+id/text_pet_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/Profile_Text_Info"
+                            android:layout_column="2"
+                            tools:text="Dog"
+                            android:text="@{pet.type}"
+                            android:layout_gravity="end"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/third_row"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_8">
+
+                        <TextView
+                            android:id="@+id/breed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="1"
+                            android:text="@string/breed" />
+
+                        <TextView
+                            android:id="@+id/text_pet_breed"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/Profile_Text_Info"
+                            android:layout_column="2"
+                            tools:text="Pomeranian"
+                            android:text="@{pet.breed}"
+                            android:layout_gravity="end"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/fourth_row"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_8">
+
+                        <TextView
+                            android:id="@+id/age"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="1"
+                            android:text="@string/age_years"/>
+
+                        <TextView
+                            android:id="@+id/text_pet_age"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_column="2"
+                            tools:text="12"
+                            android:text="@{StringUtil.calculateAge(pet.birthday)}"
+                            style="@style/Profile_Text_Info"
+                            android:layout_gravity="end"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/fifth_row"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_8">
+
+                        <TextView
+                            android:id="@+id/birthday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="1"
+                            android:text="@string/birthday"/>
+
+                        <TextView
+                            android:id="@+id/text_pet_birthday"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_column="2"
+                            tools:text="22/05/2009"
+                            android:text="@{pet.birthday}"
+                            style="@style/Profile_Text_Info"
+                            android:layout_gravity="end"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/sixth_row"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_8">
+
+                        <TextView
+                            android:id="@+id/weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="1"
+                            android:text="@string/weight"/>
+
+                        <TextView
+                            android:id="@+id/text_pet_weight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_column="2"
+                            tools:text="4 Kg"
+                            android:text="@{StringUtil.formatWeightString(pet.weight)}"
+                            style="@style/Profile_Text_Info"
+                            android:layout_gravity="end"/>
+                    </TableRow>
+
+
+                </TableLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

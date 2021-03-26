@@ -23,6 +23,7 @@ class NotesFragment : BaseFragment() {
 
     @Inject
     lateinit var factory: ViewModelFactory
+
     @Inject
     lateinit var dialogImpl: NoteDialogImpl
 
@@ -59,7 +60,7 @@ class NotesFragment : BaseFragment() {
 
                 NoteClickListener { note ->
                     val args = Bundle()
-                    args.putParcelable(context.getString(R.string.note) , note)
+                    args.putParcelable(context.getString(R.string.note), note)
                     dialogImpl.arguments = args
                     dialogImpl.show(parentFragmentManager, TAG)
                 },

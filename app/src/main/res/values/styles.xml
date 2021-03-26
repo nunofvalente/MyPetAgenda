@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Profile_Text_View" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="Profile_Text_Info" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+</resources>
