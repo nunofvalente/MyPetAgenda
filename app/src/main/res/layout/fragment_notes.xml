@@ -31,5 +31,14 @@
             android:visibility="@{viewModel.isDataLoading() ? View.GONE : View.VISIBLE}"
             android:layout_gravity="center" />
 
+        <TextView
+            android:id="@+id/tv_no_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_notes_to_display"
+            android:layout_gravity="center"
+            style="@style/Profile_Text_View"
+            android:visibility="gone"/>
+
     </FrameLayout>
 </layout>

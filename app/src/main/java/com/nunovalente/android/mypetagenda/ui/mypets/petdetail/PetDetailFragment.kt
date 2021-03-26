@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewParent
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.transition.Hold
 import com.google.android.material.transition.MaterialContainerTransform
 import com.nunovalente.android.mypetagenda.R
@@ -32,8 +34,6 @@ class PetDetailFragment : BaseFragment() {
         private val TAG: String = PetDetailFragment::class.java.simpleName
     }
 
-    @Inject
-    lateinit var petViewPagerAdapter: PetViewPagerAdapter
     @Inject
     lateinit var dialog: NoteDialogImpl
 
@@ -71,6 +71,9 @@ class PetDetailFragment : BaseFragment() {
         }
         binding.menu.transitionName =
             resources.getString(R.string.fab_transition_to_view)
+
+        setListeners()
+        setViewPager()
     }
 
     private fun setListeners() {
@@ -102,7 +105,7 @@ class PetDetailFragment : BaseFragment() {
     }
 
     private fun setViewPager() {
-        binding.pagerPetProfile.adapter = petViewPagerAdapter
+        binding.pagerPetProfile.adapter = PetViewPagerAdapter(childFragmentManager)
         binding.petDetailTab.setupWithViewPager(binding.pagerPetProfile)
 
         val root = binding.petDetailTab.getChildAt(0)
@@ -114,12 +117,5 @@ class PetDetailFragment : BaseFragment() {
             root.dividerPadding = 30
             root.dividerDrawable = drawable
         }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setListeners()
-        setViewPager()
     }
 }

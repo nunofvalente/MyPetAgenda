@@ -13,8 +13,8 @@ class ActivityModule(private val activity: AppCompatActivity) {
     @Provides
     fun activity() = activity
 
-    @Provides
-    fun fragmentManager(activity: AppCompatActivity) = activity.supportFragmentManager
+  /*  @Provides
+    fun fragmentManager(activity: AppCompatActivity) = activity.supportFragmentManager*/
 
     @Provides
     fun layoutInflater() = activity.layoutInflater

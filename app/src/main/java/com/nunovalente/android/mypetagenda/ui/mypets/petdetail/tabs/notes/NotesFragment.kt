@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.nunovalente.android.mypetagenda.R
@@ -49,9 +50,27 @@ class NotesFragment : BaseFragment() {
 
         viewModel.loadNotes(viewModelDetail.getPetRetrieved()!!)
 
+        viewModel.noteList?.observe(viewLifecycleOwner, Observer { notes ->
+            if(notes.isNullOrEmpty()) {
+                showTextNoNotes()
+            } else {
+                hideTextNoNotes()
+            }
+        })
+
         setRecyclerAdapter()
 
         return binding.root
+    }
+
+    private fun hideTextNoNotes() {
+        binding.tvNoNotes.visibility = View.GONE
+        binding.recyclerNotes.visibility = View.VISIBLE
+    }
+
+    private fun showTextNoNotes() {
+        binding.tvNoNotes.visibility = View.VISIBLE
+        binding.recyclerNotes.visibility = View.GONE
     }
 
     private fun setRecyclerAdapter(): Boolean {

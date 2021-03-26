@@ -5,6 +5,7 @@ import com.nunovalente.android.mypetagenda.application.MyApplication
 import com.nunovalente.android.mypetagenda.dependencyinjection.activity.ActivityComponent
 import com.nunovalente.android.mypetagenda.dependencyinjection.activity.ActivityModule
 import com.nunovalente.android.mypetagenda.dependencyinjection.presentation.PresentationComponent
+import com.nunovalente.android.mypetagenda.dependencyinjection.presentation.PresentationModule
 
 open class BaseActivity: AppCompatActivity() {
 

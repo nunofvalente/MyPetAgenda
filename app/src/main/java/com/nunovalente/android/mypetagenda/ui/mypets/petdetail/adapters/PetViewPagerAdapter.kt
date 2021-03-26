@@ -8,7 +8,7 @@ import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.profile.Prof
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders.RemindersFragment
 import javax.inject.Inject
 
-class PetViewPagerAdapter @Inject constructor(fm: FragmentManager) :
+class PetViewPagerAdapter(fm: FragmentManager) :
     FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     //Number of views in the Pager

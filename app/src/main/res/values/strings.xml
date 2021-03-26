@@ -63,4 +63,5 @@
     <string name="age">Age</string>
     <string name="breed">Breed</string>
     <string name="age_years">Age (years)</string>
+    <string name="no_notes_to_display">No notes to display!</string>
 </resources>
