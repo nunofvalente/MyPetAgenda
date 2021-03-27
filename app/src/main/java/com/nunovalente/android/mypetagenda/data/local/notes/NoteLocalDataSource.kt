@@ -1,8 +1,9 @@
-package com.nunovalente.android.mypetagenda.data.local
+package com.nunovalente.android.mypetagenda.data.local.notes
 
 import com.nunovalente.android.mypetagenda.data.Result
 import com.nunovalente.android.mypetagenda.data.entities.DatabaseNote
-import com.nunovalente.android.mypetagenda.data.local.dao.NoteDao
+import com.nunovalente.android.mypetagenda.data.local.notes.NoteDao
+import com.nunovalente.android.mypetagenda.data.local.notes.NoteDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext

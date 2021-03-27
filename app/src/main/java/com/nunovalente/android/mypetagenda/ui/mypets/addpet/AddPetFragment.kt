@@ -15,18 +15,14 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.nunovalente.android.mypetagenda.util.Constants
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentAddPetBinding
-import com.nunovalente.android.mypetagenda.models.Pet
 import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 import com.nunovalente.android.mypetagenda.ui.mypets.AddPetViewModel
-import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders.AddReminderFragmentArgs
 import com.nunovalente.android.mypetagenda.util.CalendarImpl
-import java.util.*
 import javax.inject.Inject
 
 class AddPetFragment : BaseFragment() {
@@ -43,21 +39,16 @@ class AddPetFragment : BaseFragment() {
     private lateinit var viewModel: AddPetViewModel
     private lateinit var binding: FragmentAddPetBinding
 
-    private val args: AddReminderFragmentArgs by navArgs()
-    private lateinit var pet: Pet
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         injector.inject(this)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_pet, container, false)
 
         viewModel = ViewModelProvider(this, factory).get(AddPetViewModel::class.java)
         binding.viewModel = viewModel
-
-        pet = args.pet
 
         //Sets the spinner value
         binding.spinnerMyPets.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

@@ -5,14 +5,12 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.nunovalente.android.mypetagenda.data.entities.asDomainModel
 import com.nunovalente.android.mypetagenda.data.entities.toDomainModel
-import com.nunovalente.android.mypetagenda.data.local.NoteDataSource
+import com.nunovalente.android.mypetagenda.data.local.notes.NoteDataSource
 import com.nunovalente.android.mypetagenda.models.Note
 import com.nunovalente.android.mypetagenda.models.toDatabaseModel
-import com.nunovalente.android.mypetagenda.models.toDatabasePet
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import javax.inject.Inject
 
 class DefaultNoteRepository @Inject constructor(private val noteDataSource: NoteDataSource) :

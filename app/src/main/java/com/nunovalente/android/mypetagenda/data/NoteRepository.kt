@@ -2,6 +2,7 @@ package com.nunovalente.android.mypetagenda.data
 
 import androidx.lifecycle.LiveData
 import com.nunovalente.android.mypetagenda.models.Note
+import com.nunovalente.android.mypetagenda.models.Pet
 
 interface NoteRepository {
     suspend fun addNote(note: Note)

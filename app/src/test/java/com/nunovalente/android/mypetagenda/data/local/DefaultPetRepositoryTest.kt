@@ -1,9 +1,10 @@
 package com.nunovalente.android.mypetagenda.data.local
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.nunovalente.android.mypetagenda.data.Repository
+import com.nunovalente.android.mypetagenda.data.DefaultPetRepository
 import com.nunovalente.android.mypetagenda.data.Result
 import com.nunovalente.android.mypetagenda.data.entities.DatabasePet
+import com.nunovalente.android.mypetagenda.data.entities.toDomainModel
 import com.nunovalente.android.mypetagenda.getOrAwaitValue
 import com.nunovalente.android.mypetagenda.models.Pet
 import com.nunovalente.android.mypetagenda.models.toDatabasePet
@@ -21,29 +22,29 @@ import java.lang.Exception
 @RunWith(AndroidJUnit4::class)
 @Config(manifest = Config.NONE)
 @ExperimentalCoroutinesApi
-class RepositoryTest {
+class DefaultPetRepositoryTest {
     private val pet1 =
-        DatabasePet("id1", "name1", "birthday1", "type1", "breed1", "weight1", "path1")
+        DatabasePet(1, "name1", "birthday1", "type1", "breed1", "weight1", "path1")
     private val pet2 =
-        DatabasePet("id2", "name2", "birthday2", "type2", "breed2", "weight2", "path2")
+        DatabasePet(2, "name2", "birthday2", "type2", "breed2", "weight2", "path2")
     private val pet3 =
-        DatabasePet("id3", "name3", "birthday3", "type3", "breed3", "weight3", "path3")
+        DatabasePet(3, "name3", "birthday3", "type3", "breed3", "weight3", "path3")
     private val localPet: List<DatabasePet>? = listOf(pet1, pet2, pet3).sortedBy { it.id }
 
     private lateinit var petDataSource: FakePetDataSource
 
     //Class under test
-    private lateinit var petRepository: Repository
+    private lateinit var petDefaultPetRepository: DefaultPetRepository
 
     @Before
     fun createRepository() {
         petDataSource = FakePetDataSource(localPet?.toMutableList())
-        petRepository = Repository(petDataSource)
+        petDefaultPetRepository = DefaultPetRepository(petDataSource)
     }
 
     @Test
     fun getPets_requestAllPetsFromLocalDataSource() = runBlockingTest {
-        val pets = petRepository.getAllPets().getOrAwaitValue()?.map {
+        val pets = petDefaultPetRepository.getAllPets().getOrAwaitValue()?.map {
             it.toDatabasePet()
         }
         assertThat(pets, IsEqual(localPet))
@@ -51,7 +52,7 @@ class RepositoryTest {
 
     @Test
     fun getPetById_checkIfPetReturned() = runBlockingTest {
-        val petResult = petRepository.getPet("id1") as Result.Success
+        val petResult = petDefaultPetRepository.getPet(1) as Result.Success
         val pet = petResult.data.toDatabasePet()
 
         assertThat(pet.id, IsEqual(pet1.id))
@@ -66,7 +67,7 @@ class RepositoryTest {
 
     @Test
     fun getPetById_returnError() = runBlockingTest {
-        val petResult = petRepository.getPet("id4") as Result.Error
+        val petResult = petDefaultPetRepository.getPet(4) as Result.Error
 
         assertThat(
             petResult.exception.localizedMessage,
@@ -76,24 +77,24 @@ class RepositoryTest {
 
     @Test
     fun insertPet_returnPet() = runBlocking {
-        val petToInsert = Pet("id4", "name4", "birthday4", "type4", "breed4", "weight4", "path4")
-        petRepository.insertPet(petToInsert)
+        val petToInsert = Pet(4, "name4", "birthday4", "type4", "breed4", "weight4", "path4")
+        petDefaultPetRepository.insertPet(petToInsert)
 
-        val petRetrieved = petRepository.getPet("id4") as Result.Success
+        val petRetrieved = petDefaultPetRepository.getPet(4) as Result.Success
 
         assertThat(petRetrieved.data, IsEqual(petToInsert))
     }
 
     @Test
     fun deletePet_checkIfDeleted() = runBlockingTest {
-        val petResult = petRepository.getAllPets().getOrAwaitValue()
+        val petResult = petDefaultPetRepository.getAllPets().getOrAwaitValue()
         val petResultSize = petResult?.size
 
         assertThat(petResultSize, IsEqual(3))
 
-        petRepository.deletePet(pet1)
+        petDefaultPetRepository.deletePet(pet1.toDomainModel())
 
-        val petList = petRepository.getAllPets().getOrAwaitValue()
+        val petList = petDefaultPetRepository.getAllPets().getOrAwaitValue()
         val petListSize = petList?.size
 
         assertThat(petListSize, IsEqual(2))

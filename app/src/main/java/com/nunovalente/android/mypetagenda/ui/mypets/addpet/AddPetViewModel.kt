@@ -1,12 +1,12 @@
 package com.nunovalente.android.mypetagenda.ui.mypets
 
 import androidx.lifecycle.*
-import com.nunovalente.android.mypetagenda.data.Repository
+import com.nunovalente.android.mypetagenda.data.DefaultPetRepository
 import com.nunovalente.android.mypetagenda.models.Pet
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AddPetViewModel @Inject constructor(private val repository: Repository): ViewModel() {
+class AddPetViewModel @Inject constructor(private val defaultPetRepository: DefaultPetRepository): ViewModel() {
 
     private val _pet = MutableLiveData<Pet>()
     val pet: LiveData<Pet>
@@ -24,7 +24,7 @@ class AddPetViewModel @Inject constructor(private val repository: Repository): V
 
     fun savePetToDb() {
         viewModelScope.launch {
-            pet.value?.let { repository.insertPet(it) }
+            pet.value?.let { defaultPetRepository.insertPet(it) }
             navigateToMyPets()
         }
     }
@@ -39,8 +39,8 @@ class AddPetViewModel @Inject constructor(private val repository: Repository): V
 }
 
 @Suppress("UNCHECKED_CAST")
-class AddPetViewModelFactory(private val repository: Repository): ViewModelProvider.Factory {
+class AddPetViewModelFactory(private val defaultPetRepository: DefaultPetRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return AddPetViewModel(repository) as T
+        return AddPetViewModel(defaultPetRepository) as T
     }
 }

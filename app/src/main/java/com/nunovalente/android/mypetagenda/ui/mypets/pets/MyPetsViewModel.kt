@@ -2,7 +2,6 @@ package com.nunovalente.android.mypetagenda.ui.mypets.pets
 
 import androidx.lifecycle.*
 import com.nunovalente.android.mypetagenda.data.PetRepository
-import com.nunovalente.android.mypetagenda.data.Repository
 import com.nunovalente.android.mypetagenda.models.Pet
 import kotlinx.coroutines.launch
 import timber.log.Timber

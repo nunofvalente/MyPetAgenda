@@ -48,8 +48,6 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
 
     private var hasFrontCamera: Boolean = false
 
-    private val cameraExecutor: ExecutorService = Executors.newSingleThreadExecutor()
-
     @Suppress("DEPRECATION")
     fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
@@ -225,9 +223,5 @@ class CameraUseCase @Inject constructor(private val activity: AppCompatActivity)
         } else {
             imageView.visibility = View.GONE
         }
-    }
-
-    fun shutdownExecutor() {
-        cameraExecutor.shutdown()
     }
 }

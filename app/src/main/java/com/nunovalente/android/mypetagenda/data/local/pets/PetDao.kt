@@ -1,4 +1,4 @@
-package com.nunovalente.android.mypetagenda.data.local.dao
+package com.nunovalente.android.mypetagenda.data.local.pets
 
 import androidx.room.*
 import com.nunovalente.android.mypetagenda.data.entities.DatabasePet
@@ -12,7 +12,7 @@ interface PetDao {
      *
      * @param pet Pet to insert in the table
      */
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPet(pet: DatabasePet?)
 
     /**
@@ -20,7 +20,7 @@ interface PetDao {
      *
      * @param pet the pet we want to update
      */
-    @Update
+    @Update(entity = DatabasePet::class)
     suspend fun updatePet(pet: DatabasePet?)
 
     /**
@@ -38,7 +38,7 @@ interface PetDao {
      * @return the pet with specified id
      */
     @Query("SELECT * FROM pet_table WHERE id = :id")
-    suspend fun getPet(id: String?): DatabasePet?
+    suspend fun getPet(id: Int?): DatabasePet?
 
     /**
      * Select all pets

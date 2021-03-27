@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
-import com.nunovalente.android.mypetagenda.data.Repository
 import com.nunovalente.android.mypetagenda.util.CameraUseCase
 import timber.log.Timber
 import java.io.File

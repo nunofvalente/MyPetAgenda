@@ -11,9 +11,9 @@ import com.nunovalente.android.mypetagenda.models.Pet
 import com.nunovalente.android.mypetagenda.models.toDatabasePet
 import kotlinx.coroutines.runBlocking
 
-class FakeRepository() : PetRepository {
+class FakeRepository : PetRepository {
 
-    private var petServiceData: LinkedHashMap<String, DatabasePet> = LinkedHashMap()
+    private var petServiceData: LinkedHashMap<Int, DatabasePet> = LinkedHashMap()
 
     private val observableTasks = MutableLiveData<List<Pet>>()
 
@@ -21,7 +21,7 @@ class FakeRepository() : PetRepository {
         petServiceData[pet.id] = pet.toDatabasePet()
     }
 
-    override suspend fun getPet(id: String): Result<Pet> {
+    override suspend fun getPet(id: Int): Result<Pet> {
         val result = petServiceData[id]
         return if (result != null) {
             Result.Success(result.toDomainModel())
@@ -35,7 +35,11 @@ class FakeRepository() : PetRepository {
         return observableTasks
     }
 
-    override suspend fun deletePet(pet: DatabasePet) {
+    override suspend fun deletePet(pet: Pet) {
         petServiceData.remove(pet.id)
+    }
+
+    override suspend fun updatePet(pet: Pet) {
+        TODO("Not yet implemented")
     }
 }

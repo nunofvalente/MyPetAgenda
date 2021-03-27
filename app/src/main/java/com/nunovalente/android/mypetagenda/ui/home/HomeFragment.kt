@@ -26,7 +26,7 @@ class HomeFragment : BaseFragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         injector.inject(this)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 

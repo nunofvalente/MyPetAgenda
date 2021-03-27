@@ -1,4 +1,4 @@
-package com.nunovalente.android.mypetagenda.data.local.dao
+package com.nunovalente.android.mypetagenda.data.local.notes
 
 import androidx.room.*
 import com.nunovalente.android.mypetagenda.data.entities.DatabaseNote

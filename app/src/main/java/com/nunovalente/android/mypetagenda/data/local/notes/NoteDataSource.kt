@@ -1,4 +1,4 @@
-package com.nunovalente.android.mypetagenda.data.local
+package com.nunovalente.android.mypetagenda.data.local.notes
 
 import com.nunovalente.android.mypetagenda.data.Result
 import com.nunovalente.android.mypetagenda.data.entities.DatabaseNote

@@ -2,6 +2,7 @@ package com.nunovalente.android.mypetagenda.data.local
 
 import com.nunovalente.android.mypetagenda.data.Result
 import com.nunovalente.android.mypetagenda.data.entities.DatabasePet
+import com.nunovalente.android.mypetagenda.data.local.pets.PetDataSource
 import kotlinx.coroutines.flow.*
 
 class FakePetDataSource(private var petsList: MutableList<DatabasePet>?) : PetDataSource {
@@ -10,7 +11,7 @@ class FakePetDataSource(private var petsList: MutableList<DatabasePet>?) : PetDa
         petsList?.add(databasePet)
     }
 
-    override suspend fun getPet(id: String): Result<DatabasePet> {
+    override suspend fun getPet(id: Int): Result<DatabasePet> {
         var selectedPet: DatabasePet? = null
         for (pet in petsList!!) {
             if (pet.id == id) {
@@ -31,5 +32,9 @@ class FakePetDataSource(private var petsList: MutableList<DatabasePet>?) : PetDa
 
     override suspend fun deletePet(pet: DatabasePet) {
         petsList?.remove(pet)
+    }
+
+    override suspend fun updatePet(pet: DatabasePet) {
+        TODO("Not yet implemented")
     }
 }

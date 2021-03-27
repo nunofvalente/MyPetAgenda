@@ -13,10 +13,12 @@ import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.transition.Fade
 import com.google.android.material.transition.MaterialContainerTransform
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentAddReminderBinding
+import com.nunovalente.android.mypetagenda.models.Pet
 import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 import com.nunovalente.android.mypetagenda.util.CalendarImpl
@@ -36,6 +38,10 @@ class AddReminderFragment : BaseFragment() {
 
     private lateinit var reminderDate: EditText
     private lateinit var linearLayoutDays: LinearLayout
+
+    private val args: AddReminderFragmentArgs by navArgs()
+    private lateinit var pet: Pet
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,6 +52,8 @@ class AddReminderFragment : BaseFragment() {
         viewModel = ViewModelProvider(this, factory).get(AddReminderViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        pet = args.pet
 
         reminderDate = binding.reminderDate
         linearLayoutDays = binding.linearDays

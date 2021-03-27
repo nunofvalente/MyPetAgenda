@@ -3,25 +3,22 @@ package com.nunovalente.android.mypetagenda.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
-import com.nunovalente.android.mypetagenda.data.entities.DatabasePet
 import com.nunovalente.android.mypetagenda.data.entities.asDomainModel
 import com.nunovalente.android.mypetagenda.data.entities.toDomainModel
-import com.nunovalente.android.mypetagenda.data.local.PetDataSource
-import com.nunovalente.android.mypetagenda.data.local.PetLocalDataSource
+import com.nunovalente.android.mypetagenda.data.local.pets.PetDataSource
 import com.nunovalente.android.mypetagenda.models.Pet
 import com.nunovalente.android.mypetagenda.models.toDatabasePet
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class Repository @Inject constructor(private val localDataSource: PetDataSource): PetRepository {
+class DefaultPetRepository @Inject constructor(private val localDataSource: PetDataSource): PetRepository {
 
     override suspend fun insertPet(pet: Pet) = withContext(Dispatchers.IO) {
         localDataSource.insertPet(pet.toDatabasePet())
     }
 
-    override suspend fun getPet(id: String): Result<Pet> {
+    override suspend fun getPet(id: Int): Result<Pet> {
         val result = localDataSource.getPet(id)
         return if (result is Result.Success) {
             val databasePet = result.data

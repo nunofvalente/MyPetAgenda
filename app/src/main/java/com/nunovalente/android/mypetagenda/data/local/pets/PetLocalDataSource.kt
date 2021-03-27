@@ -1,9 +1,9 @@
-package com.nunovalente.android.mypetagenda.data.local
+package com.nunovalente.android.mypetagenda.data.local.pets
 
 import com.nunovalente.android.mypetagenda.data.Result
 import com.nunovalente.android.mypetagenda.data.entities.DatabasePet
-import com.nunovalente.android.mypetagenda.data.local.dao.PetDao
-import kotlinx.coroutines.CoroutineDispatcher
+import com.nunovalente.android.mypetagenda.data.local.pets.PetDao
+import com.nunovalente.android.mypetagenda.data.local.pets.PetDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -18,7 +18,7 @@ class PetLocalDataSource @Inject constructor(private val dao: PetDao): PetDataSo
         }
     }
 
-     override suspend fun getPet(id: String): Result<DatabasePet> = withContext(Dispatchers.IO) {
+     override suspend fun getPet(id: Int): Result<DatabasePet> = withContext(Dispatchers.IO) {
         try {
             val pet = dao.getPet(id)
             if (pet != null) {

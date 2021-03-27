@@ -51,9 +51,9 @@ class MyPetsViewModelTest {
     @Before
     fun setupViewModel() = runBlocking {
         petRepository = FakeRepository()
-        val pet1 = Pet("id1", "name1", "birthday1", "type1", "breed1", "weight1", "path1")
-        val pet2 = Pet("id2", "name2", "birthday2", "type2", "breed2", "weight2", "path2")
-        val pet3 = Pet("id3", "name3", "birthday3", "type3", "breed3", "weight3", "path3")
+        val pet1 = Pet(1, "name1", "birthday1", "type1", "breed1", "weight1", "path1")
+        val pet2 = Pet(2, "name2", "birthday2", "type2", "breed2", "weight2", "path2")
+        val pet3 = Pet(3, "name3", "birthday3", "type3", "breed3", "weight3", "path3")
         petRepository.insertPet(pet1)
         petRepository.insertPet(pet2)
         petRepository.insertPet(pet3)
@@ -67,19 +67,5 @@ class MyPetsViewModelTest {
 
         assertThat(pets?.size, `is`(3))
         assertThat(pets, `is`(petRepository.getAllPets().value))
-    }
-
-    @Test
-    fun checkIfNavigateFalse_checkIfNavigateTrue() {
-        val navigate = petViewModel.navigate.getOrAwaitValue()
-        assertThat(navigate, `is`(false))
-
-        petViewModel.navigateToAddPet()
-        val navigateTrue = petViewModel.navigate.getOrAwaitValue()
-        assertThat(navigateTrue, `is`(true))
-
-        petViewModel.doneNavigating()
-        val navigateFalse = petViewModel.navigate.getOrAwaitValue()
-        assertThat(navigateFalse, `is`(false))
     }
 }

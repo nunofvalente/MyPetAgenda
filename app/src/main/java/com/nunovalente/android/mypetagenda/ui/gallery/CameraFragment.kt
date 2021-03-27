@@ -111,9 +111,4 @@ class CameraFragment : BaseFragment() {
             }
         }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        cameraUserCase.shutdownExecutor()
-    }
 }

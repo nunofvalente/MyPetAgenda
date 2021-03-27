@@ -7,7 +7,7 @@ import com.nunovalente.android.mypetagenda.models.Pet
 interface PetRepository {
 
     suspend fun insertPet(pet: Pet)
-    suspend fun getPet(id: String): Result<Pet>
+    suspend fun getPet(id: Int): Result<Pet>
     fun getAllPets(): LiveData<List<Pet>?>
     suspend fun deletePet(pet: Pet)
     suspend fun updatePet(pet: Pet)

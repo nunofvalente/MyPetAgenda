@@ -6,12 +6,15 @@ import com.nunovalente.android.mypetagenda.application.MyApplication
 import com.nunovalente.android.mypetagenda.data.DefaultNoteRepository
 import com.nunovalente.android.mypetagenda.data.NoteRepository
 import com.nunovalente.android.mypetagenda.data.PetRepository
-import com.nunovalente.android.mypetagenda.data.Repository
-import com.nunovalente.android.mypetagenda.data.local.*
-import com.nunovalente.android.mypetagenda.data.local.dao.NoteDao
-import com.nunovalente.android.mypetagenda.data.local.dao.PetDao
-import com.nunovalente.android.mypetagenda.data.local.dao.ReminderDao
+import com.nunovalente.android.mypetagenda.data.DefaultPetRepository
+import com.nunovalente.android.mypetagenda.data.local.notes.NoteDao
+import com.nunovalente.android.mypetagenda.data.local.pets.PetDao
+import com.nunovalente.android.mypetagenda.data.local.reminders.ReminderDao
 import com.nunovalente.android.mypetagenda.data.local.db.Database
+import com.nunovalente.android.mypetagenda.data.local.notes.NoteDataSource
+import com.nunovalente.android.mypetagenda.data.local.notes.NoteLocalDataSource
+import com.nunovalente.android.mypetagenda.data.local.pets.PetDataSource
+import com.nunovalente.android.mypetagenda.data.local.pets.PetLocalDataSource
 import dagger.Module
 import dagger.Provides
 
@@ -44,7 +47,7 @@ class DatabaseModule {
     fun noteLocalDataSource(dao: NoteDao): NoteDataSource = NoteLocalDataSource(dao)
 
     @Provides
-    fun repository(petLocalDataSource: PetLocalDataSource): PetRepository = Repository(petLocalDataSource)
+    fun repository(petLocalDataSource: PetLocalDataSource): PetRepository = DefaultPetRepository(petLocalDataSource)
 
     @Provides
     fun noteRepository(noteLocalDataSource: NoteLocalDataSource): NoteRepository = DefaultNoteRepository(noteLocalDataSource)
