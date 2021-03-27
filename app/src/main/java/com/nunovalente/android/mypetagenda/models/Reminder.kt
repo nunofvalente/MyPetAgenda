@@ -24,7 +24,7 @@ data class Reminder(
     var date: String
 ) : Parcelable
 
-fun DatabaseReminder.toDatabaseModel(): DatabaseReminder {
+fun Reminder.toDatabaseModel(): DatabaseReminder {
     return DatabaseReminder(
         id = this.id,
         petId = this.petId,

@@ -54,6 +54,4 @@ class PetLocalDataSource @Inject constructor(private val dao: PetDao): PetDataSo
             throw RuntimeException("Error updating pet!")
         }
     }
-
-
 }

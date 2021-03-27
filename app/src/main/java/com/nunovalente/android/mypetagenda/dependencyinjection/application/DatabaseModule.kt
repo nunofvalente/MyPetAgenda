@@ -15,6 +15,8 @@ import com.nunovalente.android.mypetagenda.data.local.notes.NoteDataSource
 import com.nunovalente.android.mypetagenda.data.local.notes.NoteLocalDataSource
 import com.nunovalente.android.mypetagenda.data.local.pets.PetDataSource
 import com.nunovalente.android.mypetagenda.data.local.pets.PetLocalDataSource
+import com.nunovalente.android.mypetagenda.data.local.reminders.ReminderDataSource
+import com.nunovalente.android.mypetagenda.data.local.reminders.ReminderLocalDataSource
 import dagger.Module
 import dagger.Provides
 
@@ -45,6 +47,9 @@ class DatabaseModule {
 
     @Provides
     fun noteLocalDataSource(dao: NoteDao): NoteDataSource = NoteLocalDataSource(dao)
+
+    @Provides
+    fun reminderLocalDataSource(dao: ReminderDao): ReminderDataSource = ReminderLocalDataSource(dao)
 
     @Provides
     fun repository(petLocalDataSource: PetLocalDataSource): PetRepository = DefaultPetRepository(petLocalDataSource)

@@ -78,3 +78,26 @@ fun DatabaseReminder.toDomainModel(): Reminder {
         date = this.date
     )
 }
+
+fun List<DatabaseReminder>.toDomainModel(): List<Reminder> {
+    return map {
+        Reminder(
+            id = it.id,
+            petId = it.petId,
+            petName = it.petName,
+            title = it.title,
+            hour = it.hour,
+            minutes = it.minutes,
+            isStarted = it.isStarted,
+            isRecurring = it.isRecurring,
+            monday = it.monday,
+            tuesday = it.tuesday,
+            wednesday = it.wednesday,
+            thursday = it.thursday,
+            friday = it.friday,
+            saturday = it.saturday,
+            sunday = it.sunday,
+            date = it.date
+        )
+    }
+}
