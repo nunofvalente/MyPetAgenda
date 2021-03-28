@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.nunovalente.android.mypetagenda.ui.mypets.AddPetViewModel" />
+            type="com.nunovalente.android.mypetagenda.ui.mypets.addpet.AddPetViewModel" />
 
         <variable
             name="breed"

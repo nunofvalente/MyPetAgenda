@@ -5,6 +5,7 @@ import com.nunovalente.android.mypetagenda.dependencyinjection.application.AppCo
 import com.nunovalente.android.mypetagenda.dependencyinjection.application.AppModule
 import com.nunovalente.android.mypetagenda.dependencyinjection.application.DaggerAppComponent
 import com.nunovalente.android.mypetagenda.dependencyinjection.application.DatabaseModule
+import com.nunovalente.android.mypetagenda.util.createChannel
 import timber.log.Timber
 
 class MyApplication: Application() {
@@ -18,6 +19,9 @@ class MyApplication: Application() {
             .appModule(AppModule(this),)
             .databaseModule(DatabaseModule())
             .build()
+
+        //Creates notification channel
+        createChannel(this)
 
         Timber.plant(Timber.DebugTree())
     }

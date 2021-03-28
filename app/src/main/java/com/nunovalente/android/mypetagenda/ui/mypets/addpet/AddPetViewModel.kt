@@ -1,4 +1,4 @@
-package com.nunovalente.android.mypetagenda.ui.mypets
+package com.nunovalente.android.mypetagenda.ui.mypets.addpet
 
 import androidx.lifecycle.*
 import com.nunovalente.android.mypetagenda.data.DefaultPetRepository
@@ -29,7 +29,7 @@ class AddPetViewModel @Inject constructor(private val defaultPetRepository: Defa
         }
     }
 
-    fun navigateToMyPets() {
+    private fun navigateToMyPets() {
         _navigate.value = true
     }
 

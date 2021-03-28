@@ -5,8 +5,7 @@ import com.nunovalente.android.mypetagenda.dependencyinjection.ViewModelKey
 import com.nunovalente.android.mypetagenda.ui.activity.ActivityViewModel
 import com.nunovalente.android.mypetagenda.ui.gallery.GalleryViewModel
 import com.nunovalente.android.mypetagenda.ui.home.HomeViewModel
-import com.nunovalente.android.mypetagenda.ui.mypets.AddPetViewModel
-import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.PetDetailViewModel
+import com.nunovalente.android.mypetagenda.ui.mypets.addpet.AddPetViewModel
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.notes.NotesViewModel
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders.AddReminderViewModel
 import com.nunovalente.android.mypetagenda.ui.mypets.pets.MyPetsViewModel

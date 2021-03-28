@@ -13,7 +13,7 @@ data class DatabaseReminder(
     var id: Int,
 
     @ColumnInfo(name = "petId")
-    var petId: String,
+    var petId: Int,
 
     @ColumnInfo(name = "petName")
     var petName: String,
@@ -22,10 +22,10 @@ data class DatabaseReminder(
     var title: String,
 
     @ColumnInfo(name = "hour")
-    var hour: String,
+    var hour: Int,
 
     @ColumnInfo(name = "minutes")
-    var minutes: String,
+    var minutes: Int,
 
     @ColumnInfo(name = "isStarted")
     var isStarted: Boolean,

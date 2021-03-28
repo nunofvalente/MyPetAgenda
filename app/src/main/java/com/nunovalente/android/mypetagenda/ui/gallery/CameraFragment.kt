@@ -3,17 +3,12 @@ package com.nunovalente.android.mypetagenda.ui.gallery
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.camera.core.*
-import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -21,14 +16,6 @@ import androidx.navigation.fragment.findNavController
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentCameraBinding
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
-import com.nunovalente.android.mypetagenda.util.CameraUseCase
-import timber.log.Timber
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
-import java.util.concurrent.Executor
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class CameraFragment : BaseFragment() {

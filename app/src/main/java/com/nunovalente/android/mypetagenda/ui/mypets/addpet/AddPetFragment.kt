@@ -21,7 +21,6 @@ import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentAddPetBinding
 import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
-import com.nunovalente.android.mypetagenda.ui.mypets.AddPetViewModel
 import com.nunovalente.android.mypetagenda.util.CalendarImpl
 import javax.inject.Inject
 
@@ -78,6 +77,9 @@ class AddPetFragment : BaseFragment() {
         return binding.root
     }
 
+    /**
+     * Sets listeners for the layout
+     */
     private fun setListeners() {
         binding.textChangeProfilePhoto.setOnClickListener {
             if (isPermissionGranted()) {
@@ -92,6 +94,9 @@ class AddPetFragment : BaseFragment() {
         }
     }
 
+    /**
+     * Requests necessary permissions
+     */
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
             requireActivity(),
@@ -100,11 +105,17 @@ class AddPetFragment : BaseFragment() {
         )
     }
 
+    /**
+     * Checks if permissions were granted
+     */
     private fun isPermissionGranted(): Boolean {
         return ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE
         ) == PackageManager.PERMISSION_GRANTED
     }
 
+    /**
+     * Checks whether the permission was accepted or reject and proceeds accordingly
+     */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
@@ -117,11 +128,17 @@ class AddPetFragment : BaseFragment() {
         }
     }
 
+    /**
+     * Intent to open gallery for the user to pick a photo
+     */
     private fun uploadPhoto() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, Constants.GALLERY_REQ_CODE)
     }
 
+    /**
+     * Handles the Gallery Intent and processes the image
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

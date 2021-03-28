@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.nunovalente.android.mypetagenda.util.CalendarImpl"/>
+
         <variable
             name="viewModel"
             type="com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders.AddReminderViewModel" />
@@ -58,6 +60,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_add_reminder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/margin_8"
@@ -68,6 +71,7 @@
             app:layout_constraintTop_toBottomOf="@+id/appBarReminder">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_add_reminder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:context=".activities.AddReminderActivity">
@@ -96,6 +100,7 @@
                         android:layout_height="wrap_content"
                         android:background="@color/white"
                         android:hint="@string/title"
+                        android:text="@={viewModel.reminder.title}"
                         android:inputType="text"
                         android:maxLength="75"
                         android:maxLines="1"
@@ -129,20 +134,22 @@
                     android:gravity="center"
                     android:hint="@string/_22_04_2013"
                     android:padding="@dimen/margin_8"
+                    android:text="@{CalendarImpl.retrieveYear()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/input_reminder_title"
                     android:inputType="date"  />
 
                 <LinearLayout
-                    android:id="@+id/linear_days"
-                    android:layout_width="0dp"
+                    android:id="@+id/linear_week_days"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_8"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_8"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/checkbox_recurring"
-                    android:visibility="gone" >
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/checkbox_recurring">
 
                     <TextView
                         android:id="@+id/tv_days"
@@ -150,14 +157,65 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/margin_8"
                         android:text="@string/day_s"
-                        android:textSize="@dimen/text_size_14"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        android:textSize="@dimen/text_size_14" />
 
-                    <include layout="@layout/week_days_layout" />
+                    <CheckBox
+                        android:id="@+id/checkbox_monday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@={viewModel.reminder.monday}"
+                        android:text="@string/monday"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_tuesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@={viewModel.reminder.tuesday}"
+                        android:text="@string/tuesday"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_wednesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@={viewModel.reminder.wednesday}"
+                        android:text="@string/wednesday"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_thursday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@={viewModel.reminder.thursday}"
+                        android:text="@string/thursday"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_friday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@={viewModel.reminder.friday}"
+                        android:text="@string/friday"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_saturday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@={viewModel.reminder.saturday}"
+                        android:text="@string/saturday"
+                        android:textSize="@dimen/text_size_16" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_sunday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@={viewModel.reminder.sunday}"
+                        android:text="@string/sunday"
+                        android:textSize="@dimen/text_size_16" />
                 </LinearLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

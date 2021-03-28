@@ -7,7 +7,7 @@ object StringUtil {
 
     @JvmStatic
     fun calculateAge(text: String): String {
-        val year = text.substring(6, 10).toInt()
+        val year = text.substring(6, 9).toInt()
         val age = currentYear - year
         return age.toString()
     }

@@ -1,11 +1,10 @@
-package com.nunovalente.android.mypetagenda.util
+package com.nunovalente.android.mypetagenda.ui.gallery
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
-import android.util.Size
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
@@ -17,7 +16,6 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.rotationMatrix
 import androidx.core.net.toFile
 import androidx.lifecycle.LifecycleOwner
 import com.nunovalente.android.mypetagenda.R
@@ -25,9 +23,6 @@ import timber.log.Timber
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.Executor
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 

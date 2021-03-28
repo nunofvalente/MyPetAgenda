@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -13,6 +12,13 @@ class CalendarImpl @Inject constructor(private val calendar: Calendar) {
 
     companion object {
         private const val DATE_FORMAT = "dd/MM/yyyy"
+
+        @JvmStatic
+        fun retrieveYear(): String {
+            val calendar = Calendar.getInstance()
+            val sdf = SimpleDateFormat(DATE_FORMAT, Locale.UK)
+            return sdf.format(calendar.time)
+        }
     }
 
     fun chooseDate(context: Context, editText: EditText) {
@@ -61,7 +67,6 @@ class CalendarImpl @Inject constructor(private val calendar: Calendar) {
         val chosenDate = sdf.format(calendar.time)
 
        if(chosenDate < currentDate) {
-           editText.setText("")
            Toast.makeText(editText.context, "Please enter a valid date!", Toast.LENGTH_SHORT).show()
        }else {
            editText.setText(chosenDate)

@@ -65,4 +65,7 @@
     <string name="age_years">Age (years)</string>
     <string name="no_notes_to_display">No notes to display!</string>
     <string name="settings">Settings</string>
+    <string name="reminder_channel_notification">Reminder Channel Notification</string>
+    <string name="your_pet_needs_attention">Your pet needs your attention</string>
+    <string name="snooze">Snooze</string>
 </resources>
