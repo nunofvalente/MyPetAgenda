@@ -47,4 +47,12 @@ interface ReminderDao {
      */
     @Query("SELECT * FROM reminder_table")
     fun getAllReminders(): Flow<List<DatabaseReminder>?>
+
+    /**
+     * Retrieve all reminders associated with a specific pet
+     *
+     * @return List of all the reminders related to the pet
+     */
+    @Query("SELECT * FROM reminder_table WHERE petId = :petId")
+    fun getPetReminders(petId: Int): Flow<List<DatabaseReminder>?>
 }

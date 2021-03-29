@@ -1,5 +1,6 @@
 package com.nunovalente.android.mypetagenda.dependencyinjection.presentation
 
+import com.nunovalente.android.mypetagenda.notif.ReminderBroadcastReceiver
 import com.nunovalente.android.mypetagenda.ui.activity.ActivityFragment
 import com.nunovalente.android.mypetagenda.ui.gallery.CameraFragment
 import com.nunovalente.android.mypetagenda.ui.gallery.GalleryFragment
@@ -11,6 +12,7 @@ import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders.Ad
 import com.nunovalente.android.mypetagenda.ui.mypets.pets.MyPetsFragment
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.notes.NoteDialogImpl
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.profile.ProfileFragment
+import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders.RemindersFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [ViewModelModule::class, PresentationModule::class])
@@ -24,6 +26,7 @@ interface PresentationComponent {
     fun inject(fragment: AddReminderFragment)
     fun inject(fragment: NotesFragment)
     fun inject(fragment: ProfileFragment)
+    fun inject(fragment: RemindersFragment)
 
     fun inject(fragment: CameraFragment)
     fun inject(dialog: NoteDialogImpl)

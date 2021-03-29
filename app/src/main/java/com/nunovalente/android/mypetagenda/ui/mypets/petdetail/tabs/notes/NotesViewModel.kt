@@ -34,7 +34,9 @@ class NotesViewModel @Inject constructor(private val repository: NoteRepository)
         }
     }
 
-    suspend fun deleteNote(note: Note) {
-        repository.deleteNote(note)
+    fun deleteNote(note: Note) {
+        viewModelScope.launch {
+            repository.deleteNote(note)
+        }
     }
 }

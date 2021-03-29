@@ -8,5 +8,6 @@ interface ReminderRepository {
     suspend fun updateReminder(reminder: Reminder)
     suspend fun deleteReminder(reminder: Reminder)
     fun getAllReminder(reminderId: Int): LiveData<List<Reminder>>
+    fun getPetReminders(petId: Int): LiveData<List<Reminder>>
     suspend fun getReminderById(id: Int): Result<Reminder>
 }

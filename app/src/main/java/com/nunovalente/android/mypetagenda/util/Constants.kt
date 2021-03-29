@@ -14,6 +14,17 @@ object Constants {
     const val CHANNEL_ID = "ReminderChannel"
 
     //Intent Keys
-    const val REMINDER = "reminder"
+    //days of week
+    const val MONDAY = "monday"
+    const val TUESDAY = "tuesday"
+    const val WEDNESDAY = "wednesday"
+    const val THURSDAY = "thursday"
+    const val FRIDAY = "friday"
+    const val SATURDAY = "saturday"
+    const val SUNDAY = "sunday"
+    const val RECURRING = "recurring"
+    const val TITLE = "title"
+    const val PET_NAME = "pet_name"
     const val REMINDER_DISMISS = "dismiss"
+
 }

@@ -1,11 +1,9 @@
 package com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.nunovalente.android.mypetagenda.data.DefaultReminderRepository
 import com.nunovalente.android.mypetagenda.models.Reminder
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -70,6 +68,12 @@ class AddReminderViewModel @Inject constructor(private val repository: DefaultRe
         _reminder.value?.apply {
             isStarted = true
         }
+    }
+
+    fun saveReminder() {
+       viewModelScope.launch {
+           _reminder.value?.let { repository.addReminder(it) }
+       }
     }
 }
 

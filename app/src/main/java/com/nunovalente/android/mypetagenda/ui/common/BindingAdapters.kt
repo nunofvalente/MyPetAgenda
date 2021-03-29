@@ -10,9 +10,11 @@ import com.bumptech.glide.Glide
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.models.Note
 import com.nunovalente.android.mypetagenda.models.Pet
+import com.nunovalente.android.mypetagenda.models.Reminder
 import com.nunovalente.android.mypetagenda.ui.gallery.GalleryAdapter
 import com.nunovalente.android.mypetagenda.ui.mypets.MyPetsAdapter
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.notes.MyNotesAdapter
+import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders.ReminderAdapter
 
 
 @BindingAdapter("loadImage")
@@ -37,6 +39,13 @@ fun loadItems(recyclerView: RecyclerView, petsList: List<Pet>?) {
 fun loadNotes(recyclerView: RecyclerView, noteList: List<Note>?) {
     noteList?.let { notes ->
         (recyclerView.adapter as MyNotesAdapter).setValue(notes)
+    }
+}
+
+@BindingAdapter("submitReminderList")
+fun loadReminders(recyclerView: RecyclerView, reminderList: List<Reminder>?) {
+    reminderList?.let { reminders ->
+        (recyclerView.adapter as ReminderAdapter).setValue(reminders)
     }
 }
 

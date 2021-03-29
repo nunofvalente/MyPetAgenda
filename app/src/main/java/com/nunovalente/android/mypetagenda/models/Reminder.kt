@@ -1,7 +1,5 @@
 package com.nunovalente.android.mypetagenda.models
 
-import android.app.PendingIntent
-import android.content.Intent
 import android.os.Parcelable
 import com.nunovalente.android.mypetagenda.data.entities.DatabaseReminder
 import kotlinx.parcelize.Parcelize
@@ -9,22 +7,22 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Reminder(
-    var id: Int = 0,
-    var petId: Int = 0,
-    var petName: String = "",
-    var title: String = "",
-    var hour: Int = 0,
-    var minutes: Int = 0,
-    var isStarted: Boolean = false,
-    var isRecurring: Boolean = false,
-    var monday: Boolean = false,
-    var tuesday: Boolean = false,
-    var wednesday: Boolean = false,
-    var thursday: Boolean = false,
-    var friday: Boolean = false,
-    var saturday: Boolean = false,
-    var sunday: Boolean = false,
-    var date: String = ""
+    var id: Int,
+    var petId: Int,
+    var petName: String,
+    var title: String,
+    var hour: Int,
+    var minutes: Int,
+    var isStarted: Boolean,
+    var isRecurring: Boolean,
+    var monday: Boolean,
+    var tuesday: Boolean,
+    var wednesday: Boolean,
+    var thursday: Boolean,
+    var friday: Boolean,
+    var saturday: Boolean,
+    var sunday: Boolean,
+    var date: String
 ) : Parcelable
 
 fun Reminder.toDatabaseModel(): DatabaseReminder {

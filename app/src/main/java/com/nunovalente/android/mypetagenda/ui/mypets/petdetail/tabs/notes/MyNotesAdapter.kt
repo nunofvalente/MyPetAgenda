@@ -13,11 +13,11 @@ class MyNotesAdapter(private val clickListener: NoteClickListener, private val l
 
     private var notesList: List<Note> = listOf()
 
-    class MyNotesViewHolder(val binding: AdapterNotesBinding) : RecyclerView.ViewHolder(binding.root) {}
+    class MyNotesViewHolder(val binding: AdapterNotesBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyNotesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = AdapterNotesBinding.inflate(inflater)
+        val binding = AdapterNotesBinding.inflate(inflater, parent, false)
 
         return MyNotesViewHolder(binding)
     }

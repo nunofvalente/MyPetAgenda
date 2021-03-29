@@ -41,7 +41,13 @@ class CalendarImpl @Inject constructor(private val calendar: Calendar) {
     private fun updateLabel(editText: EditText) {
         val sdf = SimpleDateFormat(DATE_FORMAT, Locale.UK)
         val date = sdf.format(calendar.time)
-        editText.setText(date)
+        val chosenDate = sdf.format(calendar.time)
+
+        if(date > chosenDate) {
+            Toast.makeText(editText.context, "Please choose a valid date!", Toast.LENGTH_SHORT).show()
+        } else {
+            editText.setText(date)
+        }
     }
 
     fun chooseDateReminder(context: Context, editText: EditText) {

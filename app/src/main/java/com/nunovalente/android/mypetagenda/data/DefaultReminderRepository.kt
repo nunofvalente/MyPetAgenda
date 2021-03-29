@@ -31,6 +31,12 @@ class DefaultReminderRepository @Inject constructor(private val dataSource: Remi
         }
     }
 
+    override fun getPetReminders(petId: Int): LiveData<List<Reminder>> {
+        return dataSource.getPetReminders(petId).asLiveData().map {
+            it!!.toDomainModel()
+        }
+    }
+
     override suspend fun getReminderById(id: Int): Result<Reminder> {
         val result = dataSource.getReminder(id)
         return if (result is Result.Success) {

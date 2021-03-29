@@ -2,6 +2,7 @@ package com.nunovalente.android.mypetagenda.dependencyinjection.application
 
 import com.nunovalente.android.mypetagenda.dependencyinjection.activity.ActivityComponent
 import com.nunovalente.android.mypetagenda.dependencyinjection.activity.ActivityModule
+import com.nunovalente.android.mypetagenda.notif.ReminderBroadcastReceiver
 import dagger.Component
 
 @AppScope

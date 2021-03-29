@@ -16,4 +16,9 @@ object StringUtil {
     fun formatWeightString(text: String): String {
         return "$text Kg"
     }
+
+    @JvmStatic
+    fun getReminderTimeStringBuilder(hours: Int, minutes: Int): String {
+        return String.format("%02d:%02d", hours, minutes)
+    }
 }

@@ -32,8 +32,6 @@ class NotesFragment : BaseFragment() {
     private lateinit var viewModelDetail: PetDetailViewModel
     private lateinit var viewModel: NotesViewModel
 
-    private val coroutineScope = CoroutineScope(Dispatchers.IO)
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,15 +41,16 @@ class NotesFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notes, container, false)
 
         viewModel = ViewModelProvider(this, factory).get(NotesViewModel::class.java)
-        viewModelDetail = ViewModelProvider(requireActivity(), factory).get(PetDetailViewModel::class.java)
+        viewModelDetail =
+            ViewModelProvider(requireActivity(), factory).get(PetDetailViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         viewModel.loadNotes(viewModelDetail.getPetRetrieved()!!)
 
-        viewModel.noteList?.observe(viewLifecycleOwner, Observer { notes ->
-            if(notes.isNullOrEmpty()) {
+        viewModel.noteList?.observe(viewLifecycleOwner, { notes ->
+            if (notes.isNullOrEmpty()) {
                 showTextNoNotes()
             } else {
                 hideTextNoNotes()
@@ -89,9 +88,7 @@ class NotesFragment : BaseFragment() {
                         .setTitle(context.getString(R.string.delete))
                         .setMessage(context.getString(R.string.are_you_sure_you_want_to_delete_note))
                         .setPositiveButton(context.getString(R.string.yes)) { dialogInterface: DialogInterface, _: Int ->
-                            coroutineScope.launch {
-                                viewModel.deleteNote(note)
-                            }
+                            viewModel.deleteNote(note)
                             dialogInterface.dismiss()
                         }
                         .setNegativeButton(context.getString(R.string.no)) { dialogInterface: DialogInterface, _: Int ->

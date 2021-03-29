@@ -33,7 +33,15 @@ class ReminderLocalDataSource @Inject constructor(private val dao: ReminderDao):
         try {
             return dao.getAllReminders()
         } catch (e: Exception) {
-            throw RuntimeException("Error loading pets!")
+            throw RuntimeException("Error loading reminders!")
+        }
+    }
+
+    override fun getPetReminders(petId: Int): Flow<List<DatabaseReminder>?> {
+        try {
+            return dao.getPetReminders(petId)
+        } catch (e: Exception) {
+            throw RuntimeException("Error loading reminders!")
         }
     }
 
@@ -49,7 +57,7 @@ class ReminderLocalDataSource @Inject constructor(private val dao: ReminderDao):
         try {
             dao.updateReminder(reminder)
         } catch (e: Exception) {
-            throw RuntimeException("Error updating pet!")
+            throw RuntimeException("Error updating reminder!")
         }
     }
 }
