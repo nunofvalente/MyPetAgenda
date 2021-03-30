@@ -81,11 +81,9 @@ class ReminderUtil {
 
             } else {
                 val toastText = String.format(
-                    "Recurring Alarm %s scheduled for %s at %02d:%02d",
+                    "Recurring Alarm %s scheduled for %s",
                     reminder.title,
                     reminder.getRecurringDays(),
-                    reminder.hour,
-                    reminder.minutes,
                 )
                 Toast.makeText(context, toastText, Toast.LENGTH_LONG).show()
 
@@ -108,10 +106,9 @@ class ReminderUtil {
             alarmManager.cancel(reminderPendingIntent)
             reminder.isStarted = false
             val toastText = String.format(
-                "Alarm cancelled for %02d:%02d with id %d",
+                "Alarm cancelled for %02d:%02d",
                 reminder.hour,
                 reminder.minutes,
-                reminder.id
             )
             Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show()
         }

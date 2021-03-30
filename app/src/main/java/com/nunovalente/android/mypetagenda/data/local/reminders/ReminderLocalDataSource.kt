@@ -53,6 +53,14 @@ class ReminderLocalDataSource @Inject constructor(private val dao: ReminderDao):
         }
     }
 
+    override suspend fun deletePetReminders(petId: Int) {
+        try {
+            dao.deletePetReminders(petId)
+        } catch (e: Exception) {
+            throw RuntimeException("Error deleting reminders! pet ID = $petId")
+        }
+    }
+
     override suspend fun updateReminder(reminder: DatabaseReminder) = withContext(Dispatchers.IO) {
         try {
             dao.updateReminder(reminder)

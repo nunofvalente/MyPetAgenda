@@ -1,6 +1,8 @@
 package com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders
 
 import android.app.AlarmManager
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -94,4 +96,21 @@ class RemindersFragment : BaseFragment(), OnToggleReminderListener {
               }
           }
       }
+
+    override fun onLongClick(reminder: Reminder?) {
+        reminder?.let { val dialog = AlertDialog.Builder(requireActivity())
+                .setTitle(context?.getString(R.string.delete))
+                .setMessage(context?.getString(R.string.are_you_sure_you_want_to_delete_note))
+                .setPositiveButton(context?.getString(R.string.yes)) { dialogInterface: DialogInterface, _: Int ->
+                    viewModel.deleteReminder(it)
+                    dialogInterface.dismiss()
+                }
+                .setNegativeButton(context?.getString(R.string.no)) { dialogInterface: DialogInterface, _: Int ->
+                    dialogInterface.dismiss()
+                }
+            dialog.create()
+            dialog.show()
+            true
+        }
+    }
 }

@@ -27,8 +27,10 @@ class AddReminderFragment : BaseFragment() {
 
     @Inject
     lateinit var factory: ViewModelFactory
+
     @Inject
     lateinit var calendarImpl: CalendarImpl
+
     @Inject
     lateinit var alarmManager: AlarmManager
 
@@ -72,7 +74,11 @@ class AddReminderFragment : BaseFragment() {
      */
     private fun setListeners() {
         binding.imageNavigateBack.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().navigate(
+                AddReminderFragmentDirections.actionNavigationAddReminderFragmentToNavigationPetDetailFragment(
+                    pet
+                )
+            )
         }
 
         binding.checkboxRecurring.setOnCheckedChangeListener { _, isChecked ->
@@ -93,7 +99,11 @@ class AddReminderFragment : BaseFragment() {
 
         binding.imageAddReminder.setOnClickListener {
             if (validateReminder()) {
-                ReminderUtil.scheduleReminder(requireActivity(), viewModel.reminder.value!!, alarmManager)
+                ReminderUtil.scheduleReminder(
+                    requireActivity(),
+                    viewModel.reminder.value!!,
+                    alarmManager
+                )
                 viewModel.startReminder()
                 viewModel.saveReminder()
                 findNavController().navigateUp()
@@ -109,7 +119,7 @@ class AddReminderFragment : BaseFragment() {
     }
 
     private fun validateReminder(): Boolean {
-        if(!binding.editReminderTitle.text.isNullOrEmpty()) {
+        if (!binding.editReminderTitle.text.isNullOrEmpty()) {
             viewModel.setInfo(
                 pet.id,
                 pet.name,

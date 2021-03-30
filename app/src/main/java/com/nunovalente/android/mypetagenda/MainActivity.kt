@@ -28,10 +28,10 @@ class MainActivity : BaseActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
-                R.id.navigation_activity -> showBottomNav()
                 R.id.navigation_home -> showBottomNav()
                 R.id.navigation_gallery -> showBottomNav()
                 R.id.navigation_mypets -> showBottomNav()
+                R.id.navigation_map -> showBottomNav()
                 R.id.navigation_camera -> hideStatusBar()
                 else -> hideBottomNav()
             }

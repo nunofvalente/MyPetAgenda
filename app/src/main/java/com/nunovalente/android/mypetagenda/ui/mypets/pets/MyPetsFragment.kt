@@ -1,5 +1,7 @@
 package com.nunovalente.android.mypetagenda.ui.mypets.pets
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +17,7 @@ import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 import com.nunovalente.android.mypetagenda.ui.mypets.MyPetsAdapter
 import com.nunovalente.android.mypetagenda.ui.mypets.PetClickListener
+import com.nunovalente.android.mypetagenda.ui.mypets.PetOnLongClickListener
 import javax.inject.Inject
 
 class MyPetsFragment : BaseFragment() {
@@ -65,11 +68,28 @@ class MyPetsFragment : BaseFragment() {
 
     private fun setRecyclerAdapter() {
         binding.recyclerMyPets.apply {
-            this.adapter = MyPetsAdapter(PetClickListener {transitionView, pet ->
+            this.adapter = MyPetsAdapter(
+
+                PetClickListener {transitionView, pet ->
                 val extras = FragmentNavigatorExtras(transitionView to pet.name)
                 val directions = MyPetsFragmentDirections.actionNavigationMypetsToPetDetailFragment(pet)
                 findNavController().navigate(directions, extras)
-            })
+            },
+                PetOnLongClickListener { pet ->
+                    val dialog = AlertDialog.Builder(requireActivity())
+                        .setTitle(context.getString(R.string.delete))
+                        .setMessage(context.getString(R.string.are_you_sure_you_want_to_delete_note))
+                        .setPositiveButton(context.getString(R.string.yes)) { dialogInterface: DialogInterface, _: Int ->
+                            viewModel.deletePet(pet)
+                            dialogInterface.dismiss()
+                        }
+                        .setNegativeButton(context.getString(R.string.no)) { dialogInterface: DialogInterface, _: Int ->
+                            dialogInterface.dismiss()
+                        }
+                    dialog.create()
+                    dialog.show()
+                }
+            )
         }
     }
 

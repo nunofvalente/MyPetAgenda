@@ -2,6 +2,7 @@ package com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nunovalente.android.mypetagenda.databinding.AdapterReminderLayoutBinding
@@ -28,6 +29,11 @@ class ReminderAdapter(private var listener: OnToggleReminderListener): RecyclerV
 
             binding.switchReminder.setOnCheckedChangeListener { _, _ ->
                 listener.onToggle(reminder)
+            }
+
+            binding.cardViewPetReminder.setOnLongClickListener {
+                listener.onLongClick(reminder)
+                return@setOnLongClickListener true
             }
         }
     }
@@ -64,4 +70,5 @@ class ReminderAdapter(private var listener: OnToggleReminderListener): RecyclerV
 
 interface OnToggleReminderListener {
     fun onToggle(reminder: Reminder?)
+    fun onLongClick(reminder: Reminder?)
 }

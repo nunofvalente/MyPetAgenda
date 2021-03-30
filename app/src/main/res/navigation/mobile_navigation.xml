@@ -38,10 +38,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_activity"
+        android:id="@+id/navigation_map"
         android:name="com.nunovalente.android.mypetagenda.ui.activity.ActivityFragment"
-        android:label="@string/title_activity"
-        tools:layout="@layout/fragment_activity" />
+        android:label="@string/title_map"
+        tools:layout="@layout/fragment_map" />
     <fragment
         android:id="@+id/navigation_addPetFragment"
         android:name="com.nunovalente.android.mypetagenda.ui.mypets.addpet.AddPetFragment"

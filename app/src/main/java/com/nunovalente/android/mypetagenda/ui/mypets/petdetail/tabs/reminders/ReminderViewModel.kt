@@ -36,11 +36,6 @@ class ReminderViewModel @Inject constructor(private val repository: ReminderRepo
         }
     }
 
-    fun cancelReminder(reminder: Reminder) {
-        reminder.isStarted = false
-
-    }
-
     fun deleteReminder(reminder: Reminder) {
         viewModelScope.launch {
             repository.deleteReminder(reminder)

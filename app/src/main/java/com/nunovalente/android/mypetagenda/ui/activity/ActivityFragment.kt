@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.nunovalente.android.mypetagenda.R
-import com.nunovalente.android.mypetagenda.databinding.FragmentActivityBinding
+import com.nunovalente.android.mypetagenda.databinding.FragmentMapBinding
 import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 import javax.inject.Inject
@@ -18,14 +18,14 @@ class ActivityFragment : BaseFragment() {
     lateinit var factory: ViewModelFactory
 
     private lateinit var viewModel: ActivityViewModel
-    private lateinit var binding: FragmentActivityBinding
+    private lateinit var binding: FragmentMapBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         injector.inject(this)
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_activity, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
 
         viewModel = ViewModelProvider(this, factory).get(ActivityViewModel::class.java)
 

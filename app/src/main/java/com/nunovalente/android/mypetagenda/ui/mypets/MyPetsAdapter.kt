@@ -13,7 +13,7 @@ import com.nunovalente.android.mypetagenda.databinding.AdapterMyPetsBinding
 import com.nunovalente.android.mypetagenda.models.Pet
 
 
-class MyPetsAdapter(private val clickListener: PetClickListener) : ListAdapter<Pet, MyPetsAdapter.MyPetsViewHolder>(MyPetsDiffCallback()) {
+class MyPetsAdapter(private val clickListener: PetClickListener, private val longClickListener: PetOnLongClickListener) : ListAdapter<Pet, MyPetsAdapter.MyPetsViewHolder>(MyPetsDiffCallback()) {
 
     class MyPetsViewHolder private constructor(private val binding: AdapterMyPetsBinding): RecyclerView.ViewHolder(binding.root) {
 
@@ -44,6 +44,11 @@ class MyPetsAdapter(private val clickListener: PetClickListener) : ListAdapter<P
             ViewCompat.setTransitionName(imageView, "image_${pet.name}")
             clickListener.onClick(imageView, pet)
         }
+
+        holder.itemView.setOnLongClickListener {
+            longClickListener.onLongClick(pet)
+            true
+        }
     }
 }
 
@@ -59,4 +64,8 @@ class MyPetsDiffCallback: DiffUtil.ItemCallback<Pet>() {
 
 class PetClickListener(private val clickListener: (transitionView: ImageView, pet: Pet) -> Unit) {
     fun onClick(transitionView: ImageView, pet: Pet) = clickListener(transitionView, pet)
+}
+
+class PetOnLongClickListener(private val longClickListener: (pet: Pet) -> Unit) {
+    fun onLongClick(pet: Pet) = longClickListener(pet)
 }

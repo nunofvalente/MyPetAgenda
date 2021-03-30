@@ -37,6 +37,10 @@ class DefaultReminderRepository @Inject constructor(private val dataSource: Remi
         }
     }
 
+    override suspend fun deletePetReminders(petId: Int) {
+        dataSource.deletePetReminders(petId)
+    }
+
     override suspend fun getReminderById(id: Int): Result<Reminder> {
         val result = dataSource.getReminder(id)
         return if (result is Result.Success) {

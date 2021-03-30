@@ -10,5 +10,6 @@ interface ReminderDataSource {
     fun getAllReminders(): Flow<List<DatabaseReminder>?>
     fun getPetReminders(petId: Int): Flow<List<DatabaseReminder>?>
     suspend fun deleteReminder(reminder: DatabaseReminder)
+    suspend fun deletePetReminders(petId: Int)
     suspend fun updateReminder(reminder: DatabaseReminder)
 }

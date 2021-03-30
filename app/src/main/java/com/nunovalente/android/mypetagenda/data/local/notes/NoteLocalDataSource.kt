@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 import java.lang.RuntimeException
 import javax.inject.Inject
 
-class NoteLocalDataSource @Inject constructor(private val dao: NoteDao): NoteDataSource {
+class NoteLocalDataSource @Inject constructor(private val dao: NoteDao) : NoteDataSource {
 
     override suspend fun addNote(note: DatabaseNote) {
         withContext(Dispatchers.IO) {
@@ -34,11 +34,19 @@ class NoteLocalDataSource @Inject constructor(private val dao: NoteDao): NoteDat
         }
     }
 
+    override suspend fun deletePetNotes(petId: Int) = withContext(Dispatchers.IO) {
+        try {
+            dao.deletePetNotes(petId)
+        } catch (e: Exception) {
+            throw RuntimeException("Error deleting notes!")
+        }
+    }
+
     override fun getAllNotes(petId: Int): Flow<List<DatabaseNote>?> {
         try {
             return dao.getAllNotes(petId)
         } catch (e: Exception) {
-            throw RuntimeException("Error loading pets!")
+            throw RuntimeException("Error loading notes!")
         }
     }
 

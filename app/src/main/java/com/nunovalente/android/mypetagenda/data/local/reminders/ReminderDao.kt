@@ -55,4 +55,11 @@ interface ReminderDao {
      */
     @Query("SELECT * FROM reminder_table WHERE petId = :petId")
     fun getPetReminders(petId: Int): Flow<List<DatabaseReminder>?>
+
+    /**
+     * Delete all reminders associated with a specific pet
+     *
+     */
+    @Query("DELETE FROM reminder_table WHERE petId = :petId")
+    suspend fun deletePetReminders(petId: Int)
 }

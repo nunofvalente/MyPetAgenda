@@ -20,7 +20,6 @@ interface NoteDao {
      *
      * @param note the Note we want to update
      */
-   // @Query("UPDATE note_table SET text=:noteText WHERE noteId = :id")
     @Update(entity = DatabaseNote::class)
     suspend fun updateNote(note: DatabaseNote?)
 
@@ -48,4 +47,11 @@ interface NoteDao {
      */
     @Query("SELECT * FROM note_table WHERE petId = :petId")
     fun getAllNotes(petId: Int): Flow<List<DatabaseNote>?>
+
+    /**
+     * Delete all Note associated with specific pet
+     *
+     */
+    @Query("DELETE FROM note_table WHERE petId = :petId")
+    suspend fun deletePetNotes(petId: Int)
 }

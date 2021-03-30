@@ -28,6 +28,10 @@ class DefaultNoteRepository @Inject constructor(private val noteDataSource: Note
         noteDataSource.deleteNote(note.toDatabaseModel())
     }
 
+    override suspend fun deletePetNotes(petId: Int) {
+        noteDataSource.deletePetNotes(petId)
+    }
+
     override fun getAllNotes(petId: Int): LiveData<List<Note>> {
         return noteDataSource.getAllNotes(petId).asLiveData().map {
             it!!.asDomainModel()
