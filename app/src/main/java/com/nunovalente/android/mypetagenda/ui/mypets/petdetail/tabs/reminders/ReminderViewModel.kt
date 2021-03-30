@@ -49,7 +49,6 @@ class ReminderViewModel @Inject constructor(private val repository: ReminderRepo
 
     fun updateReminder(reminder: Reminder) {
         viewModelScope.launch {
-            reminder.isStarted = !reminder.isStarted
             repository.updateReminder(reminder)
         }
     }

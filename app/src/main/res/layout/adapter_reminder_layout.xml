@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.nunovalente.android.mypetagenda.util.StringUtil" />
+
+        <variable
+            name="reminder"
+            type="com.nunovalente.android.mypetagenda.models.Reminder" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_8">
+    
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_pet_reminder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_pet_reminder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/adapter_reminder_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:text="@{reminder.title}"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/adapter_reminder_time"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Give Pet food" />
+
+            <TextView
+                android:id="@+id/adapter_reminder_days"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:layout_marginBottom="16dp"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/adapter_reminder_time"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/adapter_reminder_title"
+                app:layout_constraintTop_toBottomOf="@+id/adapter_reminder_title"
+                tools:text="Monday Tuesday Sunday" />
+
+            <TextView
+                android:id="@+id/adapter_reminder_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:maxLines="2"
+                android:text="@{StringUtil.getReminderTimeStringBuilder(reminder.hour, reminder.minutes)}"
+                android:textSize="@dimen/text_size_20"
+                app:layout_constraintEnd_toStartOf="@+id/switchReminder"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="11:40" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchReminder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+    </FrameLayout>
+</layout>

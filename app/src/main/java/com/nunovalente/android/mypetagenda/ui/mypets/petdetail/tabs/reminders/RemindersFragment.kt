@@ -84,7 +84,6 @@ class RemindersFragment : BaseFragment(), OnToggleReminderListener {
     }
 
     override fun onToggle(reminder: Reminder?) {
-        Toast.makeText(requireActivity(), "Test", Toast.LENGTH_LONG).show()
           if (reminder != null) {
               if (reminder.isStarted) {
                   ReminderUtil.cancelReminder(requireActivity(), reminder)

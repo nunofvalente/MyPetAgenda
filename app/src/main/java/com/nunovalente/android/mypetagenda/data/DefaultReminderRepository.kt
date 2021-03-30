@@ -25,7 +25,7 @@ class DefaultReminderRepository @Inject constructor(private val dataSource: Remi
         dataSource.deleteReminder(reminder.toDatabaseModel())
     }
 
-    override fun getAllReminder(reminderId: Int): LiveData<List<Reminder>> {
+    override fun getAllReminders(): LiveData<List<Reminder>> {
         return dataSource.getAllReminders().asLiveData().map {
             it!!.toDomainModel()
         }
@@ -44,7 +44,7 @@ class DefaultReminderRepository @Inject constructor(private val dataSource: Remi
             val reminder = databaseReminder.toDomainModel()
             Result.Success(reminder)
         } else {
-            Result.Error(Exception("Pet not found!"))
+            Result.Error(Exception("Reminder not found!"))
         }
     }
 }
