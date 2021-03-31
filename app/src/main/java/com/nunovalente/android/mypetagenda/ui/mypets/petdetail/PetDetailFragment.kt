@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.ViewParent
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -71,6 +72,9 @@ class PetDetailFragment : BaseFragment() {
         }
         binding.menu.transitionName =
             resources.getString(R.string.fab_transition_to_view)
+
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
     private fun setListeners() {
