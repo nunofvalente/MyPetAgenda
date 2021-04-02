@@ -71,4 +71,17 @@
     <string name="reminder_channel_notification">Reminder Channel Notification</string>
     <string name="your_pet_needs_attention">Your pet needs your attention</string>
     <string name="dismiss">Dismiss</string>
+    <string name="find_places_of_interest_for_your_pets_near_you">Find places of interest for your pets near you!</string>
+    <string name="veterinarian">Veterinarian</string>
+    <string name="find_out_where_to_find_assistance_for_your_pet">Find out where to find assistance for your pet!</string>
+    <string name="veterinarian_image">Veterinarian Image</string>
+    <string name="pet_shops">Pet Shops</string>
+    <string name="discover_shops_to_get_your_pet_a_treat">Discover shops to get your pet a treat!</string>
+    <string name="grooming">Grooming</string>
+    <string name="time_to_freshen_up_with_a_nice_grooming">Time to freshen up with a nice grooming.</string>
+    <string name="who_fancies_a_nice_walk_in_the_park">Who fancies a nice walk in the park?</string>
+    <string name="park">Park</string>
+    <string name="park_image">Park Image</string>
+    <string name="grooming_image">Grooming Image</string>
+    <string name="pet_shop_image">Pet Shop Image</string>
 </resources>

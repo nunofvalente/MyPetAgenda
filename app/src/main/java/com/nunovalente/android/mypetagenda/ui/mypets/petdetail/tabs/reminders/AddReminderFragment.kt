@@ -1,5 +1,6 @@
 package com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders
 
+import android.app.Activity
 import android.app.AlarmManager
 import android.graphics.Color
 import android.os.Build
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +24,7 @@ import com.nunovalente.android.mypetagenda.util.CalendarImpl
 import com.nunovalente.android.mypetagenda.util.ReminderUtil
 import com.nunovalente.android.mypetagenda.util.TimePickerUtil
 import javax.inject.Inject
+
 
 class AddReminderFragment : BaseFragment() {
 
@@ -99,6 +102,7 @@ class AddReminderFragment : BaseFragment() {
 
         binding.imageAddReminder.setOnClickListener {
             if (validateReminder()) {
+                hideSoftKeyboard(requireActivity())
                 ReminderUtil.scheduleReminder(
                     requireActivity(),
                     viewModel.reminder.value!!,
@@ -142,6 +146,16 @@ class AddReminderFragment : BaseFragment() {
             duration = resources.getInteger(R.integer.transition_duration_large).toLong()
             scrimColor = Color.TRANSPARENT
             setAllContainerColors(requireContext().resources.getColor(R.color.background_color))
+        }
+    }
+
+    fun hideSoftKeyboard(activity: Activity) {
+        val inputMethodManager: InputMethodManager = requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        if (inputMethodManager.isAcceptingText) {
+            inputMethodManager.hideSoftInputFromWindow(
+                activity.currentFocus!!.windowToken,
+                0
+            )
         }
     }
 }

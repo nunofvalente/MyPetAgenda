@@ -29,16 +29,6 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/lobster_two"
                     android:textSize="@dimen/text_size_20"/>
-
-                <ImageView
-                    android:id="@+id/icon_settings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_settings"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="@dimen/margin_16"
-                    android:contentDescription="@string/settings"/>
-
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 

@@ -4,6 +4,8 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.AudioAttributes.USAGE_ALARM
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.IBinder
@@ -12,12 +14,12 @@ import android.os.Vibrator
 import androidx.core.app.NotificationCompat
 import com.nunovalente.android.mypetagenda.MainActivity
 import com.nunovalente.android.mypetagenda.R
-import com.nunovalente.android.mypetagenda.models.Reminder
 import com.nunovalente.android.mypetagenda.util.Constants
 import com.nunovalente.android.mypetagenda.util.Constants.CHANNEL_ID
 import com.nunovalente.android.mypetagenda.util.Constants.PET_ID
 import com.nunovalente.android.mypetagenda.util.Constants.PET_NAME
 import com.nunovalente.android.mypetagenda.util.Constants.REMINDER_DISMISS
+import kotlin.concurrent.thread
 
 
 @Suppress("DEPRECATION")
@@ -29,7 +31,7 @@ class ReminderService: Service() {
     override fun onCreate() {
         super.onCreate()
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.leapfrog);
+        mediaPlayer = MediaPlayer.create(this, R.raw.leapfrog)
         mediaPlayer.isLooping = true;
 
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -62,12 +64,21 @@ class ReminderService: Service() {
             .addAction(R.drawable.ic_alarm_off, getString(R.string.dismiss), dismissPendingIntent)
             .build()
 
+        mediaPlayer.setVolume(0.8f, 0.8f)
         mediaPlayer.start()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
-        } else {
-            vibrator.vibrate(200)
+        val pattern = longArrayOf(0, 100, 1000)
+
+        if(vibrator.hasVibrator()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val audioAttributes = AudioAttributes.Builder()
+                        .setUsage(USAGE_ALARM)
+                        .build()
+                    vibrator.vibrate(
+                        VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE), audioAttributes)
+                } else {
+                    vibrator.vibrate(pattern, 1)
+                }
         }
 
         startForeground(1, notification)

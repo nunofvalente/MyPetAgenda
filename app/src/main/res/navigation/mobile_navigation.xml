@@ -39,7 +39,7 @@
 
     <fragment
         android:id="@+id/navigation_map"
-        android:name="com.nunovalente.android.mypetagenda.ui.activity.ActivityFragment"
+        android:name="com.nunovalente.android.mypetagenda.ui.map.MapFragment"
         android:label="@string/title_map"
         tools:layout="@layout/fragment_map" />
     <fragment

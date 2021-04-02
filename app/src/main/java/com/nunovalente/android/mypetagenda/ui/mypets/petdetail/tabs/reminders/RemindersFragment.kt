@@ -37,31 +37,32 @@ class RemindersFragment : BaseFragment(), OnToggleReminderListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        injector.inject(this)
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_reminders, container, false)
+            injector.inject(this)
+            binding =
+                DataBindingUtil.inflate(inflater, R.layout.fragment_reminders, container, false)
 
-        viewModel = ViewModelProvider(this, factory).get(ReminderViewModel::class.java)
-        viewModelDetail =
-            ViewModelProvider(requireActivity(), factory).get(PetDetailViewModel::class.java)
+            viewModel = ViewModelProvider(this, factory).get(ReminderViewModel::class.java)
+            viewModelDetail =
+                ViewModelProvider(requireActivity(), factory).get(PetDetailViewModel::class.java)
 
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+            binding.viewModel = viewModel
+            binding.lifecycleOwner = this
 
-        viewModelDetail.getPetRetrieved()?.apply {
-            viewModel.loadReminders(this.id)
-        }
-
-        viewModel.reminderList?.observe(viewLifecycleOwner, { notes ->
-            if (notes.isNullOrEmpty()) {
-                showTextNoReminders()
-            } else {
-                hideTextNoReminders()
+            viewModelDetail.getPetRetrieved()?.apply {
+                viewModel.loadReminders(this.id)
             }
-        })
 
-        setRecyclerAdapter()
+            viewModel.reminderList?.observe(viewLifecycleOwner, { notes ->
+                if (notes.isNullOrEmpty()) {
+                    showTextNoReminders()
+                } else {
+                    hideTextNoReminders()
+                }
+            })
 
-        return binding.root
+            setRecyclerAdapter()
+
+            return binding.root
     }
 
     private fun setRecyclerAdapter() {
@@ -103,6 +104,7 @@ class RemindersFragment : BaseFragment(), OnToggleReminderListener {
                 .setMessage(context?.getString(R.string.are_you_sure_you_want_to_delete_note))
                 .setPositiveButton(context?.getString(R.string.yes)) { dialogInterface: DialogInterface, _: Int ->
                     viewModel.deleteReminder(it)
+                    ReminderUtil.cancelReminder(requireActivity(), reminder)
                     dialogInterface.dismiss()
                 }
                 .setNegativeButton(context?.getString(R.string.no)) { dialogInterface: DialogInterface, _: Int ->

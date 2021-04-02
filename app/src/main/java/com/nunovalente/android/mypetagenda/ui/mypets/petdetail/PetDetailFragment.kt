@@ -48,12 +48,13 @@ class PetDetailFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        injector.inject(this)
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pet_detail, container, false)
+            injector.inject(this)
+            binding =
+                DataBindingUtil.inflate(inflater, R.layout.fragment_pet_detail, container, false)
 
-        viewModel = ViewModelProvider(requireActivity()).get(PetDetailViewModel::class.java)
+            viewModel = ViewModelProvider(requireActivity()).get(PetDetailViewModel::class.java)
 
-        return binding.root
+            return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
