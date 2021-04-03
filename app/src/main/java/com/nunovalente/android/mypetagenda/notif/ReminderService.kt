@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
 import android.media.AudioAttributes.USAGE_ALARM
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.IBinder
@@ -19,7 +20,6 @@ import com.nunovalente.android.mypetagenda.util.Constants.CHANNEL_ID
 import com.nunovalente.android.mypetagenda.util.Constants.PET_ID
 import com.nunovalente.android.mypetagenda.util.Constants.PET_NAME
 import com.nunovalente.android.mypetagenda.util.Constants.REMINDER_DISMISS
-import kotlin.concurrent.thread
 
 
 @Suppress("DEPRECATION")
@@ -27,11 +27,13 @@ class ReminderService: Service() {
 
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var vibrator: Vibrator
+    private var currentVolume: Int = 0
+    private lateinit var audioManager: AudioManager
 
     override fun onCreate() {
         super.onCreate()
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.leapfrog)
+        mediaPlayer = MediaPlayer.create(this, R.raw.beanstalk)
         mediaPlayer.isLooping = true;
 
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -64,7 +66,11 @@ class ReminderService: Service() {
             .addAction(R.drawable.ic_alarm_off, getString(R.string.dismiss), dismissPendingIntent)
             .build()
 
-        mediaPlayer.setVolume(0.8f, 0.8f)
+        audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+        currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, maxVolume, 0)
+        
         mediaPlayer.start()
 
         val pattern = longArrayOf(0, 100, 1000)
@@ -75,7 +81,9 @@ class ReminderService: Service() {
                         .setUsage(USAGE_ALARM)
                         .build()
                     vibrator.vibrate(
-                        VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE), audioAttributes)
+                        VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE),
+                        audioAttributes
+                    )
                 } else {
                     vibrator.vibrate(pattern, 1)
                 }
@@ -90,6 +98,7 @@ class ReminderService: Service() {
     override fun onDestroy() {
         super.onDestroy()
 
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0)
         mediaPlayer.stop()
         vibrator.cancel()
     }

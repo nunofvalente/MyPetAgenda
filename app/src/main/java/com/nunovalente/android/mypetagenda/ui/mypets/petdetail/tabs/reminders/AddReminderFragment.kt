@@ -85,6 +85,7 @@ class AddReminderFragment : BaseFragment() {
         }
 
         binding.checkboxRecurring.setOnCheckedChangeListener { _, isChecked ->
+            hideSoftKeyboard(requireActivity())
             if (!isChecked) {
                 binding.linearWeekDays.visibility = View.GONE
                 binding.reminderDate.visibility = View.VISIBLE
@@ -149,7 +150,7 @@ class AddReminderFragment : BaseFragment() {
         }
     }
 
-    fun hideSoftKeyboard(activity: Activity) {
+    private fun hideSoftKeyboard(activity: Activity) {
         val inputMethodManager: InputMethodManager = requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         if (inputMethodManager.isAcceptingText) {
             inputMethodManager.hideSoftInputFromWindow(

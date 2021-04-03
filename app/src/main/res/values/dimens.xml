@@ -34,6 +34,6 @@
     <dimen name="camera_icon_size">30dp</dimen>
 
     <!-- Card View Height -->
-    <dimen name="card_view_height">180dp</dimen>
+    <dimen name="card_view_height">200dp</dimen>
 
 </resources>
