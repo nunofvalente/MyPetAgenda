@@ -123,6 +123,9 @@ class AddReminderFragment : BaseFragment() {
         }
     }
 
+    /**
+     * Checks if reminders has a title
+     */
     private fun validateReminder(): Boolean {
         if (!binding.editReminderTitle.text.isNullOrEmpty()) {
             viewModel.setInfo(

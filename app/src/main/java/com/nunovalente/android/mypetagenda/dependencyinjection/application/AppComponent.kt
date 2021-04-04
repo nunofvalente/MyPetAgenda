@@ -7,7 +7,7 @@ import com.nunovalente.android.mypetagenda.notif.RescheduleReminderService
 import dagger.Component
 
 @AppScope
-@Component(modules = [AppModule::class, DatabaseModule::class])
+@Component(modules = [AppModule::class, DatabaseModule::class, RetrofitModule::class])
 interface AppComponent {
 
     fun newActivityComponent(activityModule: ActivityModule): ActivityComponent

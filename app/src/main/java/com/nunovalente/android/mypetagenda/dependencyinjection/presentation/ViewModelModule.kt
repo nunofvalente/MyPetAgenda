@@ -2,7 +2,7 @@ package com.nunovalente.android.mypetagenda.dependencyinjection.presentation
 
 import androidx.lifecycle.ViewModel
 import com.nunovalente.android.mypetagenda.dependencyinjection.ViewModelKey
-import com.nunovalente.android.mypetagenda.ui.map.MapViewModel
+import com.nunovalente.android.mypetagenda.ui.map.POIViewModel
 import com.nunovalente.android.mypetagenda.ui.gallery.GalleryViewModel
 import com.nunovalente.android.mypetagenda.ui.home.HomeViewModel
 import com.nunovalente.android.mypetagenda.ui.mypets.addpet.AddPetViewModel
@@ -34,8 +34,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MapViewModel::class)
-    abstract fun activityViewModel(mapViewModel: MapViewModel): ViewModel
+    @ViewModelKey(POIViewModel::class)
+    abstract fun activityViewModel(POIViewModel: POIViewModel): ViewModel
 
     @Binds
     @IntoMap

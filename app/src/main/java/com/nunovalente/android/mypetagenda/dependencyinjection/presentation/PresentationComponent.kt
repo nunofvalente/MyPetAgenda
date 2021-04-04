@@ -1,6 +1,6 @@
 package com.nunovalente.android.mypetagenda.dependencyinjection.presentation
 
-import com.nunovalente.android.mypetagenda.ui.map.MapFragment
+import com.nunovalente.android.mypetagenda.ui.map.POIFragment
 import com.nunovalente.android.mypetagenda.ui.gallery.CameraFragment
 import com.nunovalente.android.mypetagenda.ui.gallery.GalleryFragment
 import com.nunovalente.android.mypetagenda.ui.home.HomeFragment
@@ -17,7 +17,7 @@ import dagger.Subcomponent
 @Subcomponent(modules = [ViewModelModule::class, PresentationModule::class])
 interface PresentationComponent {
     fun inject(fragment: HomeFragment)
-    fun inject(fragment: MapFragment)
+    fun inject(fragment: POIFragment)
     fun inject(fragment: GalleryFragment)
     fun inject(fragment: MyPetsFragment)
     fun inject(fragment: AddPetFragment)

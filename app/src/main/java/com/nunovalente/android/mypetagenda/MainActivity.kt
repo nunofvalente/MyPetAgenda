@@ -34,7 +34,7 @@ class MainActivity : BaseActivity() {
                 R.id.navigation_home -> showBottomNav()
                 R.id.navigation_gallery -> showBottomNav()
                 R.id.navigation_mypets -> showBottomNav()
-                R.id.navigation_map -> showBottomNav()
+                R.id.navigation_poi -> showBottomNav()
                 R.id.navigation_camera -> hideStatusBar()
                 else -> hideBottomNav()
             }
