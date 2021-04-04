@@ -1,6 +1,6 @@
 package com.nunovalente.android.mypetagenda.dependencyinjection.presentation
 
-import com.nunovalente.android.mypetagenda.ui.map.POIFragment
+import com.nunovalente.android.mypetagenda.ui.poi.POIFragment
 import com.nunovalente.android.mypetagenda.ui.gallery.CameraFragment
 import com.nunovalente.android.mypetagenda.ui.gallery.GalleryFragment
 import com.nunovalente.android.mypetagenda.ui.home.HomeFragment

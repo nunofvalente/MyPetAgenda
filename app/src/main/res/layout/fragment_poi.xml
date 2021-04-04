@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:context=".ui.map.POIFragment">
+            tools:context=".ui.poi.POIFragment">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_veterinarian"
@@ -209,7 +209,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.gms.ads.AdView
-                android:id="@+id/adView_maps"
+                android:id="@+id/adView_poi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

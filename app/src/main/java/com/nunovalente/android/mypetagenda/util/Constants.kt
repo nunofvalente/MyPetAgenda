@@ -27,4 +27,10 @@ object Constants {
     const val PET_NAME = "pet_name"
     const val REMINDER_DISMISS = "dismiss"
 
+    //Navigation Maps
+    const val VETERINARIAN = "Veterinarian"
+    const val PET_SHOPS = "Pet Shops"
+    const val GROOMING = "Grooming"
+    const val PARK = "Parks"
+
 }

@@ -39,9 +39,13 @@
 
     <fragment
         android:id="@+id/navigation_poi"
-        android:name="com.nunovalente.android.mypetagenda.ui.map.POIFragment"
+        android:name="com.nunovalente.android.mypetagenda.ui.poi.POIFragment"
         android:label="@string/title_locations"
-        tools:layout="@layout/fragment_poi" />
+        tools:layout="@layout/fragment_poi" >
+        <action
+            android:id="@+id/action_navigation_poi_to_mapsFragment"
+            app:destination="@id/navigation_maps" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_addPetFragment"
         android:name="com.nunovalente.android.mypetagenda.ui.mypets.addpet.AddPetFragment"
@@ -99,5 +103,15 @@
         <argument
             android:name="image"
             app:argType="android.graphics.Bitmap" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_maps"
+        android:name="com.nunovalente.android.mypetagenda.ui.map.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <argument
+            android:name="searchParameter"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
 </navigation>

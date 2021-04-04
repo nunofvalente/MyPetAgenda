@@ -47,8 +47,7 @@ class CameraFragment : BaseFragment() {
         if (allPermissionsGranted()) {
             cameraUserCase.startCamera(binding.viewFinder.surfaceProvider, this, binding.viewFinder, binding.cameraFlash)
         } else {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
+           requestPermissions(
                 REQUIRED_PERMISSIONS,
                 REQUEST_CODE_PERMISSIONS
             )

@@ -1,4 +1,4 @@
-package com.nunovalente.android.mypetagenda.ui.map
+package com.nunovalente.android.mypetagenda.ui.poi
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject

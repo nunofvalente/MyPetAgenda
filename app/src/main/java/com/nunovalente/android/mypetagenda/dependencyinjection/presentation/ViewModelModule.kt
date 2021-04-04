@@ -2,7 +2,7 @@ package com.nunovalente.android.mypetagenda.dependencyinjection.presentation
 
 import androidx.lifecycle.ViewModel
 import com.nunovalente.android.mypetagenda.dependencyinjection.ViewModelKey
-import com.nunovalente.android.mypetagenda.ui.map.POIViewModel
+import com.nunovalente.android.mypetagenda.ui.poi.POIViewModel
 import com.nunovalente.android.mypetagenda.ui.gallery.GalleryViewModel
 import com.nunovalente.android.mypetagenda.ui.home.HomeViewModel
 import com.nunovalente.android.mypetagenda.ui.mypets.addpet.AddPetViewModel
