@@ -5,21 +5,16 @@ import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.application.MyApplication
 import com.nunovalente.android.mypetagenda.networking.MapsApi
 import com.nunovalente.android.mypetagenda.networking.UrlProvider
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 @Module
 class RetrofitModule(private val application: MyApplication) {
-
-    @Provides
-    fun moshi(): Moshi = Moshi.Builder()
-        .build()
 
     @Provides
     fun urlProvides() = UrlProvider()
@@ -31,7 +26,7 @@ class RetrofitModule(private val application: MyApplication) {
                 val url = original
                     .url
                     .newBuilder()
-                    .addQueryParameter("key", application.getString(R.string.google_api_key))
+                    .addQueryParameter("key", application.getString(R.string.google_maps_key))
                     .build()
                 val request = original
                     .newBuilder().url(url)
@@ -41,17 +36,17 @@ class RetrofitModule(private val application: MyApplication) {
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
-            .connectTimeout(5, TimeUnit.SECONDS)
-            .readTimeout(20, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
             .build()
     }
 
     @Provides
     @AppScope
-    fun retrofit(urlProvider: UrlProvider, moshi: Moshi): Retrofit {
+    fun retrofit(urlProvider: UrlProvider): Retrofit {
         return Retrofit.Builder()
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(urlProvider.getBaseUrl())
             .client(getClient())
             .build()

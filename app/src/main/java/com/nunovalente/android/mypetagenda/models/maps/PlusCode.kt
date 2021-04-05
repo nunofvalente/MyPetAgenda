@@ -1,11 +1,6 @@
 package com.nunovalente.android.mypetagenda.models.maps
 
-import com.squareup.moshi.Json
-
-class PlusCode {
-    @Json(name = "compound_code")
-    var compoundCode: String? = null
-
-    @Json(name = "global_code")
+data class PlusCode (
+    var compoundCode: String? = null,
     var globalCode: String? = null
-}
+)

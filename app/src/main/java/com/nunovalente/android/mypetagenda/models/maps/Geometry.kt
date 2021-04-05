@@ -1,11 +1,6 @@
 package com.nunovalente.android.mypetagenda.models.maps
 
-import com.squareup.moshi.Json
-
-class Geometry {
-    @Json(name = "location")
-    var location: Location? = null
-
-    @Json(name = "viewport")
+data class Geometry (
+    var location: Location? = null,
     var viewport: Viewport? = null
-}
+)

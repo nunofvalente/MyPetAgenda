@@ -1,5 +1,6 @@
 package com.nunovalente.android.mypetagenda.util
 
+import android.location.Location
 import java.util.*
 
 object StringUtil {
@@ -7,7 +8,7 @@ object StringUtil {
 
     @JvmStatic
     fun calculateAge(text: String): String {
-        val year = text.substring(6, 9).toInt()
+        val year = text.substring(6).toInt()
         val age = currentYear - year
         return age.toString()
     }
@@ -20,5 +21,10 @@ object StringUtil {
     @JvmStatic
     fun getReminderTimeStringBuilder(hours: Int, minutes: Int): String {
         return String.format("%02d:%02d", hours, minutes)
+    }
+
+    @JvmStatic
+    fun locationToString(location: Location): String {
+        return "${location.latitude},${location.longitude}"
     }
 }

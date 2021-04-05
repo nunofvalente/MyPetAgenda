@@ -1,6 +1,8 @@
 package com.nunovalente.android.mypetagenda.ui.map
 
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -9,30 +11,41 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.ads.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentMapsBinding
+import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
+import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 import com.nunovalente.android.mypetagenda.util.Constants.GROOMING
 import com.nunovalente.android.mypetagenda.util.Constants.PARK
 import com.nunovalente.android.mypetagenda.util.Constants.PET_SHOPS
 import com.nunovalente.android.mypetagenda.util.Constants.VETERINARIAN
+import com.nunovalente.android.mypetagenda.util.StringUtil
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 import kotlin.coroutines.coroutineContext
 
 
-class MapsFragment : Fragment() {
+class MapsFragment : BaseFragment(), OnMapReadyCallback {
+
+    @Inject
+    lateinit var factory: ViewModelFactory
 
     companion object {
         private val AD_UNIT_ID = "ca-app-pub-3940256099942544/6300978111"
@@ -45,27 +58,27 @@ class MapsFragment : Fragment() {
     }
 
     private lateinit var binding: FragmentMapsBinding
+    private lateinit var viewModel: MapsViewModel
     private lateinit var adView: AdView
+    private lateinit var map: GoogleMap
 
     private val args: MapsFragmentArgs by navArgs()
     private var searchParameter: String = ""
+    private lateinit var currentLocation: Location
 
-    private val callback = OnMapReadyCallback { googleMap ->
-
-        val home = LatLng(51.509201, -0.271360)
-
-        val zoomLevel = 14.0f
-        googleMap.addMarker(MarkerOptions().position(home).title("Marker Home"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoomLevel))
-    }
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        injector.inject(this)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_maps, container, false)
 
+        viewModel = ViewModelProvider(this, factory).get(MapsViewModel::class.java)
+
+        //Initialize ads
         MobileAds.initialize(requireActivity())
 
         adView = AdView(requireActivity())
@@ -73,7 +86,27 @@ class MapsFragment : Fragment() {
         binding.containerAdViewMaps.addView(adView)
         loadBanner()
 
+        //Retrieve search parameter to obtain places
         searchParameter = args.searchParameter
+
+        //Initialise location provider client
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
+
+        viewModel.places.observe(viewLifecycleOwner, { resultList ->
+            if (resultList != null) {
+                for (place in resultList) {
+                    map.addMarker(
+                        MarkerOptions().position(
+                            LatLng(
+                                place.geometry?.location?.lat!!,
+                                place.geometry?.location?.lng!!
+                            )
+                        ).title(place.name)
+                    )
+                }
+            }
+        })
 
         setToolbarTitle(searchParameter)
         setListeners()
@@ -170,6 +203,22 @@ class MapsFragment : Fragment() {
 
     private fun startMap() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
+        mapFragment?.getMapAsync(this)
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+
+        fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+            currentLocation = location
+            viewModel.loadPlaces(StringUtil.locationToString(location), 2000, searchParameter)
+
+            val myLocation = LatLng(location.latitude, location.longitude)
+            val zoomLevel = 14.0f
+            map.isMyLocationEnabled = true
+            map.uiSettings.isMyLocationButtonEnabled = true
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, zoomLevel))
+        }
     }
 }

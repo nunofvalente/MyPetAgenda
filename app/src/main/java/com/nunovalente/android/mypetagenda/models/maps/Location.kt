@@ -1,11 +1,6 @@
 package com.nunovalente.android.mypetagenda.models.maps
 
-import com.squareup.moshi.Json
-
-class Location {
-    @Json(name = "lat")
-    var lat: Double? = null
-
-    @Json(name = "lng")
+data class Location (
+    var lat: Double? = null,
     var lng: Double? = null
-}
+)

@@ -5,6 +5,7 @@ import com.nunovalente.android.mypetagenda.dependencyinjection.ViewModelKey
 import com.nunovalente.android.mypetagenda.ui.poi.POIViewModel
 import com.nunovalente.android.mypetagenda.ui.gallery.GalleryViewModel
 import com.nunovalente.android.mypetagenda.ui.home.HomeViewModel
+import com.nunovalente.android.mypetagenda.ui.map.MapsViewModel
 import com.nunovalente.android.mypetagenda.ui.mypets.addpet.AddPetViewModel
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.notes.NotesViewModel
 import com.nunovalente.android.mypetagenda.ui.mypets.petdetail.tabs.reminders.AddReminderViewModel
@@ -56,4 +57,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ReminderViewModel::class)
     abstract fun reminderViewModel(reminderViewModel: ReminderViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MapsViewModel::class)
+    abstract fun mapsViewModel(mapsViewModel: MapsViewModel): ViewModel
 }

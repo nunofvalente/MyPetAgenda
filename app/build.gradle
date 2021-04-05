@@ -108,17 +108,17 @@ dependencies {
     //Maps
     implementation "com.google.android.gms:play-services-maps:$maps_version"
 
-    //Moshi
-    implementation "com.squareup.moshi:moshi:$moshi_version"
-
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit: $version_retrofit"
-    implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
     implementation "com.squareup.okhttp3:logging-interceptor:$version_logging_interceptor"
+    implementation "com.squareup.retrofit2:converter-gson:$gson_converter_version"
 
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:26.8.0')
     implementation "com.google.android.gms:play-services-ads:$google_ads_version"
+
+    //Location
+    implementation "com.google.android.gms:play-services-location:$version_play_services_location"
 
 }
