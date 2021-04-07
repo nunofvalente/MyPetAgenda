@@ -40,6 +40,6 @@ class DefaultPetRepository @Inject constructor(private val localDataSource: PetD
     }
 
     override suspend fun updatePet(pet: Pet) {
-        TODO("Not yet implemented")
+        localDataSource.updatePet(pet.toDatabasePet())
     }
 }

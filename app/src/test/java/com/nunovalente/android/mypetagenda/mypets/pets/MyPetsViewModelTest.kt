@@ -2,6 +2,7 @@ package com.nunovalente.android.mypetagenda.mypets.pets
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.nunovalente.android.mypetagenda.data.NoteRepository
 import com.nunovalente.android.mypetagenda.data.local.FakeRepository
 import com.nunovalente.android.mypetagenda.getOrAwaitValue
 import com.nunovalente.android.mypetagenda.models.Pet
@@ -57,7 +58,7 @@ class MyPetsViewModelTest {
         petRepository.insertPet(pet1)
         petRepository.insertPet(pet2)
         petRepository.insertPet(pet3)
-        petViewModel = MyPetsViewModel(petRepository)
+       // petViewModel = MyPetsViewModel(petRepository)
     }
 
     @Test

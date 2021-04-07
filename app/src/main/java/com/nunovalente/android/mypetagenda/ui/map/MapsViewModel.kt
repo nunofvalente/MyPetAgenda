@@ -23,11 +23,9 @@ class MapsViewModel @Inject constructor(private val mapsApi: MapsApi) : ViewMode
             try {
                 val placesResult = mapsApi.getPlacesByKeyword(location, radius, searchParameter)
                 _places.value = placesResult.results
-        } catch (e: Exception) {
-            Timber.e("Error fetching places: ${e.message}")
+            } catch (e: Exception) {
+                Timber.e("Error fetching places: ${e.message}")
+            }
         }
     }
-}
-
-
 }

@@ -40,6 +40,6 @@ class FakeRepository : PetRepository {
     }
 
     override suspend fun updatePet(pet: Pet) {
-        TODO("Not yet implemented")
+        petServiceData[pet.id] = pet.toDatabasePet()
     }
 }

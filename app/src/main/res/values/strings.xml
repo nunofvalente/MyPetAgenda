@@ -84,4 +84,5 @@
     <string name="park_image">Park Image</string>
     <string name="grooming_image">Grooming Image</string>
     <string name="pet_shop_image">Pet Shop Image</string>
+    <string name="activities">Activities</string>
 </resources>

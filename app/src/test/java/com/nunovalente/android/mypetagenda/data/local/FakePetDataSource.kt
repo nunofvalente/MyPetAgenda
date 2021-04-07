@@ -35,6 +35,6 @@ class FakePetDataSource(private var petsList: MutableList<DatabasePet>?) : PetDa
     }
 
     override suspend fun updatePet(pet: DatabasePet) {
-        TODO("Not yet implemented")
+        petsList?.add(pet)
     }
 }

@@ -36,4 +36,6 @@
     <!-- Card View Height -->
     <dimen name="card_view_height">200dp</dimen>
 
+    <dimen name="activity_icon_size">75dp</dimen>
+
 </resources>

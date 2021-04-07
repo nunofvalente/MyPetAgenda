@@ -11,4 +11,5 @@
     <color name="app_secondary_dark">@android:color/white</color>
     <color name="background_color">#F8F7F7</color>
     <color name="icon_gray">#898989</color>
+    <color name="icon_yellow">#E1EF21</color>
 </resources>

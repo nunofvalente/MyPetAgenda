@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.nunovalente.android.mypetagenda.models.Pet
+import com.nunovalente.android.mypetagenda.models.toDatabasePet
 
 @Entity(tableName = "pet_table")
 data class DatabasePet(
@@ -28,7 +29,25 @@ data class DatabasePet(
     val weight: String,
 
     @ColumnInfo(name = "imagePath")
-    val imagePath: String
+    val imagePath: String,
+
+    @ColumnInfo(name = "bath")
+    val bath: String = "",
+
+    @ColumnInfo(name = "vaccination")
+    val vaccination: String = "",
+
+    @ColumnInfo(name = "wormTreatment")
+    val wormTreatment: String = "",
+
+    @ColumnInfo(name = "brushTeeth")
+    val brushTeeth: String = "",
+
+    @ColumnInfo(name = "veterinarian")
+    val veterinarian: String = "",
+
+    @ColumnInfo(name = "fleaTreatment")
+    val fleaTreatment: String = ""
 )
 
 fun List<DatabasePet>.asDomainModel(): List<Pet> {
@@ -40,7 +59,13 @@ fun List<DatabasePet>.asDomainModel(): List<Pet> {
             type = it.type,
             breed = it.breed,
             weight = it.weight,
-            imagePath = it.imagePath
+            imagePath = it.imagePath,
+            bath = it.bath,
+            vaccination = it.vaccination,
+            wormTreatment = it.wormTreatment,
+            brushTeeth = it.brushTeeth,
+            veterinarian = it.veterinarian,
+            fleaTreatment = it.fleaTreatment
         )
     }
 }
@@ -52,7 +77,13 @@ fun DatabasePet.toDomainModel(): Pet {
         this.type,
         this.breed,
         this.weight,
-        this.imagePath
+        this.imagePath,
+        this.bath,
+        this.vaccination,
+        this.wormTreatment,
+        this.brushTeeth,
+        this.veterinarian,
+        this.fleaTreatment
     )
 }
 

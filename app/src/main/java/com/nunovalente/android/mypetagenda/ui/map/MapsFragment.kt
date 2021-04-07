@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.nunovalente.android.mypetagenda.R
 import com.nunovalente.android.mypetagenda.databinding.FragmentMapsBinding
+import com.nunovalente.android.mypetagenda.models.Pet
 import com.nunovalente.android.mypetagenda.ui.common.ViewModelFactory
 import com.nunovalente.android.mypetagenda.ui.common.fragment.BaseFragment
 import com.nunovalente.android.mypetagenda.util.Constants.GROOMING
@@ -93,6 +94,7 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        //Observes the result from calling Places endpoint and places markers on the map
         viewModel.places.observe(viewLifecycleOwner, { resultList ->
             if (resultList != null) {
                 for (place in resultList) {
@@ -127,6 +129,9 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback {
         }
     }
 
+    /**
+     * Sets Toolbar title depending on the parameter chosen
+     */
     private fun setToolbarTitle(title: String) {
         when (title) {
             VETERINARIAN -> binding.toolbarMapTitle.text = VETERINARIAN
@@ -142,19 +147,22 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback {
         }
     }
 
+    /**
+     * Loads Ad banner
+     */
     private fun loadBanner() {
         val adRequest = AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
             .build()
 
         val adSize: AdSize = getAdSize()
         adView.adSize = adSize
-
-
-
         adView.loadAd(adRequest)
 
     }
 
+    /**
+     * Sets up Adaptive Ad Banner
+     */
     private fun getAdSize(): AdSize {
         val outMetrics = DisplayMetrics()
 
@@ -179,6 +187,9 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback {
         return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(requireActivity(), adWidth)
     }
 
+    /**
+     * Check if permissions have been granted
+     */
     private fun isPermissionGranted(): Boolean = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
             requireActivity(),
@@ -186,6 +197,9 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
+    /**
+     * Checks if permission has been granted or denied and proceed accordingly
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -201,11 +215,17 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback {
         }
     }
 
+    /**
+     * Starts Google Maps
+     */
     private fun startMap() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
     }
 
+    /**
+     * Callback for when the map is loaded
+     */
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
