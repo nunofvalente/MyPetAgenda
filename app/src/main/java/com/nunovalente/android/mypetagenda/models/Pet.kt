@@ -17,11 +17,10 @@ data class Pet(
     var bath: String = "",
     var vaccination: String = "",
     var wormTreatment: String = "",
-    var brushTeeth: String = "",
     var veterinarian: String = "",
     var fleaTreatment: String = ""
 ) : Parcelable {
-    constructor(name: String, birthday: String, type: String, breed: String, weight: String, imagePath: String) : this(0, name, birthday, type, breed, weight, imagePath, "TBD", "TBD", "TBD", "TBD", "TBD", "TBD")
+    constructor(name: String, birthday: String, type: String, breed: String, weight: String, imagePath: String) : this(0, name, birthday, type, breed, weight, imagePath, "TBD", "TBD", "TBD", "TBD", "TBD")
 }
 
 fun Pet.toDatabasePet(): DatabasePet {
@@ -36,7 +35,6 @@ fun Pet.toDatabasePet(): DatabasePet {
         this.bath,
         this.vaccination,
         this.wormTreatment,
-        this.brushTeeth,
         this.veterinarian,
         this.fleaTreatment
     )

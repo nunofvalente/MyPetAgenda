@@ -40,9 +40,6 @@ data class DatabasePet(
     @ColumnInfo(name = "wormTreatment")
     val wormTreatment: String = "",
 
-    @ColumnInfo(name = "brushTeeth")
-    val brushTeeth: String = "",
-
     @ColumnInfo(name = "veterinarian")
     val veterinarian: String = "",
 
@@ -63,7 +60,6 @@ fun List<DatabasePet>.asDomainModel(): List<Pet> {
             bath = it.bath,
             vaccination = it.vaccination,
             wormTreatment = it.wormTreatment,
-            brushTeeth = it.brushTeeth,
             veterinarian = it.veterinarian,
             fleaTreatment = it.fleaTreatment
         )
@@ -81,7 +77,6 @@ fun DatabasePet.toDomainModel(): Pet {
         this.bath,
         this.vaccination,
         this.wormTreatment,
-        this.brushTeeth,
         this.veterinarian,
         this.fleaTreatment
     )

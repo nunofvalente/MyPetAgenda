@@ -85,4 +85,9 @@
     <string name="grooming_image">Grooming Image</string>
     <string name="pet_shop_image">Pet Shop Image</string>
     <string name="activities">Activities</string>
+    <string name="veterinarian_visit">Veterinarian Visit</string>
+    <string name="bath">Bath</string>
+    <string name="vaccination">Vaccination</string>
+    <string name="worm_treatment">Worm Treatment</string>
+    <string name="flea_treatment">Flea Treatment</string>
 </resources>

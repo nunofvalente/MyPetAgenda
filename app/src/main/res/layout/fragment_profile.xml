@@ -203,8 +203,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
-                android:layout_marginEnd="@dimen/margin_8"
                 android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_8"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -216,7 +216,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin_8"
                     android:layout_weight="1"
-                    android:background="@color/icon_gray" />
+                    android:background="@color/app_primary" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -224,7 +224,8 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin_8"
                     android:layout_weight="0"
-                    android:text="@string/activities" />
+                    android:text="@string/activities"
+                    android:textColor="@color/app_primary" />
 
                 <View
                     android:layout_width="match_parent"
@@ -232,18 +233,257 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin_8"
                     android:layout_weight="1"
-                    android:background="@color/icon_gray" />
+                    android:background="@color/app_primary" />
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/vet_icon"
+                android:id="@+id/bath_icon"
                 android:layout_width="@dimen/activity_icon_size"
                 android:layout_height="@dimen/activity_icon_size"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/veterinarian_icon"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:contentDescription="@string/veterinarian_image"
+                android:src="@drawable/bath_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linear_separator" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/Profile_Text_View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:text="@string/bath"
+                app:layout_constraintBottom_toBottomOf="@+id/bath_icon"
+                app:layout_constraintStart_toEndOf="@+id/bath_icon"
+                app:layout_constraintTop_toTopOf="@+id/bath_icon" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:background="@color/app_primary_dark"
+                app:layout_constraintBottom_toBottomOf="@+id/bath_icon"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/bath_icon" />
+
+            <TextView
+                android:id="@+id/pet_profile_vet_date"
+                style="@style/Profile_Text_Info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:padding="@dimen/margin_8"
+                android:text="@{pet.bath}"
+                app:layout_constraintBottom_toBottomOf="@+id/bath_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/bath_icon"
+                tools:text="11/01/2021" />
+
+            <ImageView
+                android:id="@+id/veterinarian_icon"
+                android:layout_width="@dimen/activity_icon_size"
+                android:layout_height="@dimen/activity_icon_size"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:contentDescription="@string/veterinarian_image"
+                android:src="@drawable/veterinarian_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bath_icon" />
+
+            <TextView
+                android:id="@+id/pet_profile_text_bath"
+                style="@style/Profile_Text_View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:text="@string/veterinarian_visit"
+                app:layout_constraintBottom_toBottomOf="@+id/veterinarian_icon"
+                app:layout_constraintStart_toEndOf="@+id/veterinarian_icon"
+                app:layout_constraintTop_toTopOf="@+id/veterinarian_icon" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:background="@color/app_primary_dark"
+                app:layout_constraintBottom_toBottomOf="@+id/veterinarian_icon"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/veterinarian_icon" />
+
+            <TextView
+                android:id="@+id/pet_profile_bath_date"
+                style="@style/Profile_Text_Info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:padding="@dimen/margin_8"
+                android:text="@{pet.veterinarian}"
+                app:layout_constraintBottom_toBottomOf="@+id/veterinarian_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view2"
+                app:layout_constraintTop_toTopOf="@+id/veterinarian_icon"
+                tools:text="12/01/2021" />
+
+            <ImageView
+                android:id="@+id/vaccination_icon"
+                android:layout_width="@dimen/activity_icon_size"
+                android:layout_height="@dimen/activity_icon_size"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:contentDescription="@string/veterinarian_image"
+                android:src="@drawable/vaccination_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/veterinarian_icon" />
+
+            <TextView
+                android:id="@+id/pet_profile_text_vaccination"
+                style="@style/Profile_Text_View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:text="@string/vaccination"
+                app:layout_constraintBottom_toBottomOf="@+id/vaccination_icon"
+                app:layout_constraintStart_toEndOf="@+id/vaccination_icon"
+                app:layout_constraintTop_toTopOf="@+id/vaccination_icon" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:background="@color/app_primary_dark"
+                app:layout_constraintBottom_toBottomOf="@+id/vaccination_icon"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/vaccination_icon" />
+
+            <TextView
+                android:id="@+id/pet_profile_vaccination_date"
+                style="@style/Profile_Text_Info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:padding="@dimen/margin_8"
+                android:text="@{pet.vaccination}"
+                app:layout_constraintBottom_toBottomOf="@+id/vaccination_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view3"
+                app:layout_constraintTop_toTopOf="@+id/vaccination_icon"
+                tools:text="12/01/2021" />
+
+            <ImageView
+                android:id="@+id/worm_treatment_icon"
+                android:layout_width="@dimen/activity_icon_size"
+                android:layout_height="@dimen/activity_icon_size"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:contentDescription="@string/veterinarian_image"
+                android:src="@drawable/worm_treatment_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vaccination_icon" />
+
+            <TextView
+                android:id="@+id/pet_profile_text_flea"
+                style="@style/Profile_Text_View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:text="@string/worm_treatment"
+                app:layout_constraintBottom_toBottomOf="@+id/worm_treatment_icon"
+                app:layout_constraintStart_toEndOf="@+id/worm_treatment_icon"
+                app:layout_constraintTop_toTopOf="@+id/worm_treatment_icon" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:background="@color/app_primary_dark"
+                app:layout_constraintBottom_toBottomOf="@+id/worm_treatment_icon"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/worm_treatment_icon" />
+
+            <TextView
+                android:id="@+id/pet_profile_worm_date"
+                style="@style/Profile_Text_Info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:padding="@dimen/margin_8"
+                android:text="@{pet.wormTreatment}"
+                app:layout_constraintBottom_toBottomOf="@+id/worm_treatment_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view4"
+                app:layout_constraintTop_toTopOf="@+id/worm_treatment_icon"
+                tools:text="12/01/2021" />
+
+            <ImageView
+                android:id="@+id/flea_treatment_icon"
+                android:layout_width="@dimen/activity_icon_size"
+                android:layout_height="@dimen/activity_icon_size"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_80"
+                android:contentDescription="@string/veterinarian_image"
+                android:src="@drawable/flea_treatment_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/worm_treatment_icon" />
+
+            <TextView
+                android:id="@+id/pet_profile_text_worm"
+                style="@style/Profile_Text_View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:text="@string/flea_treatment"
+                app:layout_constraintBottom_toBottomOf="@+id/flea_treatment_icon"
+                app:layout_constraintStart_toEndOf="@+id/flea_treatment_icon"
+                app:layout_constraintTop_toTopOf="@+id/flea_treatment_icon" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:background="@color/app_primary_dark"
+                app:layout_constraintBottom_toBottomOf="@+id/flea_treatment_icon"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/flea_treatment_icon" />
+
+            <TextView
+                android:id="@+id/pet_profile_flea_date"
+                style="@style/Profile_Text_Info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:padding="@dimen/margin_8"
+                android:text="@{pet.fleaTreatment}"
+                app:layout_constraintBottom_toBottomOf="@+id/flea_treatment_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view5"
+                app:layout_constraintTop_toTopOf="@+id/flea_treatment_icon"
+                tools:text="12/01/2021" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="270dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
